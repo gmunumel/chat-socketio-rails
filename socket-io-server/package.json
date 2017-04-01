@@ -1,0 +1,14 @@
+{
+  "name": "socket-io-server",
+  "version": "0.0.1",
+  "description": "My chat socket.io app",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gmunumel/chat-socketio-rails.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^2.7.1",
+    "socket.io": "^1.7.3"
+  }
+}
