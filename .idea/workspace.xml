@@ -2,101 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6831cd0c-04c9-473e-8886-adde123e1c6e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/socket-io-server/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/socket-io-server/package.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/.generators" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/.rakeTasks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/chat.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/runConfigurations/Development__chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/runConfigurations/Production__chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/runConfigurations/spec__chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/runConfigurations/test__chat.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/.rspec" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/Gemfile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/Gemfile.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/Rakefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/channels/application_cable/channel.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/channels/application_cable/connection.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/application_controller.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/chat_rooms_controller.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/concerns/.keep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/concerns/exception_handler.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/concerns/response.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/messages_controller.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/controllers/users_controller.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/jobs/application_job.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/mailers/application_mailer.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/models/application_record.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/models/chat_room.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/models/concerns/.keep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/models/message.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/models/user.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/views/layouts/mailer.html.erb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/app/views/layouts/mailer.text.erb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/bin/bundle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/bin/rails" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/bin/rake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/bin/setup" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/bin/update" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config.ru" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/application.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/boot.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/cable.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/database.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/environment.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/environments/development.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/environments/production.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/environments/test.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/application_controller_renderer.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/backtrace_silencers.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/cors.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/filter_parameter_logging.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/inflections.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/mime_types.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/new_framework_defaults.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/redis.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/initializers/wrap_parameters.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/locales/en.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/puma.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/routes.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/config/secrets.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330093127_create_users.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330170532_create_chat_rooms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330193654_create_messages.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330203746_rename_column_user_id_to_chat_rooms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330204646_add_recipient_to_chat_rooms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330212822_add_user_to_chat_rooms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/migrate/20170330215524_rename_column_user_id_to_created_id.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/schema.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/db/seeds.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/dump.rdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/lib/tasks/.keep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/log/.keep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/public/robots.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/factories/chat_rooms.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/factories/messages.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/factories/users.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/models/chat_room_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/models/message_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/models/user_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/rails_helper.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/requests/chat_rooms_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/requests/messages_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/requests/users_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/routing/chat_rooms_routing_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/routing/messages_routing_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/routing/users_routing_spec.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/spec_helper.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/spec/support/request_spec_helper.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/rails-api/tmp/.keep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/socketio/README.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/chat-socketio-rails.iml" afterPath="$PROJECT_DIR$/.idea/chat-socketio-rails.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -151,14 +57,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.module.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-side/src/app/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#0#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client-side/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -215,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/rails-api/README.md" />
         <option value="$PROJECT_DIR$/socketio/README.md" />
@@ -245,6 +170,7 @@
         <option value="$PROJECT_DIR$/client-side/README.md" />
         <option value="$PROJECT_DIR$/client-side/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/client-side/src/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -290,100 +216,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rails-api-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rails-api-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rails-api-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="initializers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rails-api-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chat-socketio-rails" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rails-api-server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -653,12 +485,12 @@
       <option name="presentableId" value="Default" />
       <updated>1490994350931</updated>
       <workItem from="1490994352428" duration="2659000" />
-      <workItem from="1490997708208" duration="16568000" />
+      <workItem from="1490997708208" duration="16784000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19227000" />
+    <option name="totallyTimeSpent" value="19443000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="733" extended-state="6" />
@@ -726,14 +558,6 @@
             <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="15" lean-forward="true" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1053,10 +877,26 @@
     <entry file="file://$PROJECT_DIR$/client-side/src/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#0#58#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client-side/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="32" lean-forward="true" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
