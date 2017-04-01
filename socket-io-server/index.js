@@ -20,11 +20,17 @@ console.log("Hello world!");
 // http.listen(3000, function(){
 //     console.log('listening on *:3000');
 // });
-
-var redis = require("redis").createClient();
+var options = {
+    port: 6379,
+    url: 'redis://localhost:6379/0'
+};
+var redis = require('redis').createClient(options);
+redis.set("foo", "OK");
 redis.subscribe('users-list');
 
+
 console.log("PORT: " + process.env.PORT);
+// port was 5001
 
 var io = require('socket.io').listen(process.env.PORT || 5001);
 io.on('connection', function(socket){

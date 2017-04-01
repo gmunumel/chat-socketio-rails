@@ -29,13 +29,5 @@ module Chat
 
     # Redis configuration
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache'
-
-    # Allow CORS
-    # config.middleware.insert_before 0, Rack::Cors do
-    #   allow do
-    #     origins '*'
-    #     resource '*', :headers => :any, :methods => [:get, :post, :update, :options, :delete]
-    #   end
-    # end
   end
 end

@@ -39,13 +39,12 @@
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v5.0.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v5.0.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.14.6, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v4.2.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v1.5.3, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="factory_girl_rails (v4.8.0, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="faker (v1.7.3, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.4.5, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="listen (v3.0.8, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.8.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v0.4.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v5.0.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v5.0.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v12.0.0, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
@@ -53,12 +52,7 @@
     <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.5.3, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis-rails (v5.0.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v3.5.2, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sass-rails (v5.0.6, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="shoulda-matchers (v3.1.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="spring (v2.0.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="spring-watcher-listen (v2.0.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="sprockets (v3.7.1, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.3.13, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="uglifier (v3.1.11, RVM: ruby-2.3.1 [rails5.0]) [gem]" level="application" />
   </component>
 </module>
