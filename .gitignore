@@ -21,12 +21,12 @@ rails-api-server/tmp/*
 rails-api-server/.byebug_history
 
 
-client-side/.idea
 client-side/node_modules
 client-side/jspm_packages
 client-side/npm-debug.log
 client-side/debug.log
-client-side/src/**/*.js
+client-side/src/app/**/*.js
+client-side/src/app/**/*.js.map
 !client-side/src/systemjs.config.extras.js
 !client-side/src/systemjs.config.js
 !client-side/src/systemjs-angular-loader.js

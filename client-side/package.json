@@ -1,7 +1,11 @@
 {
-  "name": "angular-quickstart",
+  "name": "client-side",
   "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "description": "Client side for my chat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmunumel/chat-socketio-rails.git"
+  },
   "scripts": {
     "build": "tsc -p src/",
     "build:watch": "tsc -p src/ -w",
