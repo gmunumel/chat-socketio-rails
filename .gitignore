@@ -20,6 +20,19 @@ rails-api-server/tmp/*
 # Ignore Byebug command history file.
 rails-api-server/.byebug_history
 
-node_modules/
-client-side/node_modules/
+
+client-side/node_modules
+client-side/jspm_packages
+client-side/npm-debug.log
+client-side/debug.log
+client-side/src/app/**/*.js
+client-side/src/app/**/*.js.map
+!client-side/src/systemjs.config.extras.js
+!client-side/src/systemjs.config.js
+!client-side/src/systemjs-angular-loader.js
+client-side/*.js.map
+client-side/e2e/**/*.js
+client-side/e2e/**/*.js.map
+client-side/_test-output
+client-side/_temp
 
