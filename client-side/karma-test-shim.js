@@ -37,7 +37,7 @@ System.config({
   // Base URL for System.js calls. 'base/' is where Karma serves files from.
   baseURL: 'base/src',
   // Extend usual application package list with test folder
-  packages: { 'testing': { main: 'index.js', defaultExtension: 'js' } },
+  packages: { 'spec': { main: 'index.js', defaultExtension: 'js' } },
 
   // Assume npm: is set in `paths` in systemjs.config
   // Map the angular testing umd bundles
