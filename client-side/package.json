@@ -2,14 +2,11 @@
   "name": "client-side",
   "version": "1.0.0",
   "description": "Client side for my chat",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gmunumel/chat-socketio-rails.git"
-  },
+  "repository": {},
   "scripts": {
     "build": "tsc -p src/",
-    "build:test": "tsc -p spec/",
     "build:watch": "tsc -p src/ -w",
+    "build:watch:test": "tsc -p spec/ -w",
     "build:e2e": "tsc -p e2e/",
     "serve": "lite-server -c=bs-config.json",
     "serve:e2e": "lite-server -c=bs-config.e2e.json",
@@ -20,7 +17,7 @@
     "preprotractor": "webdriver-manager update",
     "protractor": "protractor protractor.config.js",
     "pretest": "npm run build",
-    "test": "concurrently \"npm run build:test\" \"npm run build:watch\" \"karma start karma.conf.js\"",
+    "test": "concurrently \"npm run build:watch:test\" \"npm run build:watch\" \"karma start karma.conf.js\"",
     "pretest:once": "npm run build",
     "test:once": "karma start karma.conf.js --single-run",
     "lint": "tslint ./src/**/*.ts -t verbose"
@@ -29,26 +26,27 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@angular/common": "~4.0.0",
-    "@angular/compiler": "~4.0.0",
-    "@angular/core": "~4.0.0",
-    "@angular/forms": "~4.0.0",
-    "@angular/http": "~4.0.0",
-    "@angular/platform-browser": "~4.0.0",
-    "@angular/platform-browser-dynamic": "~4.0.0",
-    "@angular/router": "~4.0.0",
-
+    "@angular/common": "^2.3.0",
+    "@angular/compiler": "^2.3.0",
+    "@angular/core": "^2.3.0",
+    "@angular/forms": "^2.3.0",
+    "@angular/http": "^2.3.0",
+    "@angular/platform-browser": "^2.3.0",
+    "@angular/platform-browser-dynamic": "^2.3.0",
+    "@angular/router": "^3.3.0",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.22",
     "angular-in-memory-web-api": "~0.3.0",
-    "systemjs": "0.19.40",
+    "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "ngx-bootstrap": "1.6.5",
     "rxjs": "5.0.1",
-    "zone.js": "^0.8.4"
+    "systemjs": "0.19.40",
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "concurrently": "^3.2.0",
     "lite-server": "^2.2.2",
     "typescript": "~2.1.0",
-
     "canonical-path": "0.0.2",
     "tslint": "^3.15.1",
     "lodash": "^4.16.4",
@@ -60,9 +58,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~4.0.14",
     "rimraf": "^2.5.4",
-
     "@types/node": "^6.0.46",
     "@types/jasmine": "2.5.36"
-  },
-  "repository": {}
+  }
 }
