@@ -37,3 +37,4 @@ client-side/e2e/**/*.js
 client-side/e2e/**/*.js.map
 client-side/_test-output
 client-side/_temp
+client-side/_test-output
