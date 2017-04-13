@@ -4,8 +4,8 @@ module.exports = function(config) {
   var appSrcBase = appBase;      // app source TS files
 
   // Testing helpers (optional) are conventionally in a folder called `testing`
-  var testingBase    = 'spec/'; // transpiled test JS and map files
-  var testingSrcBase = 'spec/'; // test source TS files
+  var testingBase    = 'src/testing/'; // transpiled test JS and map files
+  var testingSrcBase = 'src/testing/'; // test source TS files
 
   config.set({
     basePath: '',

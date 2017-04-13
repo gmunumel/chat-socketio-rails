@@ -2,7 +2,7 @@ import { browser, element, by } from 'protractor';
 
 describe('Client Side Chat E2E Tests', function () {
 
-  let expectedMsg = 'Hello Angular';
+  let expectedMsg = 'My App Page';
 
   beforeEach(function () {
     browser.get('');
