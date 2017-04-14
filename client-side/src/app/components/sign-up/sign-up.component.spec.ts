@@ -1,9 +1,13 @@
 import { SignUpComponent } from './sign-up.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
+import {
+  RouterLinkStubDirective, RouterOutletStubComponent
+} from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { By }                   from '@angular/platform-browser';
+import { DebugElement }         from '@angular/core';
+import { ReactiveFormsModule }  from '@angular/forms';
+import { HttpModule }           from '@angular/http';
 
 describe('SignUpComponent', function () {
   let de: DebugElement;
@@ -12,6 +16,7 @@ describe('SignUpComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ ReactiveFormsModule, HttpModule ],
       declarations: [ SignUpComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
     })
     .compileComponents();

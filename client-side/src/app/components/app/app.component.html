@@ -20,31 +20,38 @@
   </div>
   <!-- /#sidebar-wrapper -->
 
+  <button type="button" class="btn btn-primary" id="toggle-sidebar"
+      (click)="toggleSidebar()">
+      <span *ngIf="toggled === 'toggled'" class="glyphicon glyphicon-chevron-left"></span>
+      <span *ngIf="toggled === ''" class="glyphicon glyphicon-chevron-right"></span>
+  </button>
+
 	<!-- Page Content -->
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 		  <div class="row">
 		    <div class="col-lg-12">		        
-	        <button type="button" class="btn btn-primary" id="toggle-sidebar"
-			        (click)="toggleSidebar()">Toggle Sidebar
-			    </button>
-				<router-outlet></router-outlet>
-		    </div>
-		  </div>
-		</div>
+				  <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
 
     <!-- footer -->
     <div id="footer">
       <div class="row">
         <div class="col-lg-12"> 
-          <span>My Simple Chat App ☺</span>
+          <span>My Simple Chat App /
+            Powered by <a href="http://www.angular2.com/">Angular2</a>, 
+            <a href="http://rubyonrails.org/">Ruby on Rails</a>, 
+            <a href="http://socket.io/">Socket.io</a> and 
+            <a href="http://www.redis.io/">Redis</a>. 
+            Happy Coding ☺</span>
         </div>
       </div>
     </div>
     <!-- /#footer -->
 	</div>
   <!-- /#page-content-wrapper -->
-
   
 </div>
 <!-- /#Wrapper -->

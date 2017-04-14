@@ -2,14 +2,8 @@ import { browser, element, by } from 'protractor';
 
 describe('Client Side Chat E2E Tests', function () {
 
-  let expectedMsg = 'Toggle Sidebar';
-
   beforeEach(function () {
     browser.get('');
-  });
-
-  it('should display: ' + expectedMsg, function () {
-    expect(element(by.id('toggle-sidebar')).getText()).toEqual(expectedMsg);
   });
 
   it('should have links', function () {

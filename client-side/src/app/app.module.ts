@@ -1,21 +1,22 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms'; // <-- NgModel lives here
-import { JsonpModule }    from '@angular/http';
+import { NgModule }             from '@angular/core';
+import { BrowserModule }        from '@angular/platform-browser';
+import { ReactiveFormsModule }  from '@angular/forms';
+import { HttpModule }           from '@angular/http';
 
 import { AboutComponent }     from './components/about/about.component';
-import { AppComponent }       from './components/app.component';
+import { AppComponent }       from './components/app/app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent }    from './components/sign-in/sign-in.component';
 import { SignUpComponent }    from './components/sign-up/sign-up.component';
+import { UserService }        from './services/user.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports:      [
     BrowserModule,
-    FormsModule, // <-- import the FormsModule before binding with [(ngModel)]
-    JsonpModule,
+    ReactiveFormsModule,
+    HttpModule,
     AppRoutingModule
   ],
   declarations: [
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
     SignInComponent,
     SignUpComponent,
   ],
-  bootstrap:    [ AppComponent ]
+  providers: [ UserService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
+  styleUrls: ['./css/simple-sidebar.css', './css/styles.css']
 })
 export class AppComponent {
   title: string = 'Simple Chat App';

@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../testing';
+import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -35,12 +35,6 @@ describe('AppComponent', function () {
   }));
 
   it('should create component', () => expect(comp).toBeDefined() );
-
-  it('should have expected toggle button', () => {
-    const btn = de.nativeElement;
-    expect(btn.innerText).toMatch(/toggle sidebar/i,
-      'should say something about "Toggle Sidebar"');
-  });
 
   it('can get RouterLinks from template', () => {
     expect(links.length).toBe(4, 'should have 4 links');
