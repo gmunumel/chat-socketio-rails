@@ -2,6 +2,10 @@
 
 * TODO - display endpoints
 
+# Installation
+
+# Run Tests
+
 
 Based on the following tutorials: 
 * Models: https://www.sitepoint.com/create-a-chat-app-with-rails-5-actioncable-and-devise/

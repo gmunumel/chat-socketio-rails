@@ -67,8 +67,7 @@ RSpec.describe 'Messages API', type: :request do
 
   # Test suite for PUT /chat_rooms/:chat_room_id/messages
   describe 'POST /chat_rooms/:chat_room_id/messages' do
-    let(:valid_attributes) { { body: 'Visit Narnia', chat_room_id: chat_room_id, \
-                               user_id: user_id } }
+    let(:valid_attributes) { { body: 'Visit Narnia', user_id: user_id } }
 
     context 'when request attributes are valid' do
       before { post "/chat_rooms/#{chat_room_id}/messages", params: valid_attributes }
@@ -93,8 +92,7 @@ RSpec.describe 'Messages API', type: :request do
 
   # Test suite for PUT /chat_rooms/:chat_room_id/messages/:id
   describe 'PUT /chat_rooms/:chat_room_id/messages/:id' do
-    let(:valid_attributes) { { body: 'Mozart', chat_room_id: chat_room_id, \
-                               user_id: user_id } }
+    let(:valid_attributes) { { body: 'Mozart', user_id: user_id } }
 
     before { put "/chat_rooms/#{chat_room_id}/messages/#{id}", params: valid_attributes }
 
@@ -122,7 +120,7 @@ RSpec.describe 'Messages API', type: :request do
     end
   end
 
-  # Test suite for DELETE /chat_rooms/:id
+  # Test suite for DELETE /chat_rooms/:id/messages/:id
   describe 'DELETE /chat_rooms/:id' do
     before { delete "/chat_rooms/#{chat_room_id}/messages/#{id}" }
 

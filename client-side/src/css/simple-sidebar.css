@@ -4,9 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
- body {
+ /*body {
     overflow-x: hidden;
- }
+ }*/
 
 /* Toggle Styles */
 
@@ -45,6 +45,7 @@
     width: 100%;
     position: absolute;
     padding: 15px;
+    min-height: 100%;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -100,7 +101,7 @@
     background: none;
 }
 
-@media(min-width:768px) {
+/*@media(min-width:768px) {
     #wrapper {
         padding-left: 0;
     }
@@ -126,4 +127,4 @@
         position: relative;
         margin-right: 0;
     }
-}
+}*/
