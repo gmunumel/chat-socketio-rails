@@ -185,3 +185,8 @@ Shut it down manually with `Ctrl-C`.
 
 [travis-badge]: https://travis-ci.org/angular/quickstart.svg?branch=master
 [travis-badge-url]: https://travis-ci.org/angular/quickstart
+
+Related information:
+* Angular2 information: https://angular.io/docs/ts/latest/tutorial/
+* Angular2 Testing: https://angular.io/docs/ts/latest/guide/testing.html
+* Toggle Sidebar based on: https://github.com/BlackrockDigital/startbootstrap-simple-sidebar

@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './sign-up.component.html',
 })
 export class SignUpComponent {
-  title: string = 'Sign Up Page';
+  page: string = 'Sign Up';
 }

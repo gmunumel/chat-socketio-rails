@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title: string = 'App Page';
+  title: string = 'Simple Chat App';
 
   toggled: string = 'toggled';
 

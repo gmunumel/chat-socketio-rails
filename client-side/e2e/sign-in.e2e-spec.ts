@@ -2,7 +2,7 @@ import { browser, element, by } from 'protractor';
 
 describe('Sign In e2e Tests', function () {
 
-  let expectedMsg = 'My Sign In Page';
+  let expectedMsg = 'Sign In';
 
   beforeEach(function () {
     browser.get('');

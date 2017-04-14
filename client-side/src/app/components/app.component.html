@@ -1,46 +1,39 @@
-<h1>My {{title}}</h1>
+<!-- Wrapper -->
+<div id="wrapper" [className]="toggled">
 
-<h1>This is my Simple Chat App</h1>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a [routerLink]="['/dashboard']" id="dashboard-link">My Simple Chat App</a>
+      </li>
+      <li>
+        <a [routerLink]="['/signin']" id="sign-in-link">Sign In</a>
+      </li>
+      <li>
+        <a [routerLink]="['/signup']" id="sign-up-link">Sign Up</a>
+      </li>
+      <li>
+        <a [routerLink]="['/about']" id="about-link">About</a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
- <div id="wrapper" [className]="toggled">
-
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <a [routerLink]="['/']">
-                My Simple Chat
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/signin']" id="sign-in-link">Sign In</a>
-          </li>
-          <li>
-            <a [routerLink]="['/signup']" id="sign-up-link">Sign Up</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-        </ul>
-      </div>
-      <!-- /#sidebar-wrapper -->
-
-		<!-- Page Content -->
-		<div id="page-content-wrapper">
-			<div class="container-fluid">
-			  <div class="row">
-			    <div class="col-lg-12">
-			        <h1>Simple Sidebar</h1>
-			        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-			        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-			        <button type="button" class="btn btn-primary"
-					        (click)="toggleSidebar()">Toggle collapse
-					</button>
-					<hr>
-					<router-outlet></router-outlet>
-			    </div>
-			  </div>
-			</div>
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+		  <div class="row">
+		    <div class="col-lg-12">		        
+	        <button type="button" class="btn btn-primary" id="toggle-sidebar"
+			        (click)="toggleSidebar()">Toggle Sidebar
+			    </button>
+				<router-outlet></router-outlet>
+		    </div>
+		  </div>
 		</div>
+	</div>
+  <!-- /#page-content-wrapper -->
 
 </div>
+<!-- /#Wrapper -->
