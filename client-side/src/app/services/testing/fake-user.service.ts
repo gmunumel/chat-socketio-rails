@@ -1,23 +1,21 @@
-import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+// re-export for tester convenience
+export { User }        from '../../models/user';
+export { UserService } from '../user.service';
 
-import { User } from '../models/user';
+import { User }        from '../../models/user';
+import { UserService } from '../user.service';
 
-@Injectable()
-export class UserService {
+export class FakeUserService implements UserService {
   usersUrl = 'http://localhost:3000/users';  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
+  lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
   constructor(public http: Http) { }
 
   create(user: User): Promise<User> {
-    return this.http
-      .post(this.usersUrl, JSON.stringify({name: user.name, email: user.email}), {headers: this.headers})
-      .toPromise()
-      .then(res => res.json().data as User)
-      .catch(this.handleError);
+    return this.lastPromise = Promise.resolve(user);
   }
 
   handleError(error: any): Promise<any> {

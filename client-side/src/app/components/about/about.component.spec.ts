@@ -1,5 +1,4 @@
 import { AboutComponent } from './about.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -12,7 +11,7 @@ describe('AboutComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
+      declarations: [ AboutComponent ]
     })
     .compileComponents();
   }));

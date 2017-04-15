@@ -1,5 +1,4 @@
 import { DashboardComponent } from './dashboard.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -12,7 +11,7 @@ describe('DashboardComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
+      declarations: [ DashboardComponent ]
     })
     .compileComponents();
   }));

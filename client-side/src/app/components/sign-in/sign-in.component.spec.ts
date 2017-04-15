@@ -1,5 +1,4 @@
 import { SignInComponent } from './sign-in.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }           from '@angular/platform-browser';
@@ -12,7 +11,7 @@ describe('SignInComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignInComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
+      declarations: [ SignInComponent ]
     })
     .compileComponents();
   }));

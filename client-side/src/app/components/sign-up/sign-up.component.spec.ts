@@ -1,13 +1,13 @@
-import { SignUpComponent } from './sign-up.component';
 import {
-  RouterLinkStubDirective, RouterOutletStubComponent
-} from '../../../testing';
+  async, fakeAsync, ComponentFixture, TestBed
+} from '@angular/core/testing';
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }                   from '@angular/platform-browser';
 import { DebugElement }         from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule }           from '@angular/http';
+
+import { SignUpComponent } from './sign-up.component';
 
 describe('SignUpComponent', function () {
   let de: DebugElement;
@@ -17,7 +17,7 @@ describe('SignUpComponent', function () {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, HttpModule ],
-      declarations: [ SignUpComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
+      declarations: [ SignUpComponent ],
     })
     .compileComponents();
   }));
@@ -36,4 +36,36 @@ describe('SignUpComponent', function () {
     expect(h1.innerText).toMatch(/sign up/i,
       '<h1> should say something about "Sign Up"');
   });
+
+  it('user should update from form changes', fakeAsync(() => {
+    const validTestUser = {
+      name: 'testUserName',
+      email: 'test@test.com',
+    };
+    updateForm(validTestUser.name, validTestUser.email);
+    expect(comp.signUpForm.value).toEqual(validTestUser);
+  }));
+
+  it('isValid should be false when form is invalid', fakeAsync(() => {
+    const isvalidTestUser = {
+      name: 'testUserName',
+      email: 'test@',
+    };
+    updateForm(isvalidTestUser.name, isvalidTestUser.email);
+    expect(comp.signUpForm.valid).toBeFalsy();
+  }));
+
+  // it('should update model on submit', fakeAsync(() => {
+  //   updateForm(validTestUser.name, validTestUser.email);
+  //   comp.doSignUp();
+  //   expect(comp.signUpForm.value).toEqual(validTestUser);
+  // }));
+
+
+  //////// Helper //////
+  // create reusable function for a dry spec.
+  function updateForm(userEmail: string, userPassword: string) {
+    comp.signUpForm.controls['name'].setValue(userEmail);
+    comp.signUpForm.controls['email'].setValue(userPassword);
+  }
 });

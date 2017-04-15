@@ -16,16 +16,16 @@ export class SignUpComponent {
   response: number = 0;
   private user: User;
 
-  constructor(
-    public fb: FormBuilder,
-    private userService: UserService) {}
-
   public signUpForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(emailRegex)]],
   });
 
-  doSignUp(event: any): void {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService) {}
+
+  doSignUp(): void {
     this.user = new User();
     this.user.name = this.signUpForm.value.name;
     this.user.email = this.signUpForm.value.email;

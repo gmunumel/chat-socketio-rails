@@ -9,7 +9,7 @@
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
-    <form [formGroup]="signUpForm" (ngSubmit)="doSignUp($event)" novalidate>
+    <form [formGroup]="signUpForm" (ngSubmit)="doSignUp()" novalidate>
       <div class="form-group" 
       	[ngClass]="{'has-error':!signUpForm.controls['name'].valid && signUpForm.controls['name'].touched}">
         <label for="pwd">Name:</label>
