@@ -7,10 +7,10 @@ import { User } from '../models/user';
 
 @Injectable()
 export class UserService {
-  usersUrl = 'http://localhost:3000/users';  // URL to web api
-  headers = new Headers({'Content-Type': 'application/json'});
+  private usersUrl = 'http://localhost:3000/users';  // URL to web api
+  private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(public http: Http) { }
+  constructor(private http: Http) { }
 
   create(user: User): Promise<User> {
     return this.http
@@ -20,7 +20,7 @@ export class UserService {
       .catch(this.handleError);
   }
 
-  handleError(error: any): Promise<any> {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
