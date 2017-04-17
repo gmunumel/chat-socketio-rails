@@ -9,6 +9,9 @@ import { HttpModule }           from '@angular/http';
 
 import { SignUpComponent } from './sign-up.component';
 
+import { UserService } from '../../services/user.service';
+import { FakeUserService } from '../../../testing/services/fake-user.service';
+
 describe('SignUpComponent', function () {
   let de: DebugElement;
   let comp: SignUpComponent;
@@ -18,6 +21,13 @@ describe('SignUpComponent', function () {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, HttpModule ],
       declarations: [ SignUpComponent ],
+    })
+    .overrideComponent(SignUpComponent, {
+      set: {
+        providers: [
+          { provide: UserService, useClass: FakeUserService },
+        ]
+      }
     })
     .compileComponents();
   }));
@@ -55,11 +65,15 @@ describe('SignUpComponent', function () {
     expect(comp.signUpForm.valid).toBeFalsy();
   }));
 
-  // it('should update model on submit', fakeAsync(() => {
-  //   updateForm(validTestUser.name, validTestUser.email);
-  //   comp.doSignUp();
-  //   expect(comp.signUpForm.value).toEqual(validTestUser);
-  // }));
+  it('should update model on submit', fakeAsync(() => {
+    const validTestUser = {
+      name: 'testUserName',
+      email: 'test@test.com',
+    };
+    updateForm(validTestUser.name, validTestUser.email);
+    comp.doSignUp();
+    expect(comp.signUpForm.value).toEqual(validTestUser);
+  }));
 
 
   //////// Helper //////

@@ -2,6 +2,7 @@ class UsersController < ActionController::API
   include Response
   include ExceptionHandler
 
+
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users

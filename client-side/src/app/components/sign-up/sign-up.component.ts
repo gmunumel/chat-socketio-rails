@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
@@ -14,16 +14,23 @@ const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 export class SignUpComponent {
   page: string = 'Sign Up';
   response: number = 0;
-  private user: User;
+  user: User;
+  signUpForm: FormGroup;
 
-  public signUpForm = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.pattern(emailRegex)]],
-  });
+  // public signUpForm = this.fb.group({
+  //   name: ['', Validators.required],
+  //   email: ['', [Validators.required, Validators.pattern(emailRegex)]],
+  // });
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService) {}
+    private userService: UserService) {
+
+    this.signUpForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(emailRegex)]],
+    });
+  }
 
   doSignUp(): void {
     this.user = new User();
