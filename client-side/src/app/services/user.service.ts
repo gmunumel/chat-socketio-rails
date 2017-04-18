@@ -14,7 +14,21 @@ export class UserService {
 
   create(user: User): Promise<User> {
     return this.http
-      .post(this.usersUrl, JSON.stringify({name: user.name, email: user.email}), {headers: this.headers})
+      .post(this.usersUrl, 
+        JSON.stringify({name: user.name, email: user.email}), 
+        {headers: this.headers}
+      )
+      .toPromise()
+      .then(res => res.json().data as User)
+      .catch(this.handleError);
+  }
+
+  search(user: User): Promise<User> {
+    return this.http
+      .post(this.usersUrl + '/search', 
+        JSON.stringify({name: user.name, email: user.email}), 
+        {headers: this.headers}
+      )
       .toPromise()
       .then(res => res.json().data as User)
       .catch(this.handleError);

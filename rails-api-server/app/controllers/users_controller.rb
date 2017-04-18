@@ -2,7 +2,6 @@ class UsersController < ActionController::API
   include Response
   include ExceptionHandler
 
-
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -10,6 +9,12 @@ class UsersController < ActionController::API
     @users = User.all
     $redis.publish 'users-list', users: @users.to_json
     json_response(@users)
+  end
+
+  # GET /users/search?name=Name&email=Email
+  def search
+    @user = User.find_by!(user_params)
+    json_response(@user)
   end
 
   # POST /users

@@ -1,2 +1,30 @@
 <h1 class="sign-in">{{page}}</h1>
 <hr>
+
+<div class="row">
+  <div class="col-lg-4"> 
+    <div *ngIf="response === 1" class="alert alert-success">
+      <strong>Success!</strong> Your user has been created!
+    </div>
+    <div *ngIf="response === -1" class="alert alert-danger">
+      <strong>Error!</strong> Something went wrong. Please try again.
+    </div>
+    <form [formGroup]="signInForm" (ngSubmit)="doSignIn()" novalidate>
+      <div class="form-group" 
+      	[ngClass]="{'has-error':!signInForm.controls['name'].valid && signInForm.controls['name'].touched}">
+        <label for="pwd">Name:</label>
+        <input formControlName="name" type="name" class="form-control" id="name">
+        <div *ngIf="signInForm.controls['name'].hasError('required') && signInForm.controls['name'].touched" 
+        			class="alert alert-danger">You must include a name.</div>
+      </div>
+      <div class="form-group" 
+      	[ngClass]="{'has-error':!signInForm.controls['email'].valid && signInForm.controls['email'].touched}">
+        <label for="email">Email address:</label>
+        <input formControlName="email" type="email" class="form-control" id="email">
+        <div *ngIf="signInForm.controls['email'].hasError('required') && signInForm.controls['email'].touched" 
+        			class="alert alert-danger">You must include an email.</div>
+      </div>
+      <button [disabled]="!signInForm.valid" id="sign-in-submit" type="submit" class="btn btn-default">Login</button>
+    </form>
+  </div>
+</div>

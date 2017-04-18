@@ -9,7 +9,7 @@ import { HttpModule }           from '@angular/http';
 
 import { SignUpComponent } from './sign-up.component';
 
-import { UserService } from '../../services/user.service';
+import { UserService }     from '../../services/user.service';
 import { FakeUserService } from '../../../testing/services/fake-user.service';
 
 describe('SignUpComponent', function () {
@@ -74,7 +74,6 @@ describe('SignUpComponent', function () {
     comp.doSignUp();
     expect(comp.signUpForm.value).toEqual(validTestUser);
   }));
-
 
   //////// Helper //////
   // create reusable function for a dry spec.
