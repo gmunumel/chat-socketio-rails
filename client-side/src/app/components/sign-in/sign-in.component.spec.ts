@@ -1,5 +1,5 @@
 import {
-  async, fakeAsync, ComponentFixture, TestBed
+  async, fakeAsync, ComponentFixture, TestBed, tick,
 } from '@angular/core/testing';
 
 import { By }                   from '@angular/platform-browser';
@@ -38,7 +38,7 @@ describe('SignInComponent', function () {
     de = fixture.debugElement.query(By.css('h1'));
   });
 
-  it('should search component', () => expect(comp).toBeDefined() );
+  it('should search component', () => expect(comp).toBeDefined());
 
   it('should have expected <h1> text', () => {
     fixture.detectChanges();
@@ -72,8 +72,16 @@ describe('SignInComponent', function () {
     };
     updateForm(validTestUser.name, validTestUser.email);
     comp.doSignIn();
+    tick();
+    expect(comp.response).toEqual(1);
+    expect(localStorage.getItem('userName')).toEqual(validTestUser.name);
+    expect(localStorage.getItem('userEmail')).toEqual(validTestUser.email);
     expect(comp.signInForm.value).toEqual(validTestUser);
   }));
+
+  afterAll(() => {
+    localStorage.clear();
+  });
 
   //////// Helper //////
   // create reusable function for a dry spec.

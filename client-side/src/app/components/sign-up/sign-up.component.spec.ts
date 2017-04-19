@@ -1,5 +1,5 @@
 import {
-  async, fakeAsync, ComponentFixture, TestBed
+  async, fakeAsync, ComponentFixture, TestBed, tick
 } from '@angular/core/testing';
 
 import { By }                   from '@angular/platform-browser';
@@ -72,6 +72,8 @@ describe('SignUpComponent', function () {
     };
     updateForm(validTestUser.name, validTestUser.email);
     comp.doSignUp();
+    tick();
+    expect(comp.response).toEqual(1);
     expect(comp.signUpForm.value).toEqual(validTestUser);
   }));
 

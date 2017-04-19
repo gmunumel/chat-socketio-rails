@@ -35,6 +35,8 @@ export class SignInComponent {
     this.userService.search(this.user)
       .then(user => {
         this.response = 1;
+        localStorage.userName = user.name;
+        localStorage.userEmail = user.email;
       })
       .catch(user => {
         this.response = -1;
