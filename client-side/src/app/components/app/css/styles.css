@@ -19,3 +19,11 @@ h1 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
+#header {
+  width: 100%;
+  padding: 15px;
+  background: #000;
+  color: #999999;
+  text-align: right;
+}

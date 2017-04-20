@@ -8,6 +8,7 @@ import { AppComponent }       from './components/app/app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent }    from './components/sign-in/sign-in.component';
 import { SignUpComponent }    from './components/sign-up/sign-up.component';
+import { SessionService }     from './services/session.service';
 import { UserService }        from './services/user.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     SignInComponent,
     SignUpComponent,
   ],
-  providers: [ UserService ],
+  providers: [ UserService, SessionService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { User }        from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { User }            from '../../models/user';
+import { SessionService }  from '../../services/session.service';
+import { UserService }     from '../../services/user.service';
 
 const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
 
@@ -19,7 +20,8 @@ export class SignInComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService) {
+    private userService: UserService,
+    private sessionService: SessionService) {
 
     this.signInForm = this.fb.group({
       name: ['', Validators.required],
@@ -35,8 +37,8 @@ export class SignInComponent {
     this.userService.search(this.user)
       .then(user => {
         this.response = 1;
-        localStorage.userName = user.name;
-        localStorage.userEmail = user.email;
+        this.sessionService.setUserName(user.name);
+        this.sessionService.setUserEmail(user.email);
       })
       .catch(user => {
         this.response = -1;
