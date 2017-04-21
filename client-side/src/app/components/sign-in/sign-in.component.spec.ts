@@ -69,9 +69,10 @@ describe('SignInComponent', function () {
 
   it('should update model on submit', fakeAsync(() => {
     const validTestUser = {
-      name: 'testUserName',
-      email: 'test@test.com',
+      name: 'Ted',
+      email: 'ted@example.com',
     };
+    SessionService.getInstance().collection$.subscribe(() => {});
     updateForm(validTestUser.name, validTestUser.email);
     comp.doSignIn();
     tick();

@@ -10,6 +10,7 @@ const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
+  providers: [ SessionService ]
 })
 export class SignInComponent {
   page: string = 'Sign In';
@@ -19,8 +20,7 @@ export class SignInComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private sessionService: SessionService) {
+    private userService: UserService) {
 
     this.signInForm = this.fb.group({
       name: ['', Validators.required],
@@ -36,8 +36,8 @@ export class SignInComponent {
     this.userService.search(this.user)
       .then(user => {
         this.response = 1;
-        this.sessionService.setUserName(user.name);
-        this.sessionService.setUserEmail(user.email);
+        SessionService.getInstance().setUserName(user.name);
+        SessionService.getInstance().setUserEmail(user.email);
       })
       .catch(user => {
         this.response = -1;

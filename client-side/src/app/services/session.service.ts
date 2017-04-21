@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
 @Injectable()
 export class SessionService {
+  static instance: SessionService;
   public collection$: Observable<Array<string>>;
   private collectionObserver: any;
   private collection: Array<string>;
 
+  static getInstance() {
+    if (SessionService.instance == null) {
+        SessionService.instance = new SessionService();
+    }
+
+    return SessionService.instance;
+  }
+
   constructor() {
     this.collection = new Array<string>();
-    
+
     this.collection$ = new Observable((observer: any) => {
       this.collectionObserver = observer;
     }).share();
@@ -19,7 +28,9 @@ export class SessionService {
 
   setUserName(userName: string): void {
     let userNameStorage: string = localStorage.getItem('userName');
-    if (userNameStorage) return;
+    if (userNameStorage) {
+      return;
+    }
     localStorage.setItem('userName', userName);
     this.collection.push(userName);
     this.collectionObserver.next(this.collection);
@@ -27,7 +38,9 @@ export class SessionService {
 
   setUserEmail(userEmail: string): void {
     let userEmailStorage: string = localStorage.getItem('userEmail');
-    if (userEmailStorage) return;
+    if (userEmailStorage) {
+      return;
+    }
     localStorage.setItem('userEmail', userEmail);
     this.collection.push(userEmail);
     this.collectionObserver.next(this.collection);

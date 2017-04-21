@@ -10,22 +10,21 @@ import { SessionService } from '../../services/session.service';
   styleUrls: ['./css/simple-sidebar.css', './css/styles.css'],
   providers: [ SessionService ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title: string = 'Simple Chat App';
   toggled: string = 'toggled';
   userName: string = '';
   userEmail: string = '';
   subscription: Subscription;
 
-  constructor(private sessionService: SessionService) { }
-
   ngOnInit(): void {
-    this.subscription = this.sessionService.collection$.subscribe(latestCollection => {
-      this.userName = latestCollection[0];
-      this.userEmail = latestCollection[1];
+    this.subscription = SessionService.getInstance().collection$
+      .subscribe((latestCollection: any) => {
+        this.userName = latestCollection[0];
+        this.userEmail = latestCollection[1];
     });
-    
-    this.sessionService.load();
+
+    SessionService.getInstance().load();
   }
 
   toggleSidebar(): void {
@@ -37,7 +36,7 @@ export class AppComponent {
   }
 
   logOut(): void {
-    this.sessionService.clear();
+    SessionService.getInstance().clear();
   }
 
   ngOnDestroy(): void {
