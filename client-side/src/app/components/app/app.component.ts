@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription }   from 'rxjs/Subscription';
 
 import { SessionService } from '../../services/session.service';
 
@@ -13,12 +15,17 @@ export class AppComponent {
   toggled: string = 'toggled';
   userName: string = '';
   userEmail: string = '';
+  subscription: Subscription;
 
   constructor(private sessionService: SessionService) { }
 
   ngOnInit(): void {
-    this.userName = this.sessionService.getUserName();
-    this.userEmail = this.sessionService.getUserEmail();
+    this.subscription = this.sessionService.collection$.subscribe(latestCollection => {
+      this.userName = latestCollection[0];
+      this.userEmail = latestCollection[1];
+    });
+    
+    this.sessionService.load();
   }
 
   toggleSidebar(): void {
@@ -29,7 +36,12 @@ export class AppComponent {
     }
   }
 
-  ogOut(): void {
-    this.sessionService.logOut();
+  logOut(): void {
+    this.sessionService.clear();
+  }
+
+  ngOnDestroy(): void {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
   }
 }

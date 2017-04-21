@@ -10,6 +10,7 @@ import { HttpModule }           from '@angular/http';
 import { SignInComponent } from './sign-in.component';
 
 import { UserService }     from '../../services/user.service';
+import { SessionService }  from '../../services/session.service';
 import { FakeUserService } from '../../../testing/services/fake-user.service';
 
 describe('SignInComponent', function () {
@@ -20,7 +21,8 @@ describe('SignInComponent', function () {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, HttpModule ],
-      declarations: [ SignInComponent ]
+      declarations: [ SignInComponent ],
+      providers: [ SessionService ],
     })
     .overrideComponent(SignInComponent, {
       set: {

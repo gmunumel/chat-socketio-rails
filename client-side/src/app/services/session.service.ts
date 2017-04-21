@@ -1,31 +1,51 @@
 import { Injectable } from '@angular/core';
 
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
+
 @Injectable()
 export class SessionService {
-  //userName: string = '';
-  //userEmail: string = '';
+  public collection$: Observable<Array<string>>;
+  private collectionObserver: any;
+  private collection: Array<string>;
+
+  constructor() {
+    this.collection = new Array<string>();
+    
+    this.collection$ = new Observable((observer: any) => {
+      this.collectionObserver = observer;
+    }).share();
+  }
 
   setUserName(userName: string): void {
-    //this.userName = userName;
+    let userNameStorage: string = localStorage.getItem('userName');
+    if (userNameStorage) return;
     localStorage.setItem('userName', userName);
+    this.collection.push(userName);
+    this.collectionObserver.next(this.collection);
   }
 
   setUserEmail(userEmail: string): void {
-    //this.userName = userEmail;
+    let userEmailStorage: string = localStorage.getItem('userEmail');
+    if (userEmailStorage) return;
     localStorage.setItem('userEmail', userEmail);
+    this.collection.push(userEmail);
+    this.collectionObserver.next(this.collection);
   }
 
-  getUserName(): string {
-    return localStorage.getItem('userName');
-    //return this.userName;
+  load(): void {
+    let userName: string = localStorage.getItem('userName');
+    let userEmail: string = localStorage.getItem('userEmail');
+    if (userName && userEmail) {
+      this.collection.push(userName);
+      this.collection.push(userEmail);
+    }
+    this.collectionObserver.next(this.collection);
   }
 
-  getUserEmail(): string {
-    return localStorage.getItem('userEmail');
-    //return this.userEmail;
-  }
-
-  logOut(): void {
+  clear(): void {
     localStorage.clear();
+    this.collection = [];
+    this.collectionObserver.next(this.collection);
   }
 }

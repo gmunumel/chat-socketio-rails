@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component }                          from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User }            from '../../models/user';
@@ -10,7 +10,6 @@ const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
-  providers: [ UserService ]
 })
 export class SignInComponent {
   page: string = 'Sign In';
