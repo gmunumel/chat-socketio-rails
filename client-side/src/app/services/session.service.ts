@@ -46,6 +46,12 @@ export class SessionService {
     this.collectionObserver.next(this.collection);
   }
 
+  isLoggedIn(): boolean {
+    let userName: string = localStorage.getItem('userName');
+    let userEmail: string = localStorage.getItem('userEmail');
+    return (userName && userEmail) ? true : false;
+  }
+
   load(): void {
     let userName: string = localStorage.getItem('userName');
     let userEmail: string = localStorage.getItem('userEmail');

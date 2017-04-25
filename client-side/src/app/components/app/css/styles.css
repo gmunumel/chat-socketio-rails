@@ -19,14 +19,3 @@ h1 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
-#wrapper #header {
-  position: fixed;
-  right: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-  color: #999999;
-  text-align: right;
-}

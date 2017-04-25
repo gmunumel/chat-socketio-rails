@@ -7,6 +7,14 @@
       <li class="sidebar-brand">
         <a [routerLink]="['/dashboard']" id="dashboard-link">My Simple Chat App</a>
       </li>
+      <li class="sidebar-header">
+        <span *ngIf="userName != null">
+          Hello {{userName}}
+        </span>
+        <span *ngIf="userName == null">
+          Hello Guest
+        </span>
+      </li>
       <li>
         <a [routerLink]="['/signin']" id="sign-in-link">Sign In</a>
       </li>
@@ -16,18 +24,23 @@
       <li>
         <a [routerLink]="['/about']" id="about-link">About</a>
       </li>
-      <li class="sidebar-admin">
-        <span>Admin</span>
-      </li>
-      <li class="sidebar-admin">
-        <a [routerLink]="['/admin/user']" id="admin-user-link" class="admin">User</a>
-      </li>
-      <li class="sidebar-admin">
-        <a [routerLink]="['/admin/message']" id="admin-message-link" class="admin">Message</a>
-      </li>
-      <li class="sidebar-admin">
-        <a [routerLink]="['/admin/chat-room']" id="admin-chat-room-link" class="admin">Chat Room</a>
-      </li>
+      <div *ngIf="userName != null">
+        <li class="sidebar-admin">
+          <span>Admin</span>
+        </li>
+        <li class="sidebar-admin">
+          <a [routerLink]="['/admin/user']" id="admin-user-link" class="admin">User</a>
+        </li>
+        <li class="sidebar-admin">
+          <a [routerLink]="['/admin/message']" id="admin-message-link" class="admin">Message</a>
+        </li>
+        <li class="sidebar-admin">
+          <a [routerLink]="['/admin/chat-room']" id="admin-chat-room-link" class="admin">Chat Room</a>
+        </li>
+        <li class="sidebar-admin">
+          <a href="javascript:void(0)" (click)="logOut()" class="admin">Log out</a>
+        </li>
+      </div>
     </ul>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -35,31 +48,13 @@
 	<!-- Page Content -->
 	<div id="page-content-wrapper">
 
-    <!-- Header -->
-    <div id="header">
-      <div class="row">
-        <div class="col-lg-12"> 
-          <span *ngIf="userName != null">
-            Hello {{userName}}, <button type="button" (click)="logOut()">Log out</button>
-          </span>
-          <span *ngIf="userName == null">
-            Hello Guest
-          </span>
-        </div>
-      </div>
-    </div>
-    <!-- /#header -->
+    <button type="button" class="btn btn-primary" id="toggle-sidebar"
+        (click)="toggleSidebar()">
+        <span *ngIf="toggled === 'toggled'" class="glyphicon glyphicon-chevron-left"></span>
+        <span *ngIf="toggled === ''" class="glyphicon glyphicon-chevron-right"></span>
+    </button>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <button type="button" class="btn btn-primary" id="toggle-sidebar"
-            (click)="toggleSidebar()">
-            <span *ngIf="toggled === 'toggled'" class="glyphicon glyphicon-chevron-left"></span>
-            <span *ngIf="toggled === ''" class="glyphicon glyphicon-chevron-right"></span>
-        </button>
-      </div>
-    </div>
-
+    <!-- Content -->
 		<div class="container-fluid">
 		  <div class="row">
 		    <div class="col-lg-12">		
@@ -67,6 +62,7 @@
         </div>
       </div>
     </div>
+    <!-- /#Content -->
 
     <!-- footer -->
     <div id="footer">

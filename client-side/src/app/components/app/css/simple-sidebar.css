@@ -100,12 +100,16 @@
     background: none;
 }
 
-.sidebar-nav > .sidebar-admin, 
-    .sidebar-nav > .sidebar-admin > .admin  {
+.sidebar-nav > .sidebar-header {
+    color: #fff;
+}
+
+.sidebar-nav > div .sidebar-admin, 
+    .sidebar-nav > div .sidebar-admin > .admin  {
     color: #ff0000;
 }
 
-.sidebar-nav > .sidebar-admin > .admin {
+.sidebar-nav > div .sidebar-admin > .admin {
     padding-left: 10px;
 }
 
