@@ -16,6 +16,18 @@
       <li>
         <a [routerLink]="['/about']" id="about-link">About</a>
       </li>
+      <li class="sidebar-admin">
+        <span>Admin</span>
+      </li>
+      <li class="sidebar-admin">
+        <a [routerLink]="['/admin/user']" id="admin-user-link" class="admin">User</a>
+      </li>
+      <li class="sidebar-admin">
+        <a [routerLink]="['/admin/message']" id="admin-message-link" class="admin">Message</a>
+      </li>
+      <li class="sidebar-admin">
+        <a [routerLink]="['/admin/chat-room']" id="admin-chat-room-link" class="admin">Chat Room</a>
+      </li>
     </ul>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -38,16 +50,20 @@
     </div>
     <!-- /#header -->
 
+    <div class="row">
+      <div class="col-lg-12">
+        <button type="button" class="btn btn-primary" id="toggle-sidebar"
+            (click)="toggleSidebar()">
+            <span *ngIf="toggled === 'toggled'" class="glyphicon glyphicon-chevron-left"></span>
+            <span *ngIf="toggled === ''" class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+      </div>
+    </div>
+
 		<div class="container-fluid">
 		  <div class="row">
 		    <div class="col-lg-12">		
-          <button type="button" class="btn btn-primary" id="toggle-sidebar"
-              (click)="toggleSidebar()">
-              <span *ngIf="toggled === 'toggled'" class="glyphicon glyphicon-chevron-left"></span>
-              <span *ngIf="toggled === ''" class="glyphicon glyphicon-chevron-right"></span>
-          </button>
-
-				  <router-outlet></router-outlet>
+			   <router-outlet></router-outlet>
         </div>
       </div>
     </div>

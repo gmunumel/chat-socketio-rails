@@ -37,7 +37,7 @@ describe('AppComponent', function () {
   it('should create component', () => expect(comp).toBeDefined() );
 
   it('can get RouterLinks from template', () => {
-    expect(links.length).toBe(4, 'should have 4 links');
+    expect(links.length).toBe(7, 'should have 7 links');
     expect(links[0].linkParams[0]).toBe('/dashboard', '1st link should go to Dashboard');
     expect(links[1].linkParams[0]).toBe('/signin', '2st link should go to Sign In');
     expect(links[2].linkParams[0]).toBe('/signup', '3st link should go to Sign Up');

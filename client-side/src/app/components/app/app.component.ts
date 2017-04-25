@@ -11,7 +11,6 @@ import { SessionService } from '../../services/session.service';
   providers: [ SessionService ]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title: string = 'Simple Chat App';
   toggled: string = 'toggled';
   userName: string = '';
   userEmail: string = '';
