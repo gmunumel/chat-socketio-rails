@@ -52,7 +52,7 @@ describe('UserService (mockBackend)', () => {
 
       beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
         backend = be;
-        service = new UserService(http)
+        service = new UserService(http);
         user = new User('test', 'test@example.com');
         let options = new ResponseOptions({status: 200, body: {user: user}});
         response = new Response(options);
@@ -80,7 +80,7 @@ describe('UserService (mockBackend)', () => {
           });
       })));
 
-      it('should treat 404 as an Promise error', async(inject([], () => {
+      it('should treat 404 as a Promise error', async(inject([], () => {
         let resp = new Response(new ResponseOptions({status: 404}));
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 

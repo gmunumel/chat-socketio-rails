@@ -14,7 +14,6 @@ export class SessionService {
     if (SessionService.instance == null) {
         SessionService.instance = new SessionService();
     }
-
     return SessionService.instance;
   }
 

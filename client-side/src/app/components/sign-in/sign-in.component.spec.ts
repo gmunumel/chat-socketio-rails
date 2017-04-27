@@ -73,6 +73,7 @@ describe('SignInComponent', function () {
       email: 'ted@example.com',
     };
     SessionService.getInstance().collection$.subscribe(() => {});
+    SessionService.getInstance().clear();
     updateForm(validTestUser.name, validTestUser.email);
     comp.doSignIn();
     tick();
