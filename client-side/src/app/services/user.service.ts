@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -13,23 +13,21 @@ export class UserService {
   constructor(public http: Http) { }
 
   create(user: User): Promise<User> {
-    return this.http
-      .post(this.usersUrl,
-        JSON.stringify({name: user.name, email: user.email}),
-        {headers: this.headers}
-      )
-      .toPromise()
-      .then(res => res.json() as User)
-      .catch(this.handleError);
+    let body = JSON.stringify({name: user.name, email: user.email});
+    let options = new RequestOptions({ headers: this.headers });
+
+    return this.http.post(this.usersUrl, body, options)
+                    .toPromise()
+                    .then(res => res.json() as User)
+                    .catch(this.handleError);
   }
 
   search(user: User): Promise<User> {
     const url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
-    return this.http
-      .get(url)
-      .toPromise()
-      .then(res => res.json() as User)
-      .catch(this.handleError);
+    return this.http.get(url)
+                    .toPromise()
+                    .then(res => res.json() as User)
+                    .catch(this.handleError);
   }
 
   handleError(error: any): Promise<any> {
