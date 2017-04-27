@@ -29,10 +29,13 @@ export class SignInComponent {
   }
 
   doSignIn(): void {
+    if (SessionService.getInstance().isLoggedIn()) {
+      return;
+    }
     this.user = new User();
     this.user.name = this.signInForm.value.name;
     this.user.email = this.signInForm.value.email;
-
+    
     this.userService.search(this.user)
       .then(user => {
         this.response = 1;

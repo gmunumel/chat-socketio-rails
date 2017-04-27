@@ -17,6 +17,7 @@ const USERS: User[] = [
   new User('Stealthy', 'stealthy@example.com')
 ];
 
+// Dummy UserService. Pretend it makes real http requests 
 @Injectable()
 export class FakeUserService implements UserService {
 
