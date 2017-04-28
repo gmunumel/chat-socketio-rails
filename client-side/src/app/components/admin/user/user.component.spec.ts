@@ -1,17 +1,33 @@
+import {
+  async, fakeAsync, ComponentFixture, TestBed, tick
+} from '@angular/core/testing';
+
+import { By }                   from '@angular/platform-browser';
+import { DebugElement }         from '@angular/core';
+import { ReactiveFormsModule }  from '@angular/forms';
+import { HttpModule }           from '@angular/http';
+
 import { UserComponent } from './user.component';
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { UserService }     from '../../../services/user.service';
+import { FakeUserService } from '../../../../testing/services/fake-user.service';
 
-describe('AppComponent', function () {
+describe('UserComponent', function () {
   let de: DebugElement;
   let comp: UserComponent;
   let fixture: ComponentFixture<UserComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ ReactiveFormsModule, HttpModule ],
       declarations: [ UserComponent ]
+    })
+    .overrideComponent(UserComponent, {
+      set: {
+        providers: [
+          { provide: UserService, useClass: FakeUserService },
+        ]
+      }
     })
     .compileComponents();
   }));
@@ -22,7 +38,7 @@ describe('AppComponent', function () {
     de = fixture.debugElement.query(By.css('h1'));
   });
 
-  it('should create component', () => expect(comp).toBeDefined() );
+  it('should create component here5', () => expect(comp).toBeDefined() );
 
   it('should have expected <h1> text', () => {
     fixture.detectChanges();

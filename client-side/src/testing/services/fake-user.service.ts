@@ -34,6 +34,10 @@ export class FakeUserService implements UserService {
     return this.lastPromise = Promise.resolve(user);
   }
 
+  getUsers(): Promise<User[]> {
+    return this.lastPromise = Promise.resolve<User[]>(this.users);
+  }
+
   search(user: User): Promise<User> {
     let userFound = this.users.find(u => u.name === user.name && u.email === user.email);
     return this.lastPromise = Promise.resolve(userFound);

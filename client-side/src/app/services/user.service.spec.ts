@@ -14,6 +14,13 @@ import {
 import { User } from '../models/user';
 import { UserService } from './user.service';
 
+const makeUserData = () => [
+  { name: 'Ted', email: 'ted@example.com' },
+  { name: 'Bob', email: 'bob@example.com' },
+  { name: 'Jack', email: 'jack@example.com' },
+  { name: 'Barry', email: 'barry@example.com' }
+] as User[];
+
 describe('UserService (mockBackend)', () => {
 
   beforeEach( async(() => {
@@ -85,6 +92,53 @@ describe('UserService (mockBackend)', () => {
         backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
 
         service.create(user)
+          .then()
+          .catch(err => {
+            expect(err).toMatch(/Bad response status/, 'should catch bad response status code');
+            return Promise.reject(err.message || err); // failure is the expected test result
+          });
+      })));
+  });
+
+  describe('when get all users', () => {
+      let backend: MockBackend;
+      let service: UserService;
+      let fakeUsers: User[];
+      let response: Response;
+
+      beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+        backend = be;
+        service = new UserService(http);
+        fakeUsers = makeUserData();
+        let options = new ResponseOptions({status: 200, body: {users: fakeUsers}});
+        response = new Response(options);
+      }));
+
+      it('should have expected fake users (then)', async(inject([], () => {
+        backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+        service.getUsers()
+          .then((res: any) => {
+            expect(res.users.length).toBe(fakeUsers.length,
+              'should have expected no. of heroes');
+          });
+      })));
+
+      it('should be OK returning no user', async(inject([], () => {
+        let resp = new Response(new ResponseOptions({status: 200, body: {users: []}}));
+        backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+        service.getUsers()
+          .then((res: any) => {
+            expect(res.users.length).toBe(0, 'should have no user');
+          });
+      })));
+
+      it('should treat 404 as a Promise error', async(inject([], () => {
+        let resp = new Response(new ResponseOptions({status: 404}));
+        backend.connections.subscribe((c: MockConnection) => c.mockRespond(resp));
+
+        service.getUsers()
           .then()
           .catch(err => {
             expect(err).toMatch(/Bad response status/, 'should catch bad response status code');

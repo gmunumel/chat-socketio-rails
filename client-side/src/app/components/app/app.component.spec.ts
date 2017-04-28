@@ -39,9 +39,9 @@ describe('AppComponent', function () {
   it('can get RouterLinks from template', () => {
     expect(links.length).toBe(7, 'should have 7 links');
     expect(links[0].linkParams[0]).toBe('/dashboard', '1st link should go to Dashboard');
-    expect(links[1].linkParams[0]).toBe('/signin', '2st link should go to Sign In');
-    expect(links[2].linkParams[0]).toBe('/signup', '3st link should go to Sign Up');
-    expect(links[3].linkParams[0]).toBe('/about', '4st link should go to About');
+    expect(links[1].linkParams[0]).toBe('/signin', '2nd link should go to Sign In');
+    expect(links[2].linkParams[0]).toBe('/signup', '3rd link should go to Sign Up');
+    expect(links[3].linkParams[0]).toBe('/about', '4th link should go to About');
   });
 
   it('can click Sign In link in template', () => {

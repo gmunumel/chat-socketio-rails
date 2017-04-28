@@ -22,6 +22,13 @@ export class UserService {
                     .catch(this.handleError);
   }
 
+  getUsers(): Promise<User[]> {
+    return this.http.get(this.usersUrl)
+                    .toPromise()
+                    .then(res => res.json() as User[])
+                    .catch(this.handleError);
+  }
+
   search(user: User): Promise<User> {
     const url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
     return this.http.get(url)

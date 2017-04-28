@@ -1,2 +1,16 @@
 <h1 class="admin-user">{{page}}</h1>
 <hr>
+
+<div class="row">
+  <div class="col-lg-4"> 
+    <button id="add-user" class="btn btn-primary pull-right">Add</button>
+  </div>
+</div>
+<div class="help-block"></div>
+<div class="row">
+  <div class="col-lg-4"> 
+    <div class="list-group">
+      <a *ngFor="let user of users" href="#" class="list-group-item">{{user.name}}</a>
+    </div>
+  </div>
+</div>
