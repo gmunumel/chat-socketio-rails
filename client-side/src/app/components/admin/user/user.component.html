@@ -9,8 +9,11 @@
 <div class="help-block"></div>
 <div class="row">
   <div class="col-lg-4"> 
-    <div class="list-group">
-      <a *ngFor="let user of users" href="#" class="list-group-item">{{user.name}}</a>
+    <div *ngFor="let user of users; let index = index" class="input-group">
+      <input type="button" value="{{user.name}}" class="form-control text-left">
+      <span class="input-group-btn">
+          <button class="btn btn-danger" id="delete-{{index}}">x</button>
+      </span>
     </div>
   </div>
 </div>

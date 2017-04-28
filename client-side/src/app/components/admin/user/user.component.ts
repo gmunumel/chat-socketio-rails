@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 @Component({
   selector: 'user',
   templateUrl: './user.component.html',
+  styleUrls: [ '../../../app/css/styles.css' ]
 })
 export class UserComponent implements OnInit {
   page: string = 'Admin User';
