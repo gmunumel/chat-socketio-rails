@@ -26,11 +26,12 @@ RSpec.describe 'Users API', type: :request do
   # Test suite for GET /users/search?name=Name&email=Email
   describe 'GET /users/search' do
     # make HTTP get request before each example
-    before { get "/users/search?name=#{user_name}&email=#{user_email}" }
+    before { get "/users/search?id=#{user_id}&name=#{user_name}&email=#{user_email}" }
 
     context 'when the record exists' do
       it 'returns the user' do
         expect(json).not_to be_empty
+        expect(json['id']).to eq(user_id)
         expect(json['name']).to eq(user_name)
         expect(json['email']).to eq(user_email)
       end
@@ -41,6 +42,7 @@ RSpec.describe 'Users API', type: :request do
     end
 
     context 'when the record does not exist' do
+      let(:user_id) { 99 }
       let(:user_name) { 'f4k3n4m3' }
       let(:user_email) { 'f4k3@email.com' }
 

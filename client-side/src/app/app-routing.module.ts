@@ -8,7 +8,7 @@ import { MessageComponent }    from './components/admin/message/message.componen
 import { SignInComponent }     from './components/sign-in/sign-in.component';
 import { SignUpComponent }     from './components/sign-up/sign-up.component';
 import { UserComponent }       from './components/admin/user/user.component';
-
+import { UserDetailComponent } from './components/admin/user/user-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'signup',  component: SignUpComponent },
   { path: 'about',  component: AboutComponent },
   { path: 'admin/user',  component: UserComponent },
+  { path: 'admin/user/detail/:id', component: UserDetailComponent },
   { path: 'admin/message',  component: MessageComponent },
   { path: 'admin/chat-room',  component: ChatRoomComponent },
 ];

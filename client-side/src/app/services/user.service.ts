@@ -12,13 +12,12 @@ export class UserService {
 
   constructor(public http: Http) { }
 
-  create(user: User): Promise<User> {
-    let body = JSON.stringify({name: user.name, email: user.email});
-    let options = new RequestOptions({ headers: this.headers });
+  getUser(id: number): Promise<User> {
+    let url = `${this.usersUrl}/search?id=${id}`;
 
-    return this.http.post(this.usersUrl, body, options)
+    return this.http.get(url)
                     .toPromise()
-                    .then(res => res.json() as User)
+                    .then(response => response.json() as User)
                     .catch(this.handleError);
   }
 
@@ -30,10 +29,42 @@ export class UserService {
   }
 
   search(user: User): Promise<User> {
-    const url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
+    let url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
+
     return this.http.get(url)
                     .toPromise()
                     .then(res => res.json() as User)
+                    .catch(this.handleError);
+  }
+
+  create(user: User): Promise<User> {
+    let body = JSON.stringify({name: user.name, email: user.email});
+    let options = new RequestOptions({ headers: this.headers });
+
+    return this.http.post(this.usersUrl, body, options)
+                    .toPromise()
+                    .then(res => res.json() as User)
+                    .catch(this.handleError);
+  }
+
+  update(user: User): Promise<User> {
+    let url = `${this.usersUrl}/${user.id}`;
+    let body = JSON.stringify({name: user.name, email: user.email});
+    let options = new RequestOptions({ headers: this.headers });
+
+    return this.http.put(url, body, options)
+                    .toPromise()
+                    .then(() => user)
+                    .catch(this.handleError);
+  }
+
+  delete(id: number): Promise<void> {
+    let url = `${this.usersUrl}/${id}`;
+    let options = new RequestOptions({ headers: this.headers });
+
+    return this.http.delete(url, options)
+                    .toPromise()
+                    .then(() => null)
                     .catch(this.handleError);
   }
 

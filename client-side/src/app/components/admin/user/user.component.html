@@ -9,10 +9,12 @@
 <div class="help-block"></div>
 <div class="row">
   <div class="col-lg-4"> 
-    <div *ngFor="let user of users; let index = index" class="input-group">
-      <input type="button" value="{{user.name}}" class="form-control text-left">
+    <div *ngFor="let user of users" class="input-group">
+      <input (click)="gotoDetail(user)"
+             type="button" value="{{user.name}}" class="form-control text-left">
       <span class="input-group-btn">
-          <button class="btn btn-danger" id="delete-{{index}}">x</button>
+          <button (click)="delete(user); $event.stopPropagation()"
+                  class="btn btn-danger" id="delete-{{user.id}}">x</button>
       </span>
     </div>
   </div>

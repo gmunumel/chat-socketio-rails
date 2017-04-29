@@ -12,7 +12,7 @@
     <form [formGroup]="signUpForm" (ngSubmit)="doSignUp()" novalidate>
       <div class="form-group" 
       	[ngClass]="{'has-error':!signUpForm.controls['name'].valid && signUpForm.controls['name'].touched}">
-        <label for="pwd">Name:</label>
+        <label for="name">Name:</label>
         <input formControlName="name" type="name" class="form-control" id="name">
         <div *ngIf="signUpForm.controls['name'].hasError('required') && signUpForm.controls['name'].touched" 
         			class="alert alert-danger">You must include a name.</div>

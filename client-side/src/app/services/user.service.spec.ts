@@ -15,10 +15,10 @@ import { User } from '../models/user';
 import { UserService } from './user.service';
 
 const makeUserData = () => [
-  { name: 'Ted', email: 'ted@example.com' },
-  { name: 'Bob', email: 'bob@example.com' },
-  { name: 'Jack', email: 'jack@example.com' },
-  { name: 'Barry', email: 'barry@example.com' }
+  { id: 0, name: 'Ted', email: 'ted@example.com' },
+  { id: 1, name: 'Bob', email: 'bob@example.com' },
+  { id: 2, name: 'Jack', email: 'jack@example.com' },
+  { id: 3, name: 'Barry', email: 'barry@example.com' }
 ] as User[];
 
 describe('UserService (mockBackend)', () => {
@@ -60,7 +60,7 @@ describe('UserService (mockBackend)', () => {
       beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
         backend = be;
         service = new UserService(http);
-        user = new User('test', 'test@example.com');
+        user = new User(0, 'test', 'test@example.com');
         let options = new ResponseOptions({status: 200, body: {user: user}});
         response = new Response(options);
       }));

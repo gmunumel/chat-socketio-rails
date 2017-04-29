@@ -36,7 +36,7 @@ export class SignUpComponent {
       .then(user => {
         this.response = 1;
       })
-      .catch(user => {
+      .catch(() => {
         this.response = -1;
       });
   }
