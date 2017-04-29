@@ -23,6 +23,7 @@ export class SignInComponent {
     private userService: UserService) {
 
     this.signInForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailRegex)]],
     });
@@ -33,8 +34,7 @@ export class SignInComponent {
       return;
     }
     this.user = new User();
-    this.user.name = this.signInForm.value.name;
-    this.user.email = this.signInForm.value.email;
+    Object.assign(this.user, this.signInForm.value);
 
     this.userService.search(this.user)
       .then(user => {

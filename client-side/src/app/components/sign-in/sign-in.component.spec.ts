@@ -11,7 +11,11 @@ import { SignInComponent } from './sign-in.component';
 
 import { UserService }     from '../../services/user.service';
 import { SessionService }  from '../../services/session.service';
-import { FakeUserService } from '../../../testing/services/fake-user.service';
+import {
+  USERS, FakeUserService
+}                          from '../../../testing/services/fake-user.service';
+
+const firstUser = USERS[0];
 
 describe('SignInComponent', function () {
   let de: DebugElement;
@@ -50,12 +54,9 @@ describe('SignInComponent', function () {
   });
 
   it('user should update from form changes', fakeAsync(() => {
-    const validTestUser = {
-      name: 'testUserName',
-      email: 'test@test.com',
-    };
-    updateForm(validTestUser.name, validTestUser.email);
-    expect(comp.signInForm.value).toEqual(validTestUser);
+    comp.signInForm.patchValue(firstUser);
+    expect(comp.signInForm.value.name).toEqual(firstUser.name);
+    expect(comp.signInForm.value.email).toEqual(firstUser.email);
   }));
 
   it('isValid should be false when form is invalid', fakeAsync(() => {
@@ -63,34 +64,24 @@ describe('SignInComponent', function () {
       name: 'testUserName',
       email: 'test@',
     };
-    updateForm(isvalidTestUser.name, isvalidTestUser.email);
+    comp.signInForm.patchValue(isvalidTestUser);
     expect(comp.signInForm.valid).toBeFalsy();
   }));
 
   it('should update model on submit', fakeAsync(() => {
-    const validTestUser = {
-      name: 'Ted',
-      email: 'ted@example.com',
-    };
     SessionService.getInstance().collection$.subscribe(() => {});
     SessionService.getInstance().clear();
-    updateForm(validTestUser.name, validTestUser.email);
+    comp.signInForm.patchValue(firstUser);
     comp.doSignIn();
     tick();
     expect(comp.response).toEqual(1);
-    expect(localStorage.getItem('userName')).toEqual(validTestUser.name);
-    expect(localStorage.getItem('userEmail')).toEqual(validTestUser.email);
-    expect(comp.signInForm.value).toEqual(validTestUser);
+    expect(localStorage.getItem('userName')).toEqual(firstUser.name);
+    expect(localStorage.getItem('userEmail')).toEqual(firstUser.email);
+    expect(comp.signInForm.value.name).toEqual(firstUser.name);
+    expect(comp.signInForm.value.email).toEqual(firstUser.email);
   }));
 
   afterAll(() => {
     localStorage.clear();
   });
-
-  //////// Helper //////
-  // create reusable function for a dry spec.
-  function updateForm(userEmail: string, userPassword: string) {
-    comp.signInForm.controls['name'].setValue(userEmail);
-    comp.signInForm.controls['email'].setValue(userPassword);
-  }
 });

@@ -2,6 +2,10 @@ import {
   async, fakeAsync, ComponentFixture, TestBed, tick
 } from '@angular/core/testing';
 
+import {
+  ActivatedRoute, ActivatedRouteStub, Router, RouterStub
+} from '../../../../testing';
+
 import { By }                   from '@angular/platform-browser';
 import { DebugElement }         from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
@@ -20,7 +24,10 @@ describe('UserComponent', function () {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, HttpModule ],
-      declarations: [ UserComponent ]
+      declarations: [ UserComponent ],
+      providers: [
+        { provide: Router,         useClass: RouterStub},
+      ]
     })
     .overrideComponent(UserComponent, {
       set: {
@@ -38,7 +45,7 @@ describe('UserComponent', function () {
     de = fixture.debugElement.query(By.css('h1'));
   });
 
-  it('should create component here5', () => expect(comp).toBeDefined() );
+  it('should create component', () => expect(comp).toBeDefined() );
 
   it('should have expected <h1> text', () => {
     fixture.detectChanges();

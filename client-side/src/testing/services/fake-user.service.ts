@@ -8,7 +8,7 @@ export { UserService } from '../../app/services/user.service';
 import { User }        from '../../app/models/user';
 import { UserService } from '../../app/services/user.service';
 
-const USERS: User[] = [
+export var USERS: User[] = [
   new User(0, 'Bob', 'bob@example.com'),
   new User(1, 'Carol', 'carol@example.com'),
   new User(2, 'Ted', 'ted@example.com'),

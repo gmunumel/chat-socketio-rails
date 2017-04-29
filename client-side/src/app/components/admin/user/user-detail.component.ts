@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
 import {
   FormGroup, FormBuilder, Validators
@@ -12,7 +12,7 @@ import { UserService } from '../../../services/user.service';
 const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
 
 @Component({
-  selector: 'user-detail',
+  selector: 'admin-user-detail',
   templateUrl: './user-detail.component.html'
 })
 export class UserDetailComponent implements OnInit {
@@ -34,20 +34,16 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params
-      .switchMap((params: Params) => this.userService.getUser(+params['id']))
-      .subscribe(user => this.userDetailForm.patchValue(user) );
+    this.route.params.subscribe(p => this.getUser(p && p['id']));
   }
 
   save(): void {
     let user = new User();
-    user.id = this.userDetailForm.value.id;
-    user.name = this.userDetailForm.value.name;
-    user.email = this.userDetailForm.value.email;
+    Object.assign(user, this.userDetailForm.value);
 
     this.userService.update(user)
       .then(() => {
-        this.response = 1;
+        this.response = 1; // It will be lost
         this.goBack();
       })
       .catch(() => {
@@ -57,5 +53,15 @@ export class UserDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/admin/user']);
+  }
+
+  private getUser(id: number): void {
+    this.userService.getUser(id)
+      .then(user => {
+        this.userDetailForm.patchValue(user);
+      })
+      .catch(() => {
+        this.goBack();
+      });
   }
 }

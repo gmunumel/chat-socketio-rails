@@ -10,7 +10,11 @@ import { HttpModule }           from '@angular/http';
 import { SignUpComponent } from './sign-up.component';
 
 import { UserService }     from '../../services/user.service';
-import { FakeUserService } from '../../../testing/services/fake-user.service';
+import {
+ USERS, FakeUserService
+}                          from '../../../testing/services/fake-user.service';
+
+const firstUser = USERS[0];
 
 describe('SignUpComponent', function () {
   let de: DebugElement;
@@ -48,12 +52,9 @@ describe('SignUpComponent', function () {
   });
 
   it('user should update from form changes', fakeAsync(() => {
-    const validTestUser = {
-      name: 'testUserName',
-      email: 'test@test.com',
-    };
-    updateForm(validTestUser.name, validTestUser.email);
-    expect(comp.signUpForm.value).toEqual(validTestUser);
+    comp.signUpForm.patchValue(firstUser);
+    expect(comp.signUpForm.value.name).toEqual(firstUser.name);
+    expect(comp.signUpForm.value.email).toEqual(firstUser.email);
   }));
 
   it('isValid should be false when form is invalid', fakeAsync(() => {
@@ -61,26 +62,16 @@ describe('SignUpComponent', function () {
       name: 'testUserName',
       email: 'test@',
     };
-    updateForm(isvalidTestUser.name, isvalidTestUser.email);
+    comp.signUpForm.patchValue(isvalidTestUser);
     expect(comp.signUpForm.valid).toBeFalsy();
   }));
 
   it('should update model on submit', fakeAsync(() => {
-    const validTestUser = {
-      name: 'testUserName',
-      email: 'test@test.com',
-    };
-    updateForm(validTestUser.name, validTestUser.email);
+    comp.signUpForm.patchValue(firstUser);
     comp.doSignUp();
     tick();
     expect(comp.response).toEqual(1);
-    expect(comp.signUpForm.value).toEqual(validTestUser);
+    expect(comp.signUpForm.value.name).toEqual(firstUser.name);
+    expect(comp.signUpForm.value.email).toEqual(firstUser.email);
   }));
-
-  //////// Helper //////
-  // create reusable function for a dry spec.
-  function updateForm(userEmail: string, userPassword: string) {
-    comp.signUpForm.controls['name'].setValue(userEmail);
-    comp.signUpForm.controls['email'].setValue(userPassword);
-  }
 });

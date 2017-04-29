@@ -22,6 +22,7 @@ export class SignUpComponent {
     private userService: UserService) {
 
     this.signUpForm = this.fb.group({
+      id: [''],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailRegex)]],
     });
@@ -29,8 +30,7 @@ export class SignUpComponent {
 
   doSignUp(): void {
     this.user = new User();
-    this.user.name = this.signUpForm.value.name;
-    this.user.email = this.signUpForm.value.email;
+    Object.assign(this.user, this.signUpForm.value);
 
     this.userService.create(this.user)
       .then(user => {
