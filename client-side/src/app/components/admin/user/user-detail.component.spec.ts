@@ -85,6 +85,18 @@ describe('UserDetailComponent', function () {
     }));
   });
 
+  describe('when navigate with no user id', () => {
+    beforeEach( async( createComponent ));
+
+    it('should have user.id === ""', () => {
+      expect(comp.userDetailForm.value.id).toBe('');
+    });
+
+    it('should display empty user name', () => {
+      expect(page.nameDisplay.textContent).toBe('');
+    });
+  });
+
   describe('when navigate to non-existant user id', () => {
     beforeEach( async(() => {
       activatedRoute.testParams = { id: 99999 };
@@ -122,6 +134,7 @@ describe('UserDetailComponent', function () {
     saveBtn:        DebugElement;
     cancelBtn:      DebugElement;
     pageName:       HTMLInputElement;
+    nameDisplay:    HTMLInputElement;
 
     constructor() {
       const router   = TestBed.get(Router); // get router from root injector
@@ -137,6 +150,7 @@ describe('UserDetailComponent', function () {
         this.cancelBtn   = buttons[0];
         this.saveBtn     = buttons[1];
         this.pageName    = fixture.debugElement.query(By.css('.admin-user-detail')).nativeElement;
+        this.nameDisplay = fixture.debugElement.query(By.css('#name')).nativeElement;
       }
     }
   }

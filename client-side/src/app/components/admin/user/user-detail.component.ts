@@ -41,14 +41,7 @@ export class UserDetailComponent implements OnInit {
     let user = new User();
     Object.assign(user, this.userDetailForm.value);
 
-    this.userService.update(user)
-      .then(() => {
-        this.response = 1; // It will be lost
-        this.goBack();
-      })
-      .catch(() => {
-        this.response = -1;
-      });
+    this.saveOrUpdate(user);
   }
 
   goBack(): void {
@@ -56,6 +49,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   private getUser(id: number): void {
+    // when no id or id===0, create new user
+    if (!id) {
+      return;
+    }
+
     this.userService.getUser(id)
       .then(user => {
         this.userDetailForm.patchValue(user);
@@ -63,5 +61,27 @@ export class UserDetailComponent implements OnInit {
       .catch(() => {
         this.goBack();
       });
+  }
+
+  private saveOrUpdate(user: User) {
+    if (user.id === 0) {
+      this.userService.create(user)
+        .then(() => {
+          this.response = 1; // It will be lost
+          this.goBack();
+        })
+        .catch(() => {
+          this.response = -1;
+        });
+     } else {
+      this.userService.update(user)
+        .then(() => {
+          this.response = 1; // It will be lost
+          this.goBack();
+        })
+        .catch(() => {
+          this.response = -1;
+        });
+    }
   }
 }
