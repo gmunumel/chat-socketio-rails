@@ -85,10 +85,13 @@ describe('UserDetailComponent', function () {
     }));
   });
 
-  describe('when navigate with no user id', () => {
-    beforeEach( async( createComponent ));
+  describe('when navigate with user id zero', () => {
+    beforeEach( async(() => {
+      activatedRoute.testParams = { id: 0 };
+      createComponent();
+    }));
 
-    it('should have user.id === ""', () => {
+    it('should have user.id === 0', () => {
       expect(comp.userDetailForm.value.id).toBe('');
     });
 

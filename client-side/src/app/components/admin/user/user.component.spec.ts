@@ -61,8 +61,8 @@ describe('UserComponent', function () {
 
   it('should navigate to selected user detail on click', fakeAsync(() => {
     const expectedUser = USERS[1];
-    const li = page.userRows[1];
-    li.dispatchEvent(newEvent('click'));
+    const input = page.userRows[1];
+    input.dispatchEvent(newEvent('click'));
     tick();
 
     // should have navigated
@@ -75,6 +75,34 @@ describe('UserComponent', function () {
     expect(navArgs[0]).toContain('user', 'nav to user detail URL');
     expect(navArgs[1]).toBe(expectedUser.id, 'expected user.id');
 
+  }));
+
+  it('should navigate to add user on click', fakeAsync(() => {
+    const btn = page.addUserBtn;
+    btn.dispatchEvent(newEvent('click'));
+    tick();
+
+    // should have navigated
+    expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
+
+    // composed user detail will be URL like 'users/42'
+    // expect link array with the route path and user id
+    // first argument to router.navigate is link array
+    const navArgs = page.navSpy.calls.first().args[0];
+    expect(navArgs[0]).toContain('user', 'nav to user detail URL');
+    expect(navArgs[1]).toBe(0, 'expected to be 0');
+
+  }));
+
+  it('should delete user on click', fakeAsync(() => {
+    const deletedUser = USERS[1];
+    const usersLength = page.userRows.length;
+    comp.delete(deletedUser);
+    tick();
+    fixture.detectChanges();
+    expect(comp.response).toBe(1);
+    expect(comp.users.some(function(o){ return o.id === deletedUser.id; })).toBeFalsy();
+    expect(comp.users.length).toBe(usersLength - 1, 'no of users minus one');
   }));
 
   /////////// Helpers /////
@@ -100,6 +128,8 @@ describe('UserComponent', function () {
     userRows: HTMLLIElement[];
     pageName: HTMLInputElement;
 
+    addUserBtn: HTMLInputElement;
+
     // Highlighted element 
     highlightDe: DebugElement;
 
@@ -113,7 +143,8 @@ describe('UserComponent', function () {
       const router = fixture.debugElement.injector.get(Router);
       this.navSpy = spyOn(router, 'navigate');
 
-      this.pageName = fixture.debugElement.query(By.css('.admin-user')).nativeElement;
+      this.pageName   = fixture.debugElement.query(By.css('.admin-user')).nativeElement;
+      this.addUserBtn = fixture.debugElement.query(By.css('#add-user')).nativeElement;
     };
   }
 });

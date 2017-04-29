@@ -11,6 +11,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class UserComponent implements OnInit {
   page: string = 'Admin User';
+  response: number = 0;
   users: User[];
 
   constructor(
@@ -29,22 +30,18 @@ export class UserComponent implements OnInit {
     this.router.navigate(['/admin/user/detail', user.id]);
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.heroService.create(name)
-  //     .then(hero => {
-  //       this.heroes.push(hero);
-  //       this.selectedHero = null;
-  //     });
-  // }
+  add(): void {
+    this.router.navigate(['/admin/user/detail', 0]);
+  }
 
-  // delete(user: User): void {
-  //   this.userService
-  //               .delete(user)
-  //               .then(() => {
-  //                 this.heroes = this.heroes.filter(h => h !== hero);
-  //                 if (this.selectedHero === hero) { this.selectedHero = null; }
-  //               });
-  // }
+  delete(user: User): void {
+    this.userService.delete(user.id)
+                    .then(() => {
+                      this.response = 1;
+                      this.users = this.users.filter(u => u !== user);
+                    })
+                    .catch(() => {
+                      this.response = -1;
+                    });
+  }
 }

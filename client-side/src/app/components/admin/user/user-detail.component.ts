@@ -3,7 +3,7 @@ import { Router }                   from '@angular/router';
 import {
   FormGroup, FormBuilder, Validators
 }                                   from '@angular/forms';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute }           from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import { User }        from '../../../models/user';
@@ -34,7 +34,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(p => this.getUser(p && p['id']));
+    this.route.params.subscribe(p => this.getUser(+p['id']));
   }
 
   save(): void {
@@ -49,8 +49,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   private getUser(id: number): void {
-    // when no id or id===0, create new user
-    if (!id) {
+    // when id===0, create new user
+    if (id === 0) {
       return;
     }
 
