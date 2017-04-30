@@ -31,11 +31,11 @@ export class FakeUserService implements UserService {
 
   getUser(id: number): Promise<User> {
     let userFound = this.users.find(u => u.id === id);
-    return this.lastPromise = Promise.resolve<User>(userFound);
+    return this.lastPromise = Promise.resolve(userFound);
   }
 
   getUsers(): Promise<User[]> {
-    return this.lastPromise = Promise.resolve<User[]>(this.users);
+    return this.lastPromise = Promise.resolve(this.users);
   }
 
   search(user: User): Promise<User> {
@@ -44,8 +44,14 @@ export class FakeUserService implements UserService {
   }
 
   create(user: User): Promise<User> {
-    this.users.push(user);
-    return this.lastPromise = Promise.resolve(user);
+    return this.search(user).then(u => {
+      if (u) {
+        return Promise.reject({ status: 409 }) as any as Promise<User>;
+      } else {
+        this.users.push(user);
+        return this.lastPromise = Promise.resolve(user);
+      }
+    });
   }
 
   update(user: User): Promise<User> {

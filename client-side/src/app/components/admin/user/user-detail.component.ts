@@ -50,7 +50,7 @@ export class UserDetailComponent implements OnInit {
 
   private getUser(id: number): void {
     // when id===0, create new user
-    if (id === 0) {
+    if (id === -1) {
       return;
     }
 
@@ -64,24 +64,24 @@ export class UserDetailComponent implements OnInit {
   }
 
   private saveOrUpdate(user: User) {
-    if (user.id === 0) {
+    if (user.id === -1) {
       this.userService.create(user)
         .then(() => {
           this.response = 1; // It will be lost
           this.goBack();
         })
-        .catch(() => {
-          this.response = -1;
+        .catch((error: any) => {
+          return (error.status === 409) ? this.response = -2 : this.response = -1;
         });
-     } else {
-      this.userService.update(user)
-        .then(() => {
-          this.response = 1; // It will be lost
-          this.goBack();
-        })
-        .catch(() => {
-          this.response = -1;
-        });
+    } else {
+        this.userService.update(user)
+          .then(() => {
+            this.response = 1; // It will be lost
+            this.goBack();
+          })
+          .catch(() => {
+            this.response = -1;
+          });
     }
   }
 }

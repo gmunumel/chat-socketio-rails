@@ -87,7 +87,7 @@ describe('UserDetailComponent', function () {
 
   describe('when navigate with user id zero', () => {
     beforeEach( async(() => {
-      activatedRoute.testParams = { id: 0 };
+      activatedRoute.testParams = { id: -1 };
       createComponent();
     }));
 

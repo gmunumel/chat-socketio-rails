@@ -9,6 +9,9 @@
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
+    <div *ngIf="response === -2" class="alert alert-danger">
+      <strong>Error!</strong> User name and email already exists.
+    </div>
     <form [formGroup]="signUpForm" (ngSubmit)="doSignUp()" novalidate>
       <div class="form-group" 
       	[ngClass]="{'has-error':!signUpForm.controls['name'].valid && signUpForm.controls['name'].touched}">
@@ -24,7 +27,7 @@
         <div *ngIf="signUpForm.controls['email'].hasError('required') && signUpForm.controls['email'].touched" 
         			class="alert alert-danger">You must include an email.</div>
       </div>
-      <button [disabled]="!signUpForm.valid" id="sign-up-submit" type="submit" class="btn btn-primary">Submit</button>
+      <button [disabled]="!signUpForm.valid" id="sign-up-submit" type="submit" class="btn btn-primary">Register</button>
     </form>
   </div>
 </div>

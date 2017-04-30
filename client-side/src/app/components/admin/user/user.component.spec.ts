@@ -90,7 +90,7 @@ describe('UserComponent', function () {
     // first argument to router.navigate is link array
     const navArgs = page.navSpy.calls.first().args[0];
     expect(navArgs[0]).toContain('user', 'nav to user detail URL');
-    expect(navArgs[1]).toBe(0, 'expected to be 0');
+    expect(navArgs[1]).toBe(-1, 'expected to be -1');
 
   }));
 
@@ -101,7 +101,7 @@ describe('UserComponent', function () {
     tick();
     fixture.detectChanges();
     expect(comp.response).toBe(1);
-    expect(comp.users.some(function(o){ return o.id === deletedUser.id; })).toBeFalsy();
+    expect(comp.users.some(function(user){ return user.id === deletedUser.id; })).toBeFalsy();
     expect(comp.users.length).toBe(usersLength - 1, 'no of users minus one');
   }));
 

@@ -6,6 +6,9 @@
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
+    <div *ngIf="response === -2" class="alert alert-danger">
+      <strong>Error!</strong> User name and email already exists.
+    </div>
     <form [formGroup]="userDetailForm" (ngSubmit)="save()" novalidate>
     <div class="form-group" 
          [ngClass]="{'has-error':!userDetailForm.controls['name'].valid 

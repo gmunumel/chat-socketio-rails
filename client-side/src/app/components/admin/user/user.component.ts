@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
   }
 
   add(): void {
-    this.router.navigate(['/admin/user/detail', 0]);
+    this.router.navigate(['/admin/user/detail', -1]);
   }
 
   delete(user: User): void {

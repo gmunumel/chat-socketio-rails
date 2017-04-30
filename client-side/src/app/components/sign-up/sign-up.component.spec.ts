@@ -66,12 +66,23 @@ describe('SignUpComponent', function () {
     expect(comp.signUpForm.valid).toBeFalsy();
   }));
 
-  it('should update model on submit', fakeAsync(() => {
+  it('should not create an user who already exists', fakeAsync(() => {
     comp.signUpForm.patchValue(firstUser);
     comp.doSignUp();
     tick();
+    expect(comp.response).toEqual(-2);
+  }));
+
+  it('should update model on submit', fakeAsync(() => {
+    const validTestUser = {
+      name: 'testUserName',
+      email: 'testUserName@example.com',
+    };
+    comp.signUpForm.patchValue(validTestUser);
+    comp.doSignUp();
+    tick();
     expect(comp.response).toEqual(1);
-    expect(comp.signUpForm.value.name).toEqual(firstUser.name);
-    expect(comp.signUpForm.value.email).toEqual(firstUser.email);
+    expect(comp.signUpForm.value.name).toEqual(validTestUser.name);
+    expect(comp.signUpForm.value.email).toEqual(validTestUser.email);
   }));
 });
