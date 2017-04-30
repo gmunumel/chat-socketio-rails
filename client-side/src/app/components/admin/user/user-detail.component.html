@@ -7,7 +7,7 @@
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
     <div *ngIf="response === -2" class="alert alert-danger">
-      <strong>Error!</strong> User name and email already exists.
+      <strong>Error!</strong> User name or email already exists.
     </div>
     <form [formGroup]="userDetailForm" (ngSubmit)="save()" novalidate>
     <div class="form-group" 

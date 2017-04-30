@@ -7,4 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_girl_rails'
 
+User.create(name: 'admin', email: 'admin@admin.com')
 10.times { FactoryGirl.create(:user) }
