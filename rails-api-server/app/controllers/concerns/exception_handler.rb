@@ -12,7 +12,7 @@ module ExceptionHandler
     end
 
     rescue_from ActiveRecord::RecordNotUnique do |e|
-      json_response({ message: e.message }, :conflict)
+      json_response({ message: 'Validation failed: Unique constraint error' }, :conflict)
     end
   end
 end

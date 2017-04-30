@@ -110,7 +110,7 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-            .to match(/ConstraintException: UNIQUE constraint failed/)
+            .to match(/Validation failed: Unique constraint error/)
       end
     end
 
