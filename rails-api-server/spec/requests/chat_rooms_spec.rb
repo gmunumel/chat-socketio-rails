@@ -7,7 +7,8 @@ RSpec.describe 'ChatRooms API', type: :request do
   let!(:recipient) { create(:user) }
   let!(:chat_rooms) { create_list(:chat_room, 10, created_id: created.id, \
                               sender_id: sender.id, recipient_id: recipient.id) }
-  let(:chat_room_id) { chat_rooms.first.id }
+  let(:chat_room_first) { chat_rooms.first }
+  let(:chat_room_id) { chat_room_first.id }
 
   # Test suite for GET /chat_rooms
   describe 'GET /chat_rooms' do
@@ -68,6 +69,21 @@ RSpec.describe 'ChatRooms API', type: :request do
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is valid but chat room exists' do
+      let(:valid_attributes) { { title: chat_room_first.title, created_id: chat_room_first.created_id, \
+                                 sender_id: chat_room_first.sender_id, recipient_id: chat_room_first.recipient_id } }
+      before { post '/chat_rooms', params: valid_attributes }
+
+      it 'returns status code 409' do
+        expect(response).to have_http_status(409)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+            .to match(/ConstraintException: UNIQUE constraint failed/)
       end
     end
 

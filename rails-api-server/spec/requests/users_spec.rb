@@ -101,6 +101,19 @@ RSpec.describe 'Users API', type: :request do
       end
     end
 
+    context 'when the request is valid but user exists' do
+      before { post '/users', params: { name: user_name, email: user_email } }
+
+      it 'returns status code 409' do
+        expect(response).to have_http_status(409)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+            .to match(/ConstraintException: UNIQUE constraint failed/)
+      end
+    end
+
     context 'when the request is invalid' do
       before { post '/users', params: { name: 'Foobar' } }
 
