@@ -28,7 +28,8 @@
                   && userDetailForm.controls['email'].touched" 
             class="alert alert-danger">You must include an email.</div>
     </div>
-    <button (click)="goBack()" type="button" class="btn btn-default">Back</button>
+    <button (click)="goBack()" type="button" class="btn btn-default"
+            id="user-detail-back">Back</button>
     <button [disabled]="!userDetailForm.valid" id="user-detail-save" 
             type="submit" class="btn btn-primary">Save</button>
   </form>

@@ -23,7 +23,7 @@ export class SignInComponent {
     private userService: UserService) {
 
     this.signInForm = this.fb.group({
-      id: [''],
+      id: [-1],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailRegex)]],
     });

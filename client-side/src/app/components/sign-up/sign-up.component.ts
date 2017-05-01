@@ -22,7 +22,7 @@ export class SignUpComponent {
     private userService: UserService) {
 
     this.signUpForm = this.fb.group({
-      id: [''],
+      id: [-1],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailRegex)]],
     });

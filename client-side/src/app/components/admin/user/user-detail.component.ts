@@ -27,7 +27,7 @@ export class UserDetailComponent implements OnInit {
     private router: Router) {
 
     this.userDetailForm = this.fb.group({
-      id: [''],
+      id: [-1],
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(emailRegex)]],
     });
@@ -49,7 +49,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   private getUser(id: number): void {
-    // when id===0, create new user
+    // when id===-1, create new user
     if (id === -1) {
       return;
     }

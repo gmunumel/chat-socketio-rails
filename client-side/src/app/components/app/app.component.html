@@ -24,10 +24,10 @@
       <li>
         <a [routerLink]="['/about']" id="about-link">About</a>
       </li>
-      <div>
-      <!-- <div *ngIf="userName != null"> -->
+      <!-- <div> -->
+      <div *ngIf="userName != null">
         <li class="sidebar-admin">
-          <span>Admin</span>
+          <span id="admin-title">Admin</span>
         </li>
         <li class="sidebar-admin">
           <a [routerLink]="['/admin/user']" id="admin-user-link" class="admin">User</a>
@@ -39,7 +39,7 @@
           <a [routerLink]="['/admin/chat-room']" id="admin-chat-room-link" class="admin">Chat Room</a>
         </li>
         <li class="sidebar-admin">
-          <a href="javascript:void(0)" (click)="logOut()" class="admin">Log out</a>
+          <a href="javascript:void(0)" (click)="logOut()" id="admin-log-out" class="admin">Log out</a>
         </li>
       </div>
     </ul>

@@ -91,8 +91,8 @@ describe('UserDetailComponent', function () {
       createComponent();
     }));
 
-    it('should have user.id === 0', () => {
-      expect(comp.userDetailForm.value.id).toBe('');
+    it('should have user.id === -1', () => {
+      expect(comp.userDetailForm.value.id).toBe(-1);
     });
 
     it('should display empty user name', () => {
