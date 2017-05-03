@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
 
   delete(user: User): void {
     this.userService
-        .delete(user.id)
+        .delete(user)
         .then(() => {
           this.response = 1;
           this.users = this.users.filter(u => u !== user);

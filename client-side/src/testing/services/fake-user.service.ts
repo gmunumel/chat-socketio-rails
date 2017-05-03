@@ -68,7 +68,7 @@ export class FakeUserService implements UserService {
         this.users.splice(u.id, 1);
         return Promise.resolve<void>(null);
       } else {
-        return Promise.reject(`User ${id} not found`) as any as Promise<void>;
+        return Promise.reject(`User ${user.id} not found`) as any as Promise<void>;
       }
     });
   }
