@@ -56,7 +56,7 @@ export function RemoveUser(userName: string): void {
   // wait for the element to be clickable 
   browser.wait(protractor.ExpectedConditions.elementToBeClickable(elementToClick), 10000)
     .then (() => {
-      // little hack to scroll down the whole page. This is good to click the delete btn
+      // little hack to scroll down the whole page to move where the the delete button is
       browser.executeScript('window.scrollTo(0,10000);').then(() => {
         elementToClick.click();
       });

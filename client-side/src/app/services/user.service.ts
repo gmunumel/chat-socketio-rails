@@ -13,7 +13,7 @@ export class UserService {
   constructor(public http: Http) { }
 
   getUser(id: number): Promise<User> {
-    let url = `${this.usersUrl}/search?id=${id}`;
+    let url = `${this.usersUrl}/${id}`;
 
     return this.http.get(url)
                     .toPromise()
@@ -58,8 +58,8 @@ export class UserService {
                     .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
-    let url = `${this.usersUrl}/${id}`;
+  delete(user: User): Promise<void> {
+    let url = `${this.usersUrl}/${user.id}`;
     let options = new RequestOptions({ headers: this.headers });
 
     return this.http.delete(url, options)

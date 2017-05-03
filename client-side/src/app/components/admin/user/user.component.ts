@@ -35,13 +35,14 @@ export class UserComponent implements OnInit {
   }
 
   delete(user: User): void {
-    this.userService.delete(user.id)
-                    .then(() => {
-                      this.response = 1;
-                      this.users = this.users.filter(u => u !== user);
-                    })
-                    .catch(() => {
-                      this.response = -1;
-                    });
+    this.userService
+        .delete(user.id)
+        .then(() => {
+          this.response = 1;
+          this.users = this.users.filter(u => u !== user);
+        })
+        .catch(() => {
+          this.response = -1;
+        });
   }
 }
