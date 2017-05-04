@@ -13,8 +13,10 @@ class UsersController < ActionController::API
 
   # GET /users/search?name=Name&email=Email
   def search
-    @user = User.find_by!(user_params)
-    json_response(@user)
+    name = user_params[:name]
+    email = user_params[:email]
+    @users = User.where("name LIKE ? OR email LIKE ?", "%#{name}%", "%#{email}%").limit(10).map{|x| x.as_json}
+    json_response(@users)
   end
 
   # POST /users
@@ -45,7 +47,7 @@ class UsersController < ActionController::API
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.permit(:id, :name, :email)
+    params.permit(:name, :email)
   end
 
   def set_user
