@@ -43,6 +43,24 @@ RSpec.describe 'Users API', type: :request do
       end
     end
 
+    context 'when the params are uppercase' do
+      let(:user_name) { users.first.name.upcase }
+      let(:user_email) { users.first.email.upcase }
+
+      it 'returns the users' do
+        expect(json).not_to be_empty
+      end
+
+      it 'contains the user in uppercase' do
+        expect(json.first['name'].upcase).to eq(user_name)
+        expect(json.first['email'].upcase).to eq(user_email)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
     context 'when the record does not exist' do
       let(:user_name) { 'f4k3n4m3' }
       let(:user_email) { 'f4k3@email.com' }
@@ -53,6 +71,36 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns an empty array' do
         expect(json).to be_empty
+      end
+    end
+  end
+
+  # Test suite for GET /users/fetch?name=Name&email=Email
+  describe 'GET /users/fetch' do
+    before { get "/users/fetch?name=#{user_name}&email=#{user_email}" }
+
+    context 'when the record exists' do
+      it 'returns the user' do
+        expect(json).not_to be_empty
+        expect(json['name']).to eq(user_name)
+        expect(json['email']).to eq(user_email)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:user_name) { 'f4k3n4m3' }
+      let(:user_email) { 'f4k3@email.com' }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find User/)
       end
     end
   end

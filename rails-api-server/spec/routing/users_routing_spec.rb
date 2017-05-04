@@ -11,6 +11,10 @@ RSpec.describe UsersController, type: :routing do
       expect(get: '/users/search').to route_to('users#search')
     end
 
+    it 'routes to #fetch' do
+      expect(get: '/users/fetch').to route_to('users#fetch')
+    end
+
     it 'routes to #show' do
       expect(get: '/users/1').to route_to('users#show', id: '1')
     end

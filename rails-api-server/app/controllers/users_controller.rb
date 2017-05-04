@@ -13,10 +13,16 @@ class UsersController < ActionController::API
 
   # GET /users/search?name=Name&email=Email
   def search
-    name = user_params[:name]
-    email = user_params[:email]
-    @users = User.where("name LIKE ? OR email LIKE ?", "%#{name}%", "%#{email}%").limit(10).map{|x| x.as_json}
+    name = user_params[:name] ? user_params[:name].downcase : ' '
+    email = user_params[:email] ? user_params[:email].downcase : ' '
+    @users = User.where("lower(name) LIKE ? OR lower(email) LIKE ?", "%#{name}%", "%#{email}%").map{|x| x.as_json}
     json_response(@users)
+  end
+
+  # GET /users/fetch?name=Name&email=Email
+  def fetch
+    @user = User.find_by!(user_params)
+    json_response(@user)
   end
 
   # POST /users
