@@ -1,6 +1,11 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+import { Observable }    from 'rxjs/Observable';
+
+// Observable class extensions
+import 'rxjs/add/observable/of';
+
 // re-export for tester convenience
 export { User }        from '../../app/models/user';
 export { UserService } from '../../app/services/user.service';
@@ -24,6 +29,7 @@ export class FakeUserService implements UserService {
   usersUrl = 'http://localhost:3000/users';  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
+  lastObservable: Observable<any>;
 
   users = USERS.map(u => u.clone());
 
@@ -38,13 +44,25 @@ export class FakeUserService implements UserService {
     return this.lastPromise = Promise.resolve(this.users);
   }
 
-  search(user: User): Promise<User> {
+  search(name: string, email?: string): Observable<User[]> {
+    let userFound = null;
+    if (email) {
+      userFound = this.users.find(u => u.name === name && u.email === email);
+    } else {
+      userFound = this.users.find(u => u.name === name);
+    }
+    // let userFound = this.users.find(u => u.name === user.name && u.email === user.email);
+    // return this.lastPromise = Promise.resolve(userFound);
+    return this.lastObservable = Observable.of([userFound]);
+  }
+
+  fetch(user: User): Promise<User> {
     let userFound = this.users.find(u => u.name === user.name && u.email === user.email);
     return this.lastPromise = Promise.resolve(userFound);
   }
 
   create(user: User): Promise<User> {
-    return this.search(user).then(u => {
+    return this.search(user.name, user.email).toPromise().then(u => {
       if (u) {
         return Promise.reject({ status: 409 }) as any as Promise<User>;
       } else {
@@ -73,8 +91,13 @@ export class FakeUserService implements UserService {
     });
   }
 
-  handleError(error: any): Promise<any> {
+  handlePromiseError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  handleObservableError(error: any): Observable<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Observable.throw(error.message || error);
   }
 }

@@ -1,7 +1,10 @@
 import { Injectable }                    from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 
+import { Observable }  from 'rxjs/Observable';
+
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { User } from '../models/user';
 
@@ -18,24 +21,44 @@ export class UserService {
     return this.http.get(url)
                     .toPromise()
                     .then(response => response.json() as User)
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
 
   getUsers(): Promise<User[]> {
     return this.http.get(this.usersUrl)
                     .toPromise()
                     .then(res => res.json() as User[])
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
 
-  search(user: User): Promise<User> {
-    let url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
+  search(name: string, email?: string): Observable<User[]> {
+    let url = `${this.usersUrl}/search?name=${name}`;
+    if (email) {
+      url = `${url}&email=${email}`;
+    }
+
+    return this.http.get(url)
+                    .map(res => res.json() as User[] || {})
+                    .catch(this.handleObservableError);
+  }
+
+  fetch(user: User): Promise<User> {
+    let url = `${this.usersUrl}/fetch?name=${user.name}&email=${user.email}`;
 
     return this.http.get(url)
                     .toPromise()
                     .then(res => res.json() as User)
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
+
+  // search(user: User): Observable<User[]> {
+  //   let url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
+
+  //   return this.http.get(url)
+  //                   .toPromise()
+  //                   .then(res => res.json() as User)
+  //                   .catch(this.handleError);
+  // }
 
   create(user: User): Promise<User> {
     let body = JSON.stringify({name: user.name, email: user.email});
@@ -44,7 +67,7 @@ export class UserService {
     return this.http.post(this.usersUrl, body, options)
                     .toPromise()
                     .then(res => res.json() as User)
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
 
   update(user: User): Promise<User> {
@@ -55,7 +78,7 @@ export class UserService {
     return this.http.put(url, body, options)
                     .toPromise()
                     .then(() => user)
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
 
   delete(user: User): Promise<void> {
@@ -65,11 +88,16 @@ export class UserService {
     return this.http.delete(url, options)
                     .toPromise()
                     .then(() => null)
-                    .catch(this.handleError);
+                    .catch(this.handlePromiseError);
   }
 
-  handleError(error: any): Promise<any> {
+  handlePromiseError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  handleObservableError(error: any): Observable<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Observable.throw(error.message || error);
   }
 }

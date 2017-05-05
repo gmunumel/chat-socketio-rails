@@ -36,8 +36,8 @@ export class SignInComponent {
     this.user = new User();
     Object.assign(this.user, this.signInForm.value);
 
-    this.userService.search(this.user)
-      .then(user => {
+    this.userService.fetch(this.user)
+      .then((user) => {
         this.response = 1;
         SessionService.getInstance().setUserName(user.name);
         SessionService.getInstance().setUserEmail(user.email);

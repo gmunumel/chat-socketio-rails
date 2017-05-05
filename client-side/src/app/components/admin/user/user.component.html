@@ -6,13 +6,15 @@
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
+    <h4>User Search</h4>
+    <input #userSearchBox id="user-search-box" (keyup)="search(userSearchBox.value)" />
     <button (click)="add()" id="add-user" class="btn btn-primary pull-right">Add</button>
   </div>
 </div>
 <div class="help-block"></div>
 <div class="row">
   <div class="col-lg-4"> 
-    <div *ngFor="let user of users" class="input-group">
+    <div *ngFor="let user of users | async" class="input-group">
       <input (click)="gotoDetail(user)"
              type="button" value="{{user.name}}" class="form-control text-left users" id="select-{{user.id}}">
       <span class="input-group-btn">
