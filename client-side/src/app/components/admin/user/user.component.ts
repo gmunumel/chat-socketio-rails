@@ -10,7 +10,10 @@ import { Subject }           from 'rxjs/Subject';
 import 'rxjs/add/observable/of';
 
 // Observable operators
+import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
@@ -26,7 +29,6 @@ export class UserComponent implements OnInit, AfterViewInit {
   page: string = 'Admin User';
   response: number = 0;
   users: Observable<User[]>;
-  private term = '';
   private searchTerms = new Subject<string>();
   private deleteSubject = new Subject();
 
@@ -51,7 +53,6 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   search(term: string): void {
-    this.term = term;
     // Push a search term into the observable stream.
     this.searchTerms.next(term);
   }
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         .delete(user)
         .then(() => {
           this.response = 1;
-          this.deleteSubject.next(this.term);
+          this.deleteSubject.next({op: 'delete', id: user.id});
         })
         .catch(() => {
           this.response = -1;
@@ -81,9 +82,16 @@ export class UserComponent implements OnInit, AfterViewInit {
         this.response = -1;
         return Observable.of<User[]>([]);
       });
-    this.deleteSubject.subscribe(
-      (term: string) => this.users = this.userService.search(term),
-      (err) => console.log(err)
-    );
+    this.users = this.users.merge(this.deleteSubject)
+      .startWith([])
+      .scan((acc: any, val: any) => {
+        if (val.op && val.op === 'delete') {
+          let index = acc.findIndex((elt: any) => elt.id === val.id);
+          acc.splice(index, 1);
+          return acc;
+        } else {
+          return val;
+        }
+      });
   }
 }

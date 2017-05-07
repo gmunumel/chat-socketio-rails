@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy {
   toggled: string = 'toggled';
   userName: string = '';
   userEmail: string = '';
-  subscription: Subscription;
+  private subscription: Subscription;
 
   ngOnInit(): void {
     this.subscription = SessionService.getInstance().collection$
