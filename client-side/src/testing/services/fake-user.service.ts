@@ -49,11 +49,10 @@ export class FakeUserService implements UserService {
     if (email) {
       userFound = this.users.find(u => u.name === name && u.email === email);
     } else {
-      userFound = this.users.find(u => u.name === name);
+      userFound = (name === '') ? this.users : this.users.find(u => u.name === name);
     }
-    // let userFound = this.users.find(u => u.name === user.name && u.email === user.email);
-    // return this.lastPromise = Promise.resolve(userFound);
-    return this.lastObservable = Observable.of([userFound]);
+    this.lastObservable = (userFound) ? Observable.of(userFound as User[]) : Observable.of(null);
+    return this.lastObservable;
   }
 
   fetch(user: User): Promise<User> {

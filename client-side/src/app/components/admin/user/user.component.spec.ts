@@ -11,8 +11,11 @@ import { DebugElement }         from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule }           from '@angular/http';
 
+import { Observable }      from 'rxjs/Observable';
+
 import { UserComponent }   from './user.component';
 
+import { User }            from '../../../models/user';
 import { UserService }     from '../../../services/user.service';
 import {
   USERS, FakeUserService
@@ -50,7 +53,10 @@ describe('UserComponent', function () {
   });
 
   it('should display users', () => {
+    const allUsers = USERS;
+    const displayUsers = page.userRows;
     expect(page.userRows.length).toBeGreaterThan(0);
+    expect(allUsers.length).toBe(displayUsers.length);
   });
 
   it('1st user should match 1st test user', () => {
@@ -99,15 +105,34 @@ describe('UserComponent', function () {
     const usersLength = page.userRows.length;
     comp.delete(deletedUser);
     tick();
-    fixture.detectChanges();
     expect(comp.response).toBe(1);
-    // TODO
-    // expect(comp.users.some(function(user){ return user.id === deletedUser.id; })).toBeFalsy();
-    // expect(comp.users.length).toBe(usersLength - 1, 'no of users minus one');
+    expect(isUserDeleted(comp.users, deletedUser)).toBeFalsy();
+    expect(lengthUsers(comp.users)).toBe(usersLength - 1, 'no of users minus one');
   }));
 
   /////////// Helpers /////
 
+  function isUserDeleted(users: Observable<User[]>, user: User): boolean {
+    let isUserExists = false;
+
+    users.scan((acc: any, val: any) => {
+      acc.forEach((u: User) => {
+        if (u.id === user.id) {
+          isUserExists = true;
+        }
+      });
+    });
+    return isUserExists;
+  }
+
+  function lengthUsers(users: Observable<User[]>): number {
+    let len = 0;
+
+    users.scan((acc: any, val: any) => {
+      return val.length;
+    });
+    return len;
+  }
   // Create the component and set the `page` test variables 
   function createComponent() {
     fixture = TestBed.createComponent(UserComponent);
@@ -138,7 +163,7 @@ describe('UserComponent', function () {
     navSpy: jasmine.Spy;
 
     constructor() {
-      this.userRows    = fixture.debugElement.queryAll(By.css('.users')).map(de => de.nativeElement);
+      this.userRows = fixture.debugElement.queryAll(By.css('.users')).map(de => de.nativeElement);
 
       // Get the component's injected router and spy on it
       const router = fixture.debugElement.injector.get(Router);

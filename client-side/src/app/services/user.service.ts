@@ -51,15 +51,6 @@ export class UserService {
                     .catch(this.handlePromiseError);
   }
 
-  // search(user: User): Observable<User[]> {
-  //   let url = `${this.usersUrl}/search?name=${user.name}&email=${user.email}`;
-
-  //   return this.http.get(url)
-  //                   .toPromise()
-  //                   .then(res => res.json() as User)
-  //                   .catch(this.handleError);
-  // }
-
   create(user: User): Promise<User> {
     let body = JSON.stringify({name: user.name, email: user.email});
     let options = new RequestOptions({ headers: this.headers });
