@@ -82,7 +82,6 @@ export class FakeUserService implements UserService {
   delete(user: User): Promise<void> {
     return this.lastPromise = this.getUser(user.id).then(u => {
       if (u) {
-        this.users.splice(u.id, 1);
         return Promise.resolve<void>(null);
       } else {
         return Promise.reject(`User ${user.id} not found`) as any as Promise<void>;

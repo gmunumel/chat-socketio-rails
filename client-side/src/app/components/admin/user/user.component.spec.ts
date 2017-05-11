@@ -11,11 +11,8 @@ import { DebugElement }         from '@angular/core';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule }           from '@angular/http';
 
-import { Observable }      from 'rxjs/Observable';
-
 import { UserComponent }   from './user.component';
 
-import { User }            from '../../../models/user';
 import { UserService }     from '../../../services/user.service';
 import {
   USERS, FakeUserService
@@ -102,43 +99,33 @@ describe('UserComponent', function () {
 
   it('should delete user on click', fakeAsync(() => {
     const deletedUser = USERS[1];
-    const usersLength = page.userRows.length;
+    const oldUsersLength = page.userRows.length;
+
     comp.delete(deletedUser);
     tick();
+
     expect(comp.response).toBe(1);
-    expect(isUserDeleted(comp.users, deletedUser)).toBeFalsy();
-    expect(lengthUsers(comp.users)).toBe(usersLength - 1, 'no of users minus one');
+
+    // wait for ui to be complete updated
+    fixture.whenStable().then(() => {
+        fixture.detectChanges();
+
+        const newUsers = fixture.debugElement.queryAll(By.css('.users')).map(de => de.nativeElement);
+        const newUsersLength = newUsers.length;
+
+        expect(newUsersLength).toBe(oldUsersLength - 1, 'no of users must be minus one');
+        expect(newUsers.some((userName: any) => userName === deletedUser.name))
+                .toBe(false, 'user does not exists');
+    });
   }));
 
   /////////// Helpers /////
-
-  function isUserDeleted(users: Observable<User[]>, user: User): boolean {
-    let isUserExists = false;
-
-    users.scan((acc: any, val: any) => {
-      acc.forEach((u: User) => {
-        if (u.id === user.id) {
-          isUserExists = true;
-        }
-      });
-    });
-    return isUserExists;
-  }
-
-  function lengthUsers(users: Observable<User[]>): number {
-    let len = 0;
-
-    users.scan((acc: any, val: any) => {
-      return val.length;
-    });
-    return len;
-  }
   // Create the component and set the `page` test variables 
   function createComponent() {
     fixture = TestBed.createComponent(UserComponent);
     comp = fixture.componentInstance;
 
-    // change detection triggers ngOnInit which gets a user
+    // change detection triggers ngOnInit which gets an user
     fixture.detectChanges();
 
     return fixture.whenStable().then(() => {
@@ -167,7 +154,7 @@ describe('UserComponent', function () {
 
       // Get the component's injected router and spy on it
       const router = fixture.debugElement.injector.get(Router);
-      this.navSpy = spyOn(router, 'navigate');
+      this.navSpy  = spyOn(router, 'navigate');
 
       this.pageName   = fixture.debugElement.query(By.css('.admin-user')).nativeElement;
       this.addUserBtn = fixture.debugElement.query(By.css('#add-user')).nativeElement;
