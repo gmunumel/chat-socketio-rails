@@ -97,7 +97,7 @@ describe('UserComponent', function () {
 
   }));
 
-  it('should delete user on click', fakeAsync(() => {
+  it('should delete an user', fakeAsync(() => {
     const deletedUser = USERS[1];
     const oldUsersLength = page.userRows.length;
 
