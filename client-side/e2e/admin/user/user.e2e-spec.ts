@@ -45,16 +45,44 @@ describe('Admin User e2e Tests', function () {
   });
 
   it('should delete an user', function () {
-    let userName  = 'test1234';
-    let userEmail = 'test1234@test.com';
+    let userName    = 'test1234';
+    let userEmail   = 'test1234@test.com';
+    let userElement = element(by.id(`delete-${userName}`));
 
     AddUser(userName, userEmail);
 
-    expect(element(by.id(`delete-${userName}`)).isPresent()).toBeTruthy();
+    element(by.id('admin-user-link')).click();
+
+    expect(userElement.isPresent()).toBeTruthy();
 
     RemoveUser(userName);
 
-    expect(element(by.id(`delete-${userName}`)).isPresent()).toBeFalsy();
+    element(by.id('admin-user-link')).click();
+
+    expect(userElement.isPresent()).toBeFalsy();
+  });
+
+  it('should shown an existing user', function () {
+    let userElement = element.all(by.css('.users')).get(2);
+    userElement.getAttribute('value')
+      .then((name) => {
+
+        element(by.id('user-search-box')).sendKeys(name);
+
+        element.all(by.css('.users')).count().then((size: number) => {
+          expect(size).toBe(1);
+        });
+      });
+  });
+
+  it('should not shown a no existing user', function () {
+    let userName = 'f4k3N4m3';
+
+    element(by.id('user-search-box')).sendKeys(userName);
+
+    element.all(by.css('.users')).count().then((size: number) => {
+      expect(size).toBe(0);
+    });
   });
 
   afterAll(function () {

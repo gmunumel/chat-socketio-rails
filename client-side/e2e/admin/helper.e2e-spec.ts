@@ -7,23 +7,17 @@ export function SignIn(): void {
 
   browser.get('');
 
-  // Click on sign in link
   element(by.id('sign-in-link')).click();
 
-  // Fill user data
   element(by.id('name')).sendKeys('admin');
   element(by.id('email')).sendKeys('admin@admin.com');
 
-  // Sign in submit button
   element(by.id('sign-in-submit')).click();
 }
 
-// To log out
 export function LogOut(): void {
 
   browser.get('');
-
-  // Click on log out link
   element(by.id('admin-log-out')).click();
 }
 
@@ -56,9 +50,11 @@ export function RemoveUser(userName: string): void {
   // wait for the element to be clickable 
   browser.wait(protractor.ExpectedConditions.elementToBeClickable(elementToClick), 10000)
     .then (() => {
-      // little hack to scroll down the whole page to move where the the delete button is
-      browser.executeScript('window.scrollTo(0,10000);').then(() => {
+      // little hack to scroll down the whole page to move where the delete button is
+      browser.executeScript('window.scrollTo(10000,10000);').then(() => {
         elementToClick.click();
+
+        browser.get('');
       });
     });
 }
