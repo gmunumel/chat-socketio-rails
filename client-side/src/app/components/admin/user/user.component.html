@@ -6,9 +6,9 @@
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
-    <h4>User Search</h4>
-    <input #userSearchBox id="user-search-box" (keyup)="search(userSearchBox.value)" />
     <button (click)="add()" id="add-user" class="btn btn-primary pull-right">Add</button>
+    <h4>User Search</h4>
+    <input #userSearchBox id="user-search-box" class="form-control" (keyup)="search(userSearchBox.value)" />
   </div>
 </div>
 <div class="help-block"></div>
