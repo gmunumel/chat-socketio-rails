@@ -59,6 +59,43 @@ export function RemoveUser(userName: string): void {
     });
 }
 
+// Create a dummy chat room. Will be remove later
+export function AddChatRoom(title: string): void {
+
+  SignIn();
+
+  element(by.id('admin-chat-room-link')).click();
+
+  element(by.id('add-chat-room')).click();
+
+  element(by.id('title')).sendKeys(title);
+
+  browser.executeScript('window.scrollTo(0,0);').then(() => {
+    element(by.id('chat-room-detail-save')).click();
+  });
+}
+
+// To remove a specific chat room. For clean up purposes
+export function RemoveChatRoom(title: string): void {
+
+  SignIn();
+
+  element(by.id('admin-chat-room-link')).click();
+
+  let elementToClick = element(by.id(`delete-${title}`));
+
+  // wait for the element to be clickable 
+  browser.wait(protractor.ExpectedConditions.elementToBeClickable(elementToClick), 10000)
+    .then (() => {
+      // little hack to scroll down the whole page to move where the delete button is
+      browser.executeScript('window.scrollTo(10000,10000);').then(() => {
+        elementToClick.click();
+
+        browser.get('');
+      });
+    });
+}
+
 export function GetRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
   max = Math.floor(max);
