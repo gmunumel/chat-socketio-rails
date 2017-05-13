@@ -9,6 +9,7 @@ RSpec.describe 'ChatRooms API', type: :request do
                               sender_id: sender.id, recipient_id: recipient.id) }
   let(:chat_room_first) { chat_rooms.first }
   let(:chat_room_id) { chat_room_first.id }
+  let(:chat_room_title) { chat_room_first.title }
 
   # Test suite for GET /chat_rooms
   describe 'GET /chat_rooms' do
@@ -23,6 +24,54 @@ RSpec.describe 'ChatRooms API', type: :request do
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
+    end
+  end
+
+  # Test suite for GET /chat_rooms/search?title=Title
+  describe 'GET /chat_rooms/search' do
+    # make HTTP get request before each example
+    before { get "/chat_rooms/search?title=#{chat_room_title}" }
+
+    context 'when the record exists' do
+      it 'returns the chat rooms' do
+        expect(json).not_to be_empty
+      end
+
+      it 'contains the chat room' do
+        expect(json.first['title']).to eq(chat_room_title)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the params are uppercase' do
+      let(:chat_room_title) { chat_rooms.first.title.upcase }
+
+      it 'returns the chat rooms' do
+        expect(json).not_to be_empty
+      end
+
+      it 'contains the chat room in uppercase' do
+        expect(json.first['title'].upcase).to eq(chat_room_title)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:chat_room_title) { 'f4k3t1tl3' }
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns an empty array' do
+        expect(json).to be_empty
+      end
     end
   end
 

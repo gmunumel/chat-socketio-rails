@@ -7,6 +7,10 @@ RSpec.describe ChatRoomsController, type: :routing do
       expect(get: '/chat_rooms').to route_to('chat_rooms#index')
     end
 
+    it 'routes to #search' do
+      expect(get: '/chat_rooms/search').to route_to('chat_rooms#search')
+    end
+
     it 'routes to #show' do
       expect(get: '/chat_rooms/1').to route_to('chat_rooms#show', id: '1')
     end

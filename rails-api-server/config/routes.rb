@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :chat_rooms do
+    collection do
+      get 'search'
+    end
     resources :messages
   end
 end

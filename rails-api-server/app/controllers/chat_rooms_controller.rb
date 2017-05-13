@@ -10,6 +10,13 @@ class ChatRoomsController < ActionController::API
     json_response(@chat_rooms)
   end
 
+  # GET /chat_rooms/search?title=Title
+  def search
+    title = chat_room_params[:title] ? chat_room_params[:title].downcase : ' '
+    @chat_rooms = ChatRoom.where("lower(title) LIKE ?", "%#{title}%").map{|x| x.as_json}
+    json_response(@chat_rooms)
+  end
+
   # POST /chat_rooms
   def create
     @chat_room = ChatRoom.create!(chat_room_params)
