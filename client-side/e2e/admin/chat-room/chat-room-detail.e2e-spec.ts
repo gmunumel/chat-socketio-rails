@@ -9,7 +9,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
   });
 
   beforeEach(function () {
-    browser.get('/admin/chat_room/detail/2');
+    browser.get('/admin/chat-room/detail/2');
   });
 
   // This is used for testing purposes.
@@ -44,7 +44,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
 
         setChatRoomTitle(newTitle);
 
-        browser.get('/admin/chat_room/detail/2');
+        browser.get('/admin/chat-room/detail/2');
 
         expect(element(by.id('title')).getAttribute('value')).toBe(newTitle);
 
