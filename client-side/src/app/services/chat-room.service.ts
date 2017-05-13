@@ -40,7 +40,12 @@ export class ChatRoomService {
   }
 
   create(chatRoom: ChatRoom): Promise<ChatRoom> {
-    let body = JSON.stringify({title: chatRoom.title, created_id: chatRoom.created_id});
+    let body = JSON.stringify({
+                                title: chatRoom.title,
+                                created_id: chatRoom.created_id,
+                                sender_id: chatRoom.sender_id,
+                                recipient_id: chatRoom.recipient_id
+                              });
     let options = new RequestOptions({ headers: this.headers });
 
     return this.http.post(this.chatRoomsUrl, body, options)
@@ -51,7 +56,12 @@ export class ChatRoomService {
 
   update(chatRoom: ChatRoom): Promise<ChatRoom> {
     let url = `${this.chatRoomsUrl}/${chatRoom.id}`;
-    let body = JSON.stringify({title: chatRoom.title, created_id: chatRoom.created_id});
+    let body = JSON.stringify({
+                                title: chatRoom.title,
+                                created_id: chatRoom.created_id,
+                                sender_id: chatRoom.sender_id,
+                                recipient_id: chatRoom.recipient_id
+                              });
     let options = new RequestOptions({ headers: this.headers });
 
     return this.http.put(url, body, options)

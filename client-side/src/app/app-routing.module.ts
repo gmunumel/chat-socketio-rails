@@ -1,14 +1,15 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent }      from './components/about/about.component';
-import { ChatRoomComponent }   from './components/admin/chat-room/chat-room.component';
-import { DashboardComponent }  from './components/dashboard/dashboard.component';
-import { MessageComponent }    from './components/admin/message/message.component';
-import { SignInComponent }     from './components/sign-in/sign-in.component';
-import { SignUpComponent }     from './components/sign-up/sign-up.component';
-import { UserComponent }       from './components/admin/user/user.component';
-import { UserDetailComponent } from './components/admin/user/user-detail.component';
+import { AboutComponent }          from './components/about/about.component';
+import { ChatRoomComponent }       from './components/admin/chat-room/chat-room.component';
+import { ChatRoomDetailComponent } from './components/admin/chat-room/chat-room-detail.component';
+import { DashboardComponent }      from './components/dashboard/dashboard.component';
+import { MessageComponent }        from './components/admin/message/message.component';
+import { SignInComponent }         from './components/sign-in/sign-in.component';
+import { SignUpComponent }         from './components/sign-up/sign-up.component';
+import { UserComponent }           from './components/admin/user/user.component';
+import { UserDetailComponent }     from './components/admin/user/user-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'admin/user/detail/:id', component: UserDetailComponent },
   { path: 'admin/message',  component: MessageComponent },
   { path: 'admin/chat-room',  component: ChatRoomComponent },
+  { path: 'admin/chat-room/detail/:id',  component: ChatRoomDetailComponent },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

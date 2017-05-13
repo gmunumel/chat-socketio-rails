@@ -1,2 +1,28 @@
 <h1 class="admin-chat-room">{{page}}</h1>
 <hr>
+
+<div class="row">
+  <div class="col-lg-4"> 
+    <div *ngIf="response === -1" class="alert alert-danger">
+      <strong>Error!</strong> Something went wrong. Please try again.
+    </div>
+    <button (click)="add()" id="add-chat-room" class="btn btn-primary pull-right">Add</button>
+    <h4>Chat Room Search</h4>
+    <input #chatRoomSearchBox id="chat-room-search-box" class="form-control" 
+            (keyup)="search(chatRoomSearchBox.value)" />
+  </div>
+</div>
+<div class="help-block"></div>
+<div class="row">
+  <div class="col-lg-4"> 
+    <div *ngFor="let chatRoom of chatRooms | async" class="input-group">
+      <input (click)="gotoDetail(chatRoom)"
+             type="button" value="{{chatRoom.title}}" class="form-control text-left chat-rooms" 
+             id="select-{{chatRoom.id}}">
+      <span class="input-group-btn">
+          <button (click)="delete(chatRoom); $event.stopPropagation()"
+                  class="btn btn-danger" id="delete-{{chatRoom.title}}">x</button>
+      </span>
+    </div>
+  </div>
+</div>

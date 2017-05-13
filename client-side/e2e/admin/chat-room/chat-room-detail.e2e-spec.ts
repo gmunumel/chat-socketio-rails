@@ -4,12 +4,14 @@ import { SignIn, LogOut, GetRandomInt } from '../helper.e2e-spec';
 
 describe('Admin Chat Room Detail e2e Tests', function () {
 
+  const url = '/admin/chat-room/detail/2';
+
   beforeAll(function () {
     SignIn();
   });
 
   beforeEach(function () {
-    browser.get('/admin/chat-room/detail/2');
+    browser.get(url);
   });
 
   // This is used for testing purposes.
@@ -44,7 +46,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
 
         setChatRoomTitle(newTitle);
 
-        browser.get('/admin/chat-room/detail/2');
+        browser.get(url);
 
         expect(element(by.id('title')).getAttribute('value')).toBe(newTitle);
 

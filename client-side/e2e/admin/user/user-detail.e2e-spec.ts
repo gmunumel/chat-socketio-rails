@@ -4,12 +4,14 @@ import { SignIn, LogOut, GetRandomInt } from '../helper.e2e-spec';
 
 describe('Admin User Detail e2e Tests', function () {
 
+  const url = '/admin/user/detail/2';
+
   beforeAll(function () {
     SignIn();
   });
 
   beforeEach(function () {
-    browser.get('/admin/user/detail/2');
+    browser.get(url);
   });
 
   // This is used for testing purposes.
@@ -44,7 +46,7 @@ describe('Admin User Detail e2e Tests', function () {
 
         setUserName(newUserName);
 
-        browser.get('/admin/user/detail/2');
+        browser.get(url);
 
         expect(element(by.id('name')).getAttribute('value')).toBe(newUserName);
 

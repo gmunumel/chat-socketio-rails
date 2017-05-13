@@ -14,7 +14,7 @@
          [ngClass]="{'has-error':!userDetailForm.controls['name'].valid 
                   && userDetailForm.controls['name'].touched}">
       <label for="name">Name:</label>
-      <input formControlName="name" type="name" class="form-control" id="name">
+      <input formControlName="name" type="text" class="form-control" id="name">
       <div *ngIf="userDetailForm.controls['name'].hasError('required') 
                   && userDetailForm.controls['name'].touched" 
             class="alert alert-danger">You must include a name.</div>
