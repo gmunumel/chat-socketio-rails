@@ -14,7 +14,6 @@ import { HttpModule }           from '@angular/http';
 import { UserDetailComponent }  from './user-detail.component';
 
 import { UserService }          from '../../../services/user.service';
-import { SessionService }       from '../../../services/session.service';
 import {
   USERS, FakeUserService
 }                               from '../../../../testing/services/fake-user.service';
@@ -33,7 +32,6 @@ describe('UserDetailComponent', function () {
       imports: [ ReactiveFormsModule, HttpModule ],
       declarations: [ UserDetailComponent ],
       providers: [
-        { provide: SessionService, useValue: { } },
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Router,         useClass: RouterStub},
       ]
@@ -67,12 +65,12 @@ describe('UserDetailComponent', function () {
       expect(comp.userDetailForm.value.email).toEqual(firstUser.email);
     }));
 
-    it('isValid should be false when form is invalid', fakeAsync(() => {
-      const isvalidTestUser = {
+    it('should be false when form is invalid', fakeAsync(() => {
+      const invalidTestUser = {
         name: 'testUserName',
         email: 'test@',
       };
-      comp.userDetailForm.patchValue(isvalidTestUser);
+      comp.userDetailForm.patchValue(invalidTestUser);
       expect(comp.userDetailForm.valid).toBeFalsy();
     }));
 
@@ -115,7 +113,7 @@ describe('UserDetailComponent', function () {
 
   /////////// Helpers /////
 
-  /** Create the UserDetailComponent, initialize it, set test variables  */
+  // Create the UserDetailComponent, initialize it, set test variables 
   function createComponent() {
     fixture = TestBed.createComponent(UserDetailComponent);
     comp    = fixture.componentInstance;
@@ -145,7 +143,7 @@ describe('UserDetailComponent', function () {
       this.navSpy    = spyOn(router, 'navigate');
     }
 
-    // Add page elements after hero arrives 
+    // Add page elements after user arrives 
     addPageElements() {
       if (comp.userDetailForm) {
         // have a form group element so these elements are now in the DOM
