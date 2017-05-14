@@ -79,8 +79,8 @@ export class ChatRoomDetailComponent implements OnInit {
             this.response = 1; // It will be lost
             this.goBack();
           })
-          .catch(() => {
-            this.response = -1;
+          .catch((error: any) => {
+            return (error.status === 409) ? this.response = -2 : this.response = -1;
           });
     }
   }
