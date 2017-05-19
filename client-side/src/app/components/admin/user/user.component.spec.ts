@@ -8,7 +8,6 @@ import {
 
 import { By }                   from '@angular/platform-browser';
 import { DebugElement }         from '@angular/core';
-import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule }           from '@angular/http';
 
 import { UserComponent }   from './user.component';
@@ -25,7 +24,7 @@ describe('UserComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ReactiveFormsModule, HttpModule ],
+      imports: [ HttpModule ],
       declarations: [ UserComponent ],
       providers: [
         { provide: Router, useClass: RouterStub},
