@@ -10,6 +10,12 @@ class MessagesController < ActionController::API
     json_response(@chat_room.messages)
   end
 
+  # GET /chat_rooms/:chat_room_id/messages/search?user_id=id
+  def search
+    @messages = @chat_room.messages.find_by!(user_id: message_params[:user_id])
+    json_response(@messages)
+  end
+
   # GET /chat_rooms/:chat_room_id/messages/:id
   def show
     json_response(@message)

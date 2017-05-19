@@ -38,6 +38,38 @@ RSpec.describe 'Messages API', type: :request do
     end
   end
 
+  # Test suite for GET /chat_rooms/:chat_room_id/messages/search?user_id=Id
+  describe 'GET /chat_rooms/:chat_room_id/messages/search' do
+    # make HTTP get request before each example
+    before { get "/chat_rooms/#{chat_room_id}/messages/search?user_id=#{user_id}" }
+
+    context 'when the record exists' do
+      it 'returns the message' do
+        expect(json).not_to be_empty
+      end
+
+      it 'contains the mensag' do
+        expect(json['id']).to eq(id)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'when the record does not exist' do
+      let(:user_id) { 99999 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Message/)
+      end
+    end
+  end
+
   # Test suite for GET /chat_rooms/:chat_room_id/messages/:id
   describe 'GET /chat_rooms/:chat_room_id/messages/:id' do
     before { get "/chat_rooms/#{chat_room_id}/messages/#{id}" }
