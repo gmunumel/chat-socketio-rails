@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class MessageComponent {
   page: string = 'Admin Message';
+  messages: string = '';
+
+  showMessage(message: string) {
+    this.messages = message;
+  }
 }

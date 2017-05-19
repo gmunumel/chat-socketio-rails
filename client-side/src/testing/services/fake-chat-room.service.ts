@@ -25,7 +25,6 @@ export var CHATROOMS: ChatRoom[] = [
 // Dummy ChatRoomService. Pretend it makes real http requests 
 @Injectable()
 export class FakeChatRoomService implements ChatRoomService {
-
   chatRoomsUrl = 'http://localhost:3000/chat_rooms';  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls

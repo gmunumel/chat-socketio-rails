@@ -25,7 +25,6 @@ export var USERS: User[] = [
 // Dummy UserService. Pretend it makes real http requests 
 @Injectable()
 export class FakeUserService implements UserService {
-
   usersUrl = 'http://localhost:3000/users';  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls

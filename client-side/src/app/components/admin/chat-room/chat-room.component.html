@@ -5,12 +5,15 @@
 
 <div class="row">
   <div class="{{ messageVersionInput ? '' : 'col-lg-4' }}"> 
+    <div *ngIf="response === -2" class="alert alert-danger">
+      <strong>Error!</strong> Something went wrong loading messages. Please try again.
+    </div>
     <div *ngIf="response === -1" class="alert alert-danger">
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
     <button *ngIf="!messageVersionInput" (click)="add()" 
             id="add-chat-room" class="btn btn-primary pull-right">Add</button>
-    <h4>Chat Room Search</h4>
+    <h3>Chat Room Search</h3>
     <input #chatRoomSearchBox id="chat-room-search-box" class="form-control" 
             (keyup)="search(chatRoomSearchBox.value)" />
   </div>

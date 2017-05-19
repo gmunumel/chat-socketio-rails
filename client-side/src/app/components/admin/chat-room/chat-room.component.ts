@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, AfterViewInit, Input
+  Component, OnInit, AfterViewInit, Input, Output, EventEmitter
 }                            from '@angular/core';
 import { Router }            from '@angular/router';
 
@@ -18,7 +18,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { ChatRoom }        from '../../../models/chat-room';
+import { Message }         from '../../../models/message';
 import { ChatRoomService } from '../../../services/chat-room.service';
+import { MessageService }  from '../../../services/message.service';
 
 @Component({
   selector: 'chat-room',
@@ -29,13 +31,17 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   page: string = 'Admin Chat Room';
   response: number = 0;
   chatRooms: Observable<ChatRoom[]>;
+
   @Input() messageVersionInput: boolean = false;
+  @Output() getMessages: EventEmitter<string> = new EventEmitter();
+
   private searchTerms = new Subject<string>();
   private deleteSubject = new Subject();
 
   constructor(
     private router: Router,
-    private chatRoomService: ChatRoomService) { }
+    private chatRoomService: ChatRoomService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.setChatRooms();
@@ -46,7 +52,11 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   }
 
   gotoDetail(chatRoom: ChatRoom): void {
-    this.router.navigate(['/admin/chat-room/detail', chatRoom.id]);
+    if (this.messageVersionInput) {
+      this.searchMessages(chatRoom.id);
+    } else {
+      this.router.navigate(['/admin/chat-room/detail', chatRoom.id]);
+    }
   }
 
   add(): void {
@@ -94,5 +104,19 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
           return val;
         }
       });
+  }
+
+  private searchMessages(chatRoomId: number) {
+    this.messageService.setUrl(chatRoomId);
+    this.messageService
+        .getMessages()
+        .then((messages: Message[]) => {
+          this.response = 1;
+          let completeMessage = messages.map((m: any) => m.body).join('\n');
+          this.getMessages.emit(completeMessage);
+        })
+        .catch(() => {
+          this.response = -2;
+        });
   }
 }
