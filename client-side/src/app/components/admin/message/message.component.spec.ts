@@ -1,8 +1,10 @@
 import { MessageComponent } from './message.component';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { By }                               from '@angular/platform-browser';
+import {
+  DebugElement, CUSTOM_ELEMENTS_SCHEMA
+}                                           from '@angular/core';
 
 describe('MessageComponent', function () {
   let de: DebugElement;
@@ -11,7 +13,8 @@ describe('MessageComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageComponent ]
+      declarations: [ MessageComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

@@ -20,6 +20,8 @@ rails-api-server/tmp/*
 # Ignore Byebug command history file.
 rails-api-server/.byebug_history
 
+rails-api-server/dump.rdb
+
 
 client-side/node_modules
 client-side/jspm_packages

@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, AfterViewInit
+  Component, OnInit, AfterViewInit, Input
 }                            from '@angular/core';
 import { Router }            from '@angular/router';
 
@@ -29,6 +29,7 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   page: string = 'Admin Chat Room';
   response: number = 0;
   chatRooms: Observable<ChatRoom[]>;
+  @Input() messageVersionInput: boolean = false;
   private searchTerms = new Subject<string>();
   private deleteSubject = new Subject();
 
