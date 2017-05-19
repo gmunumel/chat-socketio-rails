@@ -34,6 +34,15 @@ export class MessageService {
                     .catch(this.handlePromiseError);
   }
 
+  search(user_id: number): Promise<Message[]> {
+    let url = `${this.messagesUrl}/search?user_id=${user_id}`;
+
+    return this.http.get(url)
+                    .toPromise()
+                    .then(res => res.json() as Message[])
+                    .catch(this.handlePromiseError);
+  }
+
   create(message: Message): Promise<Message> {
     let body = JSON.stringify({
                                 body: message.body,

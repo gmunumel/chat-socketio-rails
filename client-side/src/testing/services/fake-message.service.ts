@@ -42,6 +42,11 @@ export class FakeMessageService implements MessageService {
     return this.lastPromise = Promise.resolve(this.messages);
   }
 
+  search(user_id: number): Promise<Message[]> {
+    let messagesFound = this.messages.filter(m => m.user_id === user_id);
+    return this.lastPromise = Promise.resolve(messagesFound);
+  }
+
   create(message: Message): Promise<Message> {
     this.messages.push(message);
     return this.lastPromise = Promise.resolve(message);
