@@ -63,7 +63,7 @@ export class ChatRoomDetailComponent implements OnInit {
       });
   }
 
-  private saveOrUpdate(chatRoom: ChatRoom) {
+  private saveOrUpdate(chatRoom: ChatRoom): void {
     if (chatRoom.id === -1) {
       this.chatRoomService.create(chatRoom)
         .then(() => {

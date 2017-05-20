@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subscription }   from 'rxjs/Subscription';
 
+import { User }           from '../../models/user';
+
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -12,15 +14,16 @@ import { SessionService } from '../../services/session.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   toggled: string = 'toggled';
-  userName: string = '';
-  userEmail: string = '';
+  user: User;
   private subscription: Subscription;
 
   ngOnInit(): void {
     this.subscription = SessionService.getInstance().collection$
       .subscribe((latestCollection: any) => {
-        this.userName = latestCollection[0];
-        this.userEmail = latestCollection[1];
+        this.user = new User;
+        this.user.id = latestCollection[0];
+        this.user.name = latestCollection[1];
+        this.user.email = latestCollection[2];
     });
 
     SessionService.getInstance().load();
