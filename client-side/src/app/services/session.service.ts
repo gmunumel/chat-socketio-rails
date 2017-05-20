@@ -25,6 +25,16 @@ export class SessionService {
     }).share();
   }
 
+  setUserId(userId: string): void {
+    let userIdStorage: string = localStorage.getItem('userId');
+    if (userIdStorage) {
+      return;
+    }
+    localStorage.setItem('userId', userId);
+    this.collection.push(userId);
+    this.collectionObserver.next(this.collection);
+  }
+
   setUserName(userName: string): void {
     let userNameStorage: string = localStorage.getItem('userName');
     if (userNameStorage) {
@@ -46,15 +56,18 @@ export class SessionService {
   }
 
   isLoggedIn(): boolean {
+    let userId: string = localStorage.getItem('userId');
     let userName: string = localStorage.getItem('userName');
     let userEmail: string = localStorage.getItem('userEmail');
-    return (userName && userEmail) ? true : false;
+    return (userId && userName && userEmail) ? true : false;
   }
 
   load(): void {
+    let userId: string = localStorage.getItem('userId');
     let userName: string = localStorage.getItem('userName');
     let userEmail: string = localStorage.getItem('userEmail');
-    if (userName && userEmail) {
+    if (userId && userName && userEmail) {
+      this.collection.push(userId);
       this.collection.push(userName);
       this.collection.push(userEmail);
     }

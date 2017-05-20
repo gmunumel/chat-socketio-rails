@@ -24,6 +24,14 @@ describe('SessionService test', () => {
     expect(service instanceof SessionService).toBe(true, 'new service should be ok');
   }));
 
+  it('can set user id', async(() => {
+    let userId = '0';
+    let service = SessionService.getInstance();
+    SessionService.getInstance().clear();
+    service.setUserId(userId);
+    expect(localStorage.getItem('userId')).toEqual(userId);
+  }));
+
   it('can set user name', async(() => {
     let userName = 'test';
     let service = SessionService.getInstance();
@@ -48,9 +56,11 @@ describe('SessionService test', () => {
     }));
 
     it('returns true', async(() => {
+      let userId = '0';
       let userName = 'test';
       let userEmail = 'test@example.com';
       let service = SessionService.getInstance();
+      service.setUserId(userId);
       service.setUserName(userName);
       service.setUserEmail(userEmail);
       expect(service.isLoggedIn()).toBe(true);
@@ -58,9 +68,11 @@ describe('SessionService test', () => {
   });
 
   it('can clear all data', async(() => {
+    expect(localStorage.getItem('userId')).not.toBeNull();
     expect(localStorage.getItem('userName')).not.toBeNull();
     expect(localStorage.getItem('userEmail')).not.toBeNull();
     SessionService.getInstance().clear();
+    expect(localStorage.getItem('userId')).toBeNull();
     expect(localStorage.getItem('userName')).toBeNull();
     expect(localStorage.getItem('userEmail')).toBeNull();
   }));
