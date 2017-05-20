@@ -23,11 +23,12 @@ import { ChatRoomService } from '../../../services/chat-room.service';
 @Component({
   selector: 'chat-room',
   templateUrl: './chat-room.component.html',
-  styleUrls: [ '../../../app/css/styles.css' ]
+  styleUrls: [ './chat-room.component.css' ]
 })
 export class ChatRoomComponent implements OnInit, AfterViewInit {
   page: string = 'Admin Chat Room';
   response: number = 0;
+  selectedChatRoom: ChatRoom;
   chatRooms: Observable<ChatRoom[]>;
 
   @Input() messageVersionInput: boolean = false;
@@ -49,6 +50,7 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   }
 
   gotoDetail(chatRoom: ChatRoom): void {
+    this.selectedChatRoom = chatRoom;
     if (this.messageVersionInput) {
       this.getChatRoomId.emit(chatRoom.id);
     } else {
