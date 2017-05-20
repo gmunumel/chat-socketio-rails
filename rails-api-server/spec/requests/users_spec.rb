@@ -9,17 +9,34 @@ RSpec.describe 'Users API', type: :request do
 
   # Test suite for GET /users
   describe 'GET /users' do
-    # make HTTP get request before each example
-    before { get '/users' }
+    context 'when params ids is not defined' do
+      # make HTTP get request before each example
+      before { get '/users' }
 
-    it 'returns users' do
-      # Note `json` is a custom helper to parse JSON responses
-      expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      it 'returns users' do
+        # Note `json` is a custom helper to parse JSON responses
+        expect(json).not_to be_empty
+        expect(json.size).to eq(10)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
     end
 
-    it 'returns status code 200' do
-      expect(response).to have_http_status(200)
+    context 'when params ids is defined' do
+      # make HTTP get request before each example
+      before { get '/users?ids=1,3,8' }
+
+      it 'returns users' do
+        # Note `json` is a custom helper to parse JSON responses
+        expect(json).not_to be_empty
+        expect(json.size).to eq(3)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
     end
   end
 

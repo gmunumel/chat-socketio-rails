@@ -6,7 +6,8 @@ class UsersController < ActionController::API
 
   # GET /users
   def index
-    @users = User.all
+    ids = user_params[:ids] ? user_params[:ids].split(',').map(&:to_i) : nil
+    @users = ids ? User.find(ids).index_by(&:id).slice(*ids).values : User.all
     $redis.publish 'users-list', users: @users.to_json
     json_response(@users)
   end
@@ -53,7 +54,7 @@ class UsersController < ActionController::API
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.permit(:name, :email)
+    params.permit(:ids, :name, :email)
   end
 
   def set_user
