@@ -36,6 +36,10 @@
           </div>
         </li>
       </ul>
+      <div *ngIf="messages == null" class="chat-empty glyphicon-bigger">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <span>Please select a chat room</span>
+      </div>
     </div>
     <div class="panel-footer">
       <div class="input-group">

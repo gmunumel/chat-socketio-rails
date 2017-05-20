@@ -63,7 +63,7 @@ export class UserDetailComponent implements OnInit {
       });
   }
 
-  private saveOrUpdate(user: User) {
+  private saveOrUpdate(user: User): void {
     if (user.id === -1) {
       this.userService.create(user)
         .then(() => {
