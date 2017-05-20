@@ -39,7 +39,11 @@ export class FakeUserService implements UserService {
     return this.lastPromise = Promise.resolve(userFound);
   }
 
-  getUsers(): Promise<User[]> {
+  getUsers(ids?: number[]): Promise<User[]> {
+    if (ids) {
+      let filteredUsers = this.users.filter((u: User) => ids.indexOf(u.id) >= 0);
+      return this.lastPromise = Promise.resolve(filteredUsers);
+    }
     return this.lastPromise = Promise.resolve(this.users);
   }
 

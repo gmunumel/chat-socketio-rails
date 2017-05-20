@@ -18,9 +18,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { ChatRoom }        from '../../../models/chat-room';
-import { Message }         from '../../../models/message';
 import { ChatRoomService } from '../../../services/chat-room.service';
-import { MessageService }  from '../../../services/message.service';
 
 @Component({
   selector: 'chat-room',
@@ -33,15 +31,14 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   chatRooms: Observable<ChatRoom[]>;
 
   @Input() messageVersionInput: boolean = false;
-  @Output() getMessages: EventEmitter<string> = new EventEmitter();
+  @Output() getChatRoomId: EventEmitter<number> = new EventEmitter();
 
   private searchTerms = new Subject<string>();
   private deleteSubject = new Subject();
 
   constructor(
     private router: Router,
-    private chatRoomService: ChatRoomService,
-    private messageService: MessageService) { }
+    private chatRoomService: ChatRoomService) { }
 
   ngOnInit(): void {
     this.setChatRooms();
@@ -53,7 +50,7 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
 
   gotoDetail(chatRoom: ChatRoom): void {
     if (this.messageVersionInput) {
-      this.searchMessages(chatRoom.id);
+      this.getChatRoomId.emit(chatRoom.id);
     } else {
       this.router.navigate(['/admin/chat-room/detail', chatRoom.id]);
     }
@@ -104,19 +101,5 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
           return val;
         }
       });
-  }
-
-  private searchMessages(chatRoomId: number) {
-    this.messageService.setUrl(chatRoomId);
-    this.messageService
-        .getMessages()
-        .then((messages: Message[]) => {
-          this.response = 1;
-          let completeMessage = messages.map((m: any) => m.body).join('\n');
-          this.getMessages.emit(completeMessage);
-        })
-        .catch(() => {
-          this.response = -2;
-        });
   }
 }

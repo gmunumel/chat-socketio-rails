@@ -24,7 +24,12 @@ export class UserService {
                     .catch(this.handlePromiseError);
   }
 
-  getUsers(): Promise<User[]> {
+  getUsers(ids?: number[]): Promise<User[]> {
+    if (ids) {
+      let stringIds = ids.map(String).join();
+      this.usersUrl = `${this.usersUrl}?ids=${stringIds}`;
+    }
+
     return this.http.get(this.usersUrl)
                     .toPromise()
                     .then(res => res.json() as User[])

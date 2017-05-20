@@ -6,16 +6,15 @@ import {
   newEvent, Router, RouterStub
 } from '../../../../testing';
 
-import { By }                   from '@angular/platform-browser';
-import { DebugElement }         from '@angular/core';
-import { HttpModule }           from '@angular/http';
+import { By }                  from '@angular/platform-browser';
+import { HttpModule }          from '@angular/http';
 
 import { ChatRoomComponent }   from './chat-room.component';
 
 import { ChatRoomService }     from '../../../services/chat-room.service';
 import {
   CHATROOMS, FakeChatRoomService
-}                          from '../../../../testing/services/fake-chat-room.service';
+}                              from '../../../../testing/services/fake-chat-room.service';
 
 describe('ChatRoomComponent', function () {
   let comp: ChatRoomComponent;
@@ -141,9 +140,6 @@ describe('ChatRoomComponent', function () {
     pageName:     HTMLInputElement;
 
     addChatRoomBtn: HTMLInputElement;
-
-    // Highlighted element 
-    highlightDe: DebugElement;
 
     // Spy on router navigate method 
     navSpy: jasmine.Spy;
