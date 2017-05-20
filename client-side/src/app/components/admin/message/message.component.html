@@ -19,7 +19,7 @@
           <div class="chat-body clearfix">
             <div class="header">
               <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                <span class="glyphicon glyphicon-time"></span>{{message.created_at}}</small>
+                <span class="glyphicon glyphicon-time"></span>{{message.created_at | date:"medium"}}</small>
             </div>
             <p>{{message.body}}</p>
           </div>
@@ -29,7 +29,7 @@
         </span>
           <div class="chat-body clearfix">
             <div class="header">
-              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message.created_at}}</small>
+              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message.created_at | date:"medium"}}</small>
               <strong class="pull-right primary-font">{{user.name}}</strong>
             </div>
             <p>{{message.body}}</p>
