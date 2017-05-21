@@ -7,7 +7,6 @@ import {
 } from '../../../../testing';
 
 import { By }                   from '@angular/platform-browser';
-import { DebugElement }         from '@angular/core';
 import { HttpModule }           from '@angular/http';
 
 import { UserComponent }   from './user.component';
@@ -27,7 +26,7 @@ describe('UserComponent', function () {
       imports: [ HttpModule ],
       declarations: [ UserComponent ],
       providers: [
-        { provide: Router, useClass: RouterStub},
+        { provide: Router, useClass: RouterStub },
       ]
     })
     .overrideComponent(UserComponent, {
@@ -137,16 +136,13 @@ describe('UserComponent', function () {
 
   class Page {
     // User line elements 
-    userRows: HTMLLIElement[];
-    pageName: HTMLInputElement;
+    userRows:   HTMLLIElement[];
 
+    pageName:   HTMLInputElement;
     addUserBtn: HTMLInputElement;
 
-    // Highlighted element 
-    highlightDe: DebugElement;
-
     // Spy on router navigate method 
-    navSpy: jasmine.Spy;
+    navSpy:     jasmine.Spy;
 
     constructor() {
       this.userRows = fixture.debugElement.queryAll(By.css('.users')).map(de => de.nativeElement);

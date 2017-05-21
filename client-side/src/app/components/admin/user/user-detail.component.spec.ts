@@ -83,7 +83,7 @@ describe('UserDetailComponent', function () {
     }));
   });
 
-  describe('when navigate with user id zero', () => {
+  describe('when navigate with user id -1', () => {
     beforeEach( async(() => {
       activatedRoute.testParams = { id: -1 };
       createComponent();
@@ -134,6 +134,7 @@ describe('UserDetailComponent', function () {
 
     saveBtn:        DebugElement;
     cancelBtn:      DebugElement;
+
     pageName:       HTMLInputElement;
     nameDisplay:    HTMLInputElement;
 

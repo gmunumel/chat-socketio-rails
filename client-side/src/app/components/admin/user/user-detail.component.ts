@@ -1,13 +1,14 @@
-import { Component, OnInit }        from '@angular/core';
-import { Router }                   from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router }                       from '@angular/router';
 import {
   FormGroup, FormBuilder, Validators
 }                                   from '@angular/forms';
 import { ActivatedRoute }           from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 
-import { User }        from '../../../models/user';
-import { UserService } from '../../../services/user.service';
+import { Subscription }  from 'rxjs/Subscription';
+
+import { User }          from '../../../models/user';
+import { UserService }   from '../../../services/user.service';
 
 const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
 
@@ -15,10 +16,11 @@ const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{
   selector: 'admin-user-detail',
   templateUrl: './user-detail.component.html'
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin User Detail';
   response: number = 0;
   userDetailForm: FormGroup;
+  private subscriptionParams: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(p => this.getUser(+p['id']));
+    this.subscriptionParams = this.route.params
+      .subscribe(p => this.getUser(+p['id']));
   }
 
   save(): void {
@@ -46,6 +49,11 @@ export class UserDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/admin/user']);
+  }
+
+  ngOnDestroy(): void {
+    // prevent memory leak when component destroyed
+    this.subscriptionParams.unsubscribe();
   }
 
   private getUser(id: number): void {

@@ -9,6 +9,7 @@ import { ChatRoomComponent }       from './components/admin/chat-room/chat-room.
 import { ChatRoomDetailComponent } from './components/admin/chat-room/chat-room-detail.component';
 import { DashboardComponent }      from './components/dashboard/dashboard.component';
 import { MessageComponent }        from './components/admin/message/message.component';
+import { MessageDetailComponent }  from './components/admin/message/message-detail.component';
 import { SignInComponent }         from './components/sign-in/sign-in.component';
 import { SignUpComponent }         from './components/sign-up/sign-up.component';
 import { UserComponent }           from './components/admin/user/user.component';
@@ -33,6 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
     ChatRoomDetailComponent,
     DashboardComponent,
     MessageComponent,
+    MessageDetailComponent,
     SignInComponent,
     SignUpComponent,
     UserComponent,

@@ -2,11 +2,10 @@ import { AppComponent } from './app.component';
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By }           from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { By }             from '@angular/platform-browser';
+import { DebugElement }   from '@angular/core';
 
 describe('AppComponent', function () {
-  let de: DebugElement;
   let comp: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let links: RouterLinkStubDirective[];
@@ -20,10 +19,10 @@ describe('AppComponent', function () {
       .then(() => {
         fixture = TestBed.createComponent(AppComponent);
         comp = fixture.componentInstance;
-        de = fixture.debugElement.query(By.css('#toggle-sidebar'));
 
         // trigger initial data binding
         fixture.detectChanges();
+
         // find DebugElements with an attached RouterLinkStubDirective
         linkDes = fixture.debugElement
           .queryAll(By.directive(RouterLinkStubDirective));
@@ -37,7 +36,7 @@ describe('AppComponent', function () {
   it('should create component', () => expect(comp).toBeDefined() );
 
   it('can get RouterLinks from template', () => {
-    expect(links.length).toBe(7, 'should have 7 links');
+    expect(links.length).toBe(4, 'should have 4 links');
     expect(links[0].linkParams[0]).toBe('/dashboard', '1st link should go to Dashboard');
     expect(links[1].linkParams[0]).toBe('/signin', '2nd link should go to Sign In');
     expect(links[2].linkParams[0]).toBe('/signup', '3rd link should go to Sign Up');

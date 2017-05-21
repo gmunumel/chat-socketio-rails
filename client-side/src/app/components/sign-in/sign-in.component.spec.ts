@@ -82,6 +82,6 @@ describe('SignInComponent', function () {
   }));
 
   afterAll(() => {
-    localStorage.clear();
+    SessionService.getInstance().clear();
   });
 });

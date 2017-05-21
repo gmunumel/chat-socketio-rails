@@ -59,7 +59,7 @@ describe('ChatRoomDetailComponent', function () {
         '<h1> should say something about "Admin Chat Room Detail"');
     });
 
-    it('user should update from form changes', fakeAsync(() => {
+    it('chat room should update from form changes', fakeAsync(() => {
       comp.chatRoomDetailForm.patchValue(firstChatRoom);
       expect(comp.chatRoomDetailForm.value.title).toEqual(firstChatRoom.title);
       expect(comp.chatRoomDetailForm.value.created_id).toEqual(1);
@@ -83,7 +83,7 @@ describe('ChatRoomDetailComponent', function () {
     }));
   });
 
-  describe('when navigate with chat room id zero', () => {
+  describe('when navigate with chat room id -1', () => {
     beforeEach( async(() => {
       activatedRoute.testParams = { id: -1 };
       createComponent();
@@ -146,6 +146,7 @@ describe('ChatRoomDetailComponent', function () {
 
     saveBtn:        DebugElement;
     cancelBtn:      DebugElement;
+
     pageName:       HTMLInputElement;
     nameDisplay:    HTMLInputElement;
 

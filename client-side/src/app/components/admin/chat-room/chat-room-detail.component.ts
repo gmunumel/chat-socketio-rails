@@ -1,10 +1,11 @@
-import { Component, OnInit }        from '@angular/core';
-import { Router }                   from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router }                       from '@angular/router';
 import {
   FormGroup, FormBuilder, Validators
 }                                   from '@angular/forms';
 import { ActivatedRoute }           from '@angular/router';
-import 'rxjs/add/operator/switchMap';
+
+import { Subscription }    from 'rxjs/Subscription';
 
 import { ChatRoom }        from '../../../models/chat-room';
 import { ChatRoomService } from '../../../services/chat-room.service';
@@ -13,10 +14,11 @@ import { ChatRoomService } from '../../../services/chat-room.service';
   selector: 'admin-chat-room-detail',
   templateUrl: './chat-room-detail.component.html'
 })
-export class ChatRoomDetailComponent implements OnInit {
+export class ChatRoomDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin Chat Room Detail';
   response: number = 0;
   chatRoomDetailForm: FormGroup;
+  private subscriptionParams: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,8 @@ export class ChatRoomDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(p => this.getChatRoom(+p['id']));
+    this.subscriptionParams = this.route.params
+      .subscribe(p => this.getChatRoom(+p['id']));
   }
 
   save(): void {
@@ -46,6 +49,11 @@ export class ChatRoomDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/admin/chat-room']);
+  }
+
+  ngOnDestroy(): void {
+    // prevent memory leak when component destroyed
+    this.subscriptionParams.unsubscribe();
   }
 
   private getChatRoom(id: number): void {

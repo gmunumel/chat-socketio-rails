@@ -1,10 +1,10 @@
 import {
   Component, OnInit, AfterViewInit, Input, Output, EventEmitter
-}                            from '@angular/core';
-import { Router }            from '@angular/router';
+}                      from '@angular/core';
+import { Router }      from '@angular/router';
 
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
+import { Observable }  from 'rxjs/Observable';
+import { Subject }     from 'rxjs/Subject';
 
 // Observable class extensions
 import 'rxjs/add/observable/of';
@@ -14,6 +14,7 @@ import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 

@@ -6,6 +6,7 @@ import { ChatRoomComponent }       from './components/admin/chat-room/chat-room.
 import { ChatRoomDetailComponent } from './components/admin/chat-room/chat-room-detail.component';
 import { DashboardComponent }      from './components/dashboard/dashboard.component';
 import { MessageComponent }        from './components/admin/message/message.component';
+import { MessageDetailComponent }  from './components/admin/message/message-detail.component';
 import { SignInComponent }         from './components/sign-in/sign-in.component';
 import { SignUpComponent }         from './components/sign-up/sign-up.component';
 import { UserComponent }           from './components/admin/user/user.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'admin/user',  component: UserComponent },
   { path: 'admin/user/detail/:id', component: UserDetailComponent },
   { path: 'admin/message',  component: MessageComponent },
+  { path: 'admin/message/detail/:id',  component: MessageDetailComponent },
   { path: 'admin/chat-room',  component: ChatRoomComponent },
   { path: 'admin/chat-room/detail/:id',  component: ChatRoomDetailComponent },
 ];

@@ -11,10 +11,10 @@ import { MessageService } from '../../app/services/message.service';
 export var MESSAGES: Message[] = [
   new Message(0, 'First Message', 1, 1),
   new Message(1, 'Second Message', 1, 1),
-  new Message(2, 'Test 1', 1, 2),
-  new Message(3, 'Test 2', 1, 2),
-  new Message(4, 'Long Message', 1, 3),
-  new Message(5, 'Very Long Message', 1, 3)
+  new Message(2, 'Test 1', 1, 1),
+  new Message(3, 'Test 2', 1, 1),
+  new Message(4, 'Long Message', 1, 1),
+  new Message(5, 'Very Long Message', 1, 1)
 ];
 
 // Dummy MessageService. Pretend it makes real http requests 

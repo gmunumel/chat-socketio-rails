@@ -10,19 +10,19 @@
       <strong>Error!</strong> Chat Room title already exists.
     </div>
     <form [formGroup]="chatRoomDetailForm" (ngSubmit)="save()" novalidate>
-    <div class="form-group" 
-         [ngClass]="{'has-error':!chatRoomDetailForm.controls['title'].valid 
-                  && chatRoomDetailForm.controls['title'].touched}">
-      <label for="title">Title:</label>
-      <input formControlName="title" type="text" class="form-control" id="title">
-      <div *ngIf="chatRoomDetailForm.controls['title'].hasError('required') 
-                  && chatRoomDetailForm.controls['title'].touched" 
-            class="alert alert-danger">You must include a title.</div>
-    </div>
-    <button (click)="goBack()" type="button" class="btn btn-default"
-            id="chat-room-detail-back">Back</button>
-    <button [disabled]="!chatRoomDetailForm.valid" id="chat-room-detail-save" 
-            type="submit" class="btn btn-primary">Save</button>
-  </form>
+      <div class="form-group" 
+           [ngClass]="{'has-error':!chatRoomDetailForm.controls['title'].valid 
+                    && chatRoomDetailForm.controls['title'].touched}">
+        <label for="title">Title:</label>
+        <input formControlName="title" type="text" class="form-control" id="title">
+        <div *ngIf="chatRoomDetailForm.controls['title'].hasError('required') 
+                    && chatRoomDetailForm.controls['title'].touched" 
+              class="alert alert-danger">You must include a title.</div>
+      </div>
+      <button (click)="goBack()" type="button" class="btn btn-default"
+              id="chat-room-detail-back">Back</button>
+      <button [disabled]="!chatRoomDetailForm.valid" id="chat-room-detail-save" 
+              type="submit" class="btn btn-primary">Save</button>
+    </form>
   </div>
 </div>

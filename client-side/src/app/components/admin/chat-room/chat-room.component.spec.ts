@@ -69,8 +69,8 @@ describe('ChatRoomComponent', function () {
     // should have navigated
     expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
 
-    // composed user detail will be URL like 'users/42'
-    // expect link array with the route path and user id
+    // composed chat room detail will be URL like 'chat-rooms/42'
+    // expect link array with the route path and chat room id
     // first argument to router.navigate is link array
     const navArgs = page.navSpy.calls.first().args[0];
     expect(navArgs[0]).toContain('chat-room', 'nav to chat room detail URL');
@@ -86,8 +86,8 @@ describe('ChatRoomComponent', function () {
     // should have navigated
     expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
 
-    // composed user detail will be URL like 'users/42'
-    // expect link array with the route path and user id
+    // composed chat room detail will be URL like 'chat-rooms/42'
+    // expect link array with the route path and chat room id
     // first argument to router.navigate is link array
     const navArgs = page.navSpy.calls.first().args[0];
     expect(navArgs[0]).toContain('chat-room', 'nav to chat room detail URL');
@@ -111,7 +111,7 @@ describe('ChatRoomComponent', function () {
         const newChatRooms = fixture.debugElement.queryAll(By.css('.chat-rooms')).map(de => de.nativeElement);
         const newChatRoomsLength = newChatRooms.length;
 
-        expect(newChatRoomsLength).toBe(oldChatRoomsLength - 1, 'no of users must be minus one');
+        expect(newChatRoomsLength).toBe(oldChatRoomsLength - 1, 'no of chat rooms must be minus one');
         expect(newChatRooms.some((chatRoomTitle: any) => chatRoomTitle === deletedChatRoom.title))
                 .toBe(false, 'chat room does not exists');
     });
@@ -136,13 +136,13 @@ describe('ChatRoomComponent', function () {
 
   class Page {
     // Chat Room  line elements 
-    chatRoomRows: HTMLLIElement[];
-    pageName:     HTMLInputElement;
+    chatRoomRows:   HTMLLIElement[];
 
+    pageName:       HTMLInputElement;
     addChatRoomBtn: HTMLInputElement;
 
     // Spy on router navigate method 
-    navSpy: jasmine.Spy;
+    navSpy:         jasmine.Spy;
 
     constructor() {
       this.chatRoomRows = fixture.debugElement.queryAll(By.css('.chat-rooms')).map(de => de.nativeElement);
