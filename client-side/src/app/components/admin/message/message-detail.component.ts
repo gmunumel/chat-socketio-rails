@@ -87,7 +87,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
     this.messageService.setUrl(this.chatRoomId);
     this.messageService.getMessage(messageId)
       .then(message => {
-        this.messageDetailForm.patchValue(message);
+        message ? this.messageDetailForm.patchValue(message) : this.goBack();
       })
       .catch(() => {
         this.goBack();

@@ -20,7 +20,7 @@
               id="message-detail-back">Back</button>
       <button [disabled]="!messageDetailForm.valid" class="btn btn-primary"
               id="message-detail-update" type="submit" >Update</button>
-      <button *ngIf="messageDetailForm.value.id !== -1" (click)="delete(); $event.stopPropagation()" 
+      <button (click)="delete(); $event.stopPropagation()" 
               id="message-detail-delete" class="btn btn-danger float-right">Delete</button>
     </form>
   </div>

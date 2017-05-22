@@ -1,10 +1,10 @@
 import {
   async, fakeAsync, ComponentFixture, TestBed, tick,
-} from '@angular/core/testing';
+}                               from '@angular/core/testing';
 
 import {
   ActivatedRoute, ActivatedRouteStub, newEvent, Router, RouterStub
-} from '../../../../testing';
+}                               from '../../../../testing';
 
 import { By }                   from '@angular/platform-browser';
 import { ReactiveFormsModule }  from '@angular/forms';
@@ -13,11 +13,12 @@ import { HttpModule }           from '@angular/http';
 import { MessageDetailComponent } from './message-detail.component';
 
 import { MessageService }         from '../../../services/message.service';
-import {
-  MESSAGES, FakeMessageService
-}                                 from '../../../../testing/services/fake-message.service';
+
+import { MESSAGES, FakeMessageService } from '../../../../testing/services/fake-message.service';
+import { CHATROOMS }                    from '../../../../testing/services/fake-chat-room.service';
 
 const firstMessage = MESSAGES[0];
+const firstChatRoom = CHATROOMS[0];
 
 describe('MessageDetailComponent', function () {
   let activatedRoute: ActivatedRouteStub;
@@ -47,7 +48,7 @@ describe('MessageDetailComponent', function () {
 
   describe('when navigate to existing message', () => {
     beforeEach( async(() => {
-      activatedRoute.testParams = { id: firstMessage.id };
+      activatedRoute.testParams = { id: firstMessage.id, chat_room_id: firstChatRoom.id };
       createComponent();
     }));
 
@@ -62,7 +63,7 @@ describe('MessageDetailComponent', function () {
       comp.messageDetailForm.patchValue(firstMessage);
       expect(comp.messageDetailForm.value.body).toEqual(firstMessage.body);
       expect(comp.messageDetailForm.value.user_id).toEqual(1);
-      expect(comp.messageDetailForm.value.chat_room_id).toEqual(1);
+      expect(comp.messageDetailForm.value.chat_room_id).toEqual(0);
     }));
 
     it('should be false when form is invalid', fakeAsync(() => {
@@ -76,6 +77,7 @@ describe('MessageDetailComponent', function () {
     }));
 
     it('should update model on submit', fakeAsync(() => {
+      comp.chatRoomId = firstChatRoom.id;
       comp.messageDetailForm.patchValue(firstMessage);
       comp.update();
       tick();
@@ -104,12 +106,37 @@ describe('MessageDetailComponent', function () {
 
   describe('when navigate to non-existant message id', () => {
     beforeEach( async(() => {
-      activatedRoute.testParams = { id: 99999 };
+      activatedRoute.testParams = { id: 99999, chat_room_id: firstChatRoom.id };
       createComponent();
     }));
 
     it('should try to navigate back to message list', fakeAsync(() => {
-      // comp.messageDetailForm.patchValue(firstMessage);
+      tick();
+      expect(page.goBackSpy.calls.any()).toBe(true, 'comp.goBack called');
+      expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+    }));
+  });
+
+  describe('when navigate to non-existant message id and chat room id', () => {
+    beforeEach( async(() => {
+      activatedRoute.testParams = { id: 99999, chat_room_id: 99999 };
+      createComponent();
+    }));
+
+    it('should try to navigate back to message list', fakeAsync(() => {
+      tick();
+      expect(page.goBackSpy.calls.any()).toBe(true, 'comp.goBack called');
+      expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
+    }));
+  });
+
+  describe('when navigate to existant message id and not existant chat room id', () => {
+    beforeEach( async(() => {
+      activatedRoute.testParams = { id: firstMessage.id, chat_room_id: 99999 };
+      createComponent();
+    }));
+
+    it('should try to navigate back to message list', fakeAsync(() => {
       tick();
       expect(page.goBackSpy.calls.any()).toBe(true, 'comp.goBack called');
       expect(page.navSpy.calls.any()).toBe(true, 'router.navigate called');
