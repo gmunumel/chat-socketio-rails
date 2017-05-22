@@ -1,4 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy,
+}                                from '@angular/core';
+import { Router }                from '@angular/router';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -22,6 +25,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
+    private router: Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -38,15 +42,18 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   showMessage(chatRoomId: number): void {
     this.messageService.setUrl(chatRoomId);
-    this.messageService
-        .getMessages()
-        .then((messages: Message[]) => {
-          this.response = 1;
-          this.messages = messages;
-        })
-        .catch(() => {
-          this.response = -1;
-        });
+    this.messageService.getMessages()
+      .then((messages: Message[]) => {
+        this.response = 1;
+        this.messages = messages;
+      })
+      .catch(() => {
+        this.response = -1;
+      });
+  }
+
+  gotoDetail(message: Message): void {
+    this.router.navigate(['/admin/message/detail', message.id]);
   }
 
   ngOnDestroy(): void {

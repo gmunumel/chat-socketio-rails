@@ -2,13 +2,11 @@ import {
   async, fakeAsync, ComponentFixture, TestBed, tick
 } from '@angular/core/testing';
 
-import {
-  newEvent, Router, RouterStub
-} from '../../../../testing';
+import { newEvent, Router, RouterStub } from '../../../../testing';
 
-import { By }                      from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA }  from '@angular/core';
-import { HttpModule }              from '@angular/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By }                     from '@angular/platform-browser';
+import { HttpModule }             from '@angular/http';
 
 import { MessageComponent }   from './message.component';
 
@@ -16,6 +14,8 @@ import { MessageService }     from '../../../services/message.service';
 import {
   MESSAGES, FakeMessageService
 }                             from '../../../../testing/services/fake-message.service';
+
+const firstChatRoomId = MESSAGES[0].chat_room_id;
 
 describe('MessageComponent', function () {
   let comp: MessageComponent;
@@ -27,7 +27,7 @@ describe('MessageComponent', function () {
       imports: [ HttpModule ],
       declarations: [ MessageComponent ],
       providers: [
-        { provide: Router, useClass: RouterStub},
+        { provide: Router, useClass: RouterStub }
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
@@ -49,75 +49,43 @@ describe('MessageComponent', function () {
       '<h1> should say something about "Admin Message"');
   });
 
-  // it('should display chat rooms', () => {
-  //   const allChatRooms = CHATROOMS;
-  //   const displayChatRooms = page.chatRoomRows;
-  //   expect(page.chatRoomRows.length).toBeGreaterThan(0);
-  //   expect(allChatRooms.length).toBe(displayChatRooms.length);
-  // });
+  it('should display all messages for chat id 1', fakeAsync(() => {
+    const allMessages = MESSAGES;
+    comp.showMessage(firstChatRoomId);
+    tick();
+    expect(comp.response).toBe(1);
+    expect(comp.messages.length).toBe(allMessages.length);
+  }));
 
-  // it('1st chat room should match 1st chat room', () => {
-  //   const expectedChatRoom = CHATROOMS[0];
-  //   const actualChatRoom = page.chatRoomRows[0].value;
-  //   expect(actualChatRoom).toContain(expectedChatRoom.title, 'chatRoom.title');
-  // });
+  it('1st message should match 1st chat room message', fakeAsync(() => {
+    comp.showMessage(firstChatRoomId);
+    tick();
 
-  // it('should navigate to selected chat room detail on click', fakeAsync(() => {
-  //   const expectedChatRoom = CHATROOMS[1];
-  //   const input = page.chatRoomRows[1];
-  //   input.dispatchEvent(newEvent('click'));
-  //   tick();
+    const expectedMessage = MESSAGES[0];
+    const actualMessage = page.messagesRows[0].value;
+    expect(actualMessage).toContain(expectedMessage.body, 'message.body');
+  }));
 
-  //   // should have navigated
-  //   expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
+  it('should navigate to selected message detail on click', fakeAsync(() => {
+    const expectedMessage = MESSAGES[1];
+    const input = page.messagesRows[1];
+    input.dispatchEvent(newEvent('click'));
+    tick();
 
-  //   // composed user detail will be URL like 'users/42'
-  //   // expect link array with the route path and user id
-  //   // first argument to router.navigate is link array
-  //   const navArgs = page.navSpy.calls.first().args[0];
-  //   expect(navArgs[0]).toContain('chat-room', 'nav to chat room detail URL');
-  //   expect(navArgs[1]).toBe(expectedChatRoom.id, 'expected chatRoom.id');
+    // should have navigated
+    expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
 
-  // }));
+    // composed message detail will be URL like 'messages/42'
+    // expect link array with the route path and message id
+    // first argument to router.navigate is link array
+    const navArgs = page.navSpy.calls.first().args[0];
+    expect(navArgs[0]).toContain('message', 'nav to message detail URL');
+    expect(navArgs[1]).toBe(expectedMessage.id, 'expected message.id');
+  }));
 
-  // it('should navigate to add chat room on click', fakeAsync(() => {
-  //   const btn = page.addChatRoomBtn;
-  //   btn.dispatchEvent(newEvent('click'));
-  //   tick();
-
-  //   // should have navigated
-  //   expect(page.navSpy.calls.any()).toBe(true, 'navigate called');
-
-  //   // composed user detail will be URL like 'users/42'
-  //   // expect link array with the route path and user id
-  //   // first argument to router.navigate is link array
-  //   const navArgs = page.navSpy.calls.first().args[0];
-  //   expect(navArgs[0]).toContain('chat-room', 'nav to chat room detail URL');
-  //   expect(navArgs[1]).toBe(-1, 'expected to be -1');
-
-  // }));
-
-  // it('should delete a chat room', fakeAsync(() => {
-  //   const deletedChatRoom = CHATROOMS[1];
-  //   const oldChatRoomsLength = page.chatRoomRows.length;
-
-  //   comp.delete(deletedChatRoom);
-  //   tick();
-
-  //   expect(comp.response).toBe(1);
-
-  //   // wait for ui to be complete updated
-  //   fixture.whenStable().then(() => {
-  //       fixture.detectChanges();
-
-  //       const newChatRooms = fixture.debugElement.queryAll(By.css('.chat-rooms')).map(de => de.nativeElement);
-  //       const newChatRoomsLength = newChatRooms.length;
-
-  //       expect(newChatRoomsLength).toBe(oldChatRoomsLength - 1, 'no of users must be minus one');
-  //       expect(newChatRooms.some((chatRoomTitle: any) => chatRoomTitle === deletedChatRoom.title))
-  //               .toBe(false, 'chat room does not exists');
-  //   });
-  // }));
+  it('should add new message', () => {
+    // TODO
+  });
 
   /////////// Helpers /////
   // Create the component and set the `page` test variables 
@@ -139,12 +107,12 @@ describe('MessageComponent', function () {
   class Page {
     // Messages line elements 
     messagesRows:  HTMLLIElement[];
-    pageName:      HTMLInputElement;
 
+    pageName:      HTMLInputElement;
     addMessageBtn: HTMLInputElement;
 
     // Spy on router navigate method 
-    navSpy: jasmine.Spy;
+    navSpy:        jasmine.Spy;
 
     constructor() {
       this.messagesRows = fixture.debugElement.queryAll(By.css('.messages')).map(de => de.nativeElement);
@@ -153,8 +121,8 @@ describe('MessageComponent', function () {
       const router = fixture.debugElement.injector.get(Router);
       this.navSpy  = spyOn(router, 'navigate');
 
-      this.pageName       = fixture.debugElement.query(By.css('.admin-message')).nativeElement;
-      this.addMessageBtn  = fixture.debugElement.query(By.css('#add-message')).nativeElement;
+      this.pageName      = fixture.debugElement.query(By.css('.admin-message')).nativeElement;
+      this.addMessageBtn = fixture.debugElement.query(By.css('#add-message')).nativeElement;
     };
   }
 });

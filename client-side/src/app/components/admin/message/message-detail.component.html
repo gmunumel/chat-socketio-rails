@@ -1,0 +1,27 @@
+<h1 class="admin-message-detail">{{page}}</h1>
+<hr>
+
+<div class="row">
+  <div class="col-lg-4"> 
+    <div *ngIf="response === -1" class="alert alert-danger">
+      <strong>Error!</strong> Something went wrong. Please try again.
+    </div>
+    <form [formGroup]="messageDetailForm" (ngSubmit)="update()" novalidate>
+      <div class="form-group" 
+           [ngClass]="{'has-error':!messageDetailForm.controls['body'].valid 
+                    && messageDetailForm.controls['body'].touched}">
+        <label for="body">Body:</label>
+        <input formControlName="body" type="text" class="form-control" id="body">
+        <div *ngIf="messageDetailForm.controls['body'].hasError('required') 
+                    && messageDetailForm.controls['body'].touched" 
+              class="alert alert-danger">You must include a body.</div>
+      </div>
+      <button (click)="goBack()" type="button" class="btn btn-default"
+              id="message-detail-back">Back</button>
+      <button [disabled]="!messageDetailForm.valid" class="btn btn-primary"
+              id="message-detail-update" type="submit" >Update</button>
+      <button *ngIf="messageDetailForm.value.id !== -1" (click)="delete(); $event.stopPropagation()" 
+              id="message-detail-delete" class="btn btn-danger float-right">Delete</button>
+    </form>
+  </div>
+</div>
