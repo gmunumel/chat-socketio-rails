@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router }                       from '@angular/router';
+import { ActivatedRoute, Router }       from '@angular/router';
 import {
   FormGroup, FormBuilder, Validators
 }                                       from '@angular/forms';
-import { ActivatedRoute }               from '@angular/router';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -18,6 +17,7 @@ import { MessageService } from '../../../services/message.service';
 export class MessageDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin Message Detail';
   response: number = 0;
+  chatRoomId: number = -1;
   messageDetailForm: FormGroup;
   private subscriptionParams: Subscription;
 
@@ -37,14 +37,14 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptionParams = this.route.params
-      .subscribe(p => this.getMessage(+p['id']));
+      .subscribe(p => this.getMessage(+p['id'], +p['chat_room_id']));
   }
 
   update(): void {
     let message = new Message();
     Object.assign(message, this.messageDetailForm.value);
 
-    this.messageService.setUrl(message.chat_room_id);
+    this.messageService.setUrl(this.chatRoomId);
     this.messageService.update(message)
       .then(() => {
         this.response = 1;  // It will be lost
@@ -59,7 +59,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
     let message = new Message();
     Object.assign(message, this.messageDetailForm.value);
 
-    this.messageService.setUrl(message.chat_room_id);
+    this.messageService.setUrl(this.chatRoomId);
     this.messageService.delete(message)
       .then(() => {
         this.response = 1;  // It will be lost
@@ -71,7 +71,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigate(['/admin/message']);
+    this.router.navigate([`/admin/chat-room/${this.chatRoomId}/message`]);
   }
 
   ngOnDestroy(): void {
@@ -79,9 +79,13 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
     this.subscriptionParams.unsubscribe();
   }
 
-  private getMessage(id: number): void {
-    this.messageService.setUrl(this.messageDetailForm.value.chat_room_id);
-    this.messageService.getMessage(id)
+  private getMessage(messageId: number, chatRoomId: number): void {
+    if (chatRoomId === -1) {
+      this.goBack();
+    }
+    this.chatRoomId = chatRoomId;
+    this.messageService.setUrl(this.chatRoomId);
+    this.messageService.getMessage(messageId)
       .then(message => {
         this.messageDetailForm.patchValue(message);
       })

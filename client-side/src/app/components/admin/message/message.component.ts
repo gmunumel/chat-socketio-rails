@@ -1,7 +1,7 @@
 import {
   Component, OnInit, OnDestroy,
-}                                from '@angular/core';
-import { Router }                from '@angular/router';
+}                                 from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -20,15 +20,21 @@ import { SessionService } from '../../../services/session.service';
 export class MessageComponent implements OnInit, OnDestroy {
   page: string = 'Admin Message';
   response: number = 0;
+  chatRoomId: number = -1;
   user: User;
   messages: Message[];
   private subscription: Subscription;
+  private subscriptionParams: Subscription;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.subscriptionParams = this.route.params
+      .subscribe(p => this.getMessage(+p['chat_room_id']));
+
     this.subscription = SessionService.getInstance().collection$
       .subscribe((latestCollection: any) => {
         this.user = new User;
@@ -41,7 +47,28 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   showMessage(chatRoomId: number): void {
-    this.messageService.setUrl(chatRoomId);
+    this.chatRoomId = chatRoomId;
+    this.getMessage(this.chatRoomId);
+  }
+
+  gotoDetail(message: Message): void {
+    this.router.navigate([`admin/chat-room/${this.chatRoomId}/message/detail/${message.id}`]);
+  }
+
+  ngOnDestroy(): void {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
+    this.subscriptionParams.unsubscribe();
+  }
+
+  private getMessage(chatRoomId: number) {
+    // in case we haven't selected a chat room
+    if (chatRoomId === -1) {
+      return;
+    }
+
+    this.chatRoomId = chatRoomId;
+    this.messageService.setUrl(this.chatRoomId);
     this.messageService.getMessages()
       .then((messages: Message[]) => {
         this.response = 1;
@@ -50,14 +77,5 @@ export class MessageComponent implements OnInit, OnDestroy {
       .catch(() => {
         this.response = -1;
       });
-  }
-
-  gotoDetail(message: Message): void {
-    this.router.navigate(['/admin/message/detail', message.id]);
-  }
-
-  ngOnDestroy(): void {
-    // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
   }
 }

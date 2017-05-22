@@ -14,16 +14,16 @@ import { UserDetailComponent }     from './components/admin/user/user-detail.com
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'signin',  component: SignInComponent },
-  { path: 'signup',  component: SignUpComponent },
-  { path: 'about',  component: AboutComponent },
-  { path: 'admin/user',  component: UserComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'signin', component: SignInComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'admin/user', component: UserComponent },
   { path: 'admin/user/detail/:id', component: UserDetailComponent },
-  { path: 'admin/message',  component: MessageComponent },
-  { path: 'admin/message/detail/:id',  component: MessageDetailComponent },
-  { path: 'admin/chat-room',  component: ChatRoomComponent },
-  { path: 'admin/chat-room/detail/:id',  component: ChatRoomDetailComponent },
+  { path: 'admin/chat-room', component: ChatRoomComponent },
+  { path: 'admin/chat-room/detail/:id', component: ChatRoomDetailComponent },
+  { path: 'admin/chat-room/:chat_room_id/message', component: MessageComponent },
+  { path: 'admin/chat-room/:chat_room_id/message/detail/:id', component: MessageDetailComponent },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
