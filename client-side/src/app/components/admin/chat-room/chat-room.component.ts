@@ -29,10 +29,11 @@ import { ChatRoomService } from '../../../services/chat-room.service';
 export class ChatRoomComponent implements OnInit, AfterViewInit {
   page: string = 'Admin Chat Room';
   response: number = 0;
-  selectedChatRoom: ChatRoom;
+  selectedChatRoomId: number;
   chatRooms: Observable<ChatRoom[]>;
 
   @Input() messageVersionInput: boolean = false;
+  @Input() messageSelectedChatRoomId: number = -1;
   @Output() getChatRoomId: EventEmitter<number> = new EventEmitter();
 
   private searchTerms = new Subject<string>();
@@ -51,7 +52,7 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   }
 
   gotoDetail(chatRoom: ChatRoom): void {
-    this.selectedChatRoom = chatRoom;
+    this.selectedChatRoomId = chatRoom.id;
     if (this.messageVersionInput) {
       this.getChatRoomId.emit(chatRoom.id);
     } else {
@@ -81,6 +82,7 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   }
 
   private setChatRooms(): void {
+    this.selectedChatRoomId = this.messageSelectedChatRoomId;
     this.chatRooms = this.searchTerms
       .debounceTime(300)        // wait 300ms after each keystroke before considering the term
       .distinctUntilChanged()   // ignore if next search term is same as previous

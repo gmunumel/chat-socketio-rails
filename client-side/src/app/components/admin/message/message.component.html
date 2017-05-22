@@ -3,7 +3,8 @@
 
 <div class="row">
   <div class="col-lg-4"> 
-    <chat-room [messageVersionInput]="true" (getChatRoomId)="showMessage($event)"></chat-room>
+    <chat-room [messageVersionInput]="true" [messageSelectedChatRoomId]="chatRoomId" 
+               (getChatRoomId)="showMessage($event)"></chat-room>
   </div>
 
   <div class="col-lg-8"> 
