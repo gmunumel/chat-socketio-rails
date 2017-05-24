@@ -45,14 +45,14 @@
       </div>
     </div>
     <div class="panel-footer">
-      <div class="input-group">
-        <input id="chat" type="text" class="form-control input-sm" 
+      <form [formGroup]="messageForm" (ngSubmit)="save()" class="input-group" novalidate>
+        <input formControlName="body" id="body" type="text" class="form-control input-sm" 
                 placeholder="Type your message here..." />
         <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" id="add-message">
-                Send</button>
+            <button type="submit" class="btn btn-primary btn-sm" 
+                    id="add-message">Send</button>
         </span>
-      </div>
+      </form>
     </div>
   </div>
 </div>

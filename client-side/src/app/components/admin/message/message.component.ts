@@ -1,7 +1,6 @@
-import {
-  Component, OnInit, OnDestroy,
-}                                 from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router }       from '@angular/router';
+import { FormGroup, FormBuilder }       from '@angular/forms';
 
 import { Subscription }   from 'rxjs/Subscription';
 
@@ -23,13 +22,23 @@ export class MessageComponent implements OnInit, OnDestroy {
   chatRoomId: number = -1;
   user: User;
   messages: Message[];
+  messageForm: FormGroup;
   private subscription: Subscription;
   private subscriptionParams: Subscription;
 
   constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+
+    this.messageForm = this.fb.group({
+      id: [-1],
+      body: [''],
+      user_id: [1],       // default user id
+      chat_room_id: [1]   // default chat room id
+    });
+  }
 
   ngOnInit(): void {
     this.subscriptionParams = this.route.params
@@ -44,6 +53,27 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
 
     SessionService.getInstance().load();
+  }
+
+  save(): void {
+    if (this.messageForm.value.body === '' || this.chatRoomId === -1) {
+      return;
+    }
+
+    let message = new Message();
+    Object.assign(message, this.messageForm.value);
+    message.chat_room_id = this.chatRoomId;
+
+    this.messageService.setUrl(this.chatRoomId);
+    this.messageService.create(message)
+      .then((msg: Message) => {
+        this.response = 1;
+        this.messages.push(msg);
+        this.messageForm.reset();
+      })
+      .catch((error: any) => {
+        this.response = -1;
+      });
   }
 
   showMessage(chatRoomId: number): void {
