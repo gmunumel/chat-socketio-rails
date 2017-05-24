@@ -24,7 +24,7 @@ class MessagesController < ActionController::API
   # POST /chat_rooms/:chat_room_id/messages
   def create
     @chat_room.messages.create!(message_params)
-    json_response(@chat_room, :created)
+    json_response(@message, :created)
   end
 
   # PUT /chat_rooms/:chat_room_id/messages/:id
