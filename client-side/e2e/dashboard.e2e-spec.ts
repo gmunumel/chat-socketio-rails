@@ -11,7 +11,7 @@ describe('Dashboard e2e Tests', function () {
   });
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.dashboard')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('dashboard')).getText()).toEqual(expectedMsg);
   });
 
 });

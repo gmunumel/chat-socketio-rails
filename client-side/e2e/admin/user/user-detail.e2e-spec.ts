@@ -20,7 +20,7 @@ describe('Admin User Detail e2e Tests', function () {
   let expectedMsg = 'Admin User Detail';
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.admin-user-detail')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('admin-user-detail')).getText()).toEqual(expectedMsg);
   });
 
   it('should display a save button', function () {

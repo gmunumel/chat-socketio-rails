@@ -15,9 +15,10 @@
     <div class="panel-body">
       <ul *ngFor="let message of messages" class="chat">
         <li *ngIf="message.user_id != user.id" (click)="gotoDetail(message)" 
-            class="left clearfix messages"><span class="chat-img pull-left">
-          <img src="app/components/admin/message/resources/img/you.png" alt="User Avatar" class="img-circle" />
-        </span>
+            class="left clearfix messages">
+          <span class="chat-img pull-left">
+            <img src="app/components/admin/message/resources/img/you.png" alt="User Avatar" class="img-circle" />
+          </span>
           <div class="chat-body clearfix">
             <div class="header">
               <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
@@ -27,9 +28,10 @@
           </div>
         </li>
         <li *ngIf="message.user_id == user.id" (click)="gotoDetail(message)" 
-            class="right clearfix messages"><span class="chat-img pull-right">
-          <img src="app/components/admin/message/resources/img/me.png" alt="User Avatar" class="img-circle" />
-        </span>
+            class="right clearfix messages">
+          <span class="chat-img pull-right">
+            <img src="app/components/admin/message/resources/img/me.png" alt="User Avatar" class="img-circle" />
+          </span>
           <div class="chat-body clearfix">
             <div class="header">
               <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message.created_at | date:"medium"}}</small>

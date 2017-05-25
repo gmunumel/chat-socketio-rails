@@ -15,11 +15,11 @@ describe('Client Side Chat E2E Tests', function () {
 
   it('can click Sign In link in template', function () {
     element(by.id('sign-in-link')).click();
-    expect(element(by.css('.sign-in')).getText()).toEqual('Sign In');
+    expect(element(by.className('sign-in')).getText()).toEqual('Sign In');
   });
 
   it('can click Sign Up link in template', function () {
     element(by.id('sign-up-link')).click();
-    expect(element(by.css('.sign-up')).getText()).toEqual('Sign Up');
+    expect(element(by.className('sign-up')).getText()).toEqual('Sign Up');
   });
 });

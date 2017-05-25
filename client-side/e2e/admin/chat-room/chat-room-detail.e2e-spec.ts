@@ -20,7 +20,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
   let expectedMsg = 'Admin Chat Room Detail';
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.admin-chat-room-detail')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('admin-chat-room-detail')).getText()).toEqual(expectedMsg);
   });
 
   it('should display a save button', function () {

@@ -13,7 +13,7 @@ describe('Sign Up e2e Tests', function () {
   });
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.sign-up')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('sign-up')).getText()).toEqual(expectedMsg);
   });
 
   it('should not create an user', function() {
@@ -22,7 +22,7 @@ describe('Sign Up e2e Tests', function () {
 
     element(by.id('sign-up-submit')).click();
 
-    expect(element(by.css('.alert-success')).isPresent()).
+    expect(element(by.className('alert-success')).isPresent()).
         toBe(false);
   });
 
@@ -36,7 +36,7 @@ describe('Sign Up e2e Tests', function () {
 
     element(by.id('sign-up-submit')).click();
 
-    expect(element(by.css('.alert-success')).getText()).
+    expect(element(by.className('alert-success')).getText()).
         toContain('Your user has been created');
 
     // remove user just created

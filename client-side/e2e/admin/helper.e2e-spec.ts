@@ -96,6 +96,54 @@ export function RemoveChatRoom(title: string): void {
     });
 }
 
+// Create a dummy message. Will be remove later
+export function AddMessage(body: string, chatRoomId: number): void {
+
+  SignIn();
+
+  element(by.id('admin-message-link')).click();
+
+  // select chat-room
+  element(by.id(`select-${chatRoomId}`)).click();
+
+  element(by.id('body')).sendKeys(body);
+
+  element(by.id('add-message')).click();
+
+  // browser.executeScript('window.scrollTo(0,0);').then(() => {
+  //   element(by.id('chat-room-detail-save')).click();
+  // });
+}
+
+// To remove a specific message. For clean up purposes
+export function RemoveMessage(body: string, chatRoomId: number): void {
+
+  SignIn();
+
+  element(by.id('admin-message-link')).click();
+
+  // select chat-room
+  element(by.id(`select-${chatRoomId}`)).click();
+
+  let elementToClick = element.all(by.className('messages')).last();
+
+  // wait for the element to be clickable 
+  browser.wait(protractor.ExpectedConditions.elementToBeClickable(elementToClick), 10000)
+    .then (() => {
+      elementToClick.click();
+
+      element(by.id('message-detail-delete')).click();
+
+      browser.get('');
+      // little hack to scroll down the whole page to move where the delete button is
+      // browser.executeScript('window.scrollTo(10000,10000);').then(() => {
+      //   elementToClick.click();
+
+      //   browser.get('');
+      // });
+    });
+}
+
 export function GetRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
   max = Math.floor(max);

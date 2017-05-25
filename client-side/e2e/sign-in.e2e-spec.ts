@@ -13,7 +13,7 @@ describe('Sign In e2e Tests', function () {
   });
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.sign-in')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('sign-in')).getText()).toEqual(expectedMsg);
   });
 
   it('should not found an user', function() {
@@ -22,7 +22,7 @@ describe('Sign In e2e Tests', function () {
 
     element(by.id('sign-in-submit')).click();
 
-    expect(element(by.css('.alert-success')).isPresent()).
+    expect(element(by.className('alert-success')).isPresent()).
         toBe(false);
   });
 
@@ -33,7 +33,7 @@ describe('Sign In e2e Tests', function () {
 
     element(by.id('sign-in-submit')).click();
 
-    expect(element(by.css('.alert-success')).getText()).
+    expect(element(by.className('alert-success')).getText()).
         toContain('Your user has been logged in!');
   });
 

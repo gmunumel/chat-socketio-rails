@@ -18,7 +18,7 @@ describe('Admin User e2e Tests', function () {
   let expectedMsg = 'Admin User';
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.admin-user')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('admin-user')).getText()).toEqual(expectedMsg);
   });
 
   it('should display an add button', function () {
@@ -34,7 +34,7 @@ describe('Admin User e2e Tests', function () {
   });
 
   it('should navigate to edit an user', function () {
-    let userElement = element.all(by.css('.users')).get(1);
+    let userElement = element.all(by.className('users')).get(1);
     userElement.getAttribute('value')
       .then((name) => {
 
@@ -63,13 +63,13 @@ describe('Admin User e2e Tests', function () {
   });
 
   it('should shown an existing user', function () {
-    let userElement = element.all(by.css('.users')).get(2);
+    let userElement = element.all(by.className('users')).get(2);
     userElement.getAttribute('value')
       .then((name) => {
 
         element(by.id('user-search-box')).sendKeys(name);
 
-        element.all(by.css('.users')).count().then((size: number) => {
+        element.all(by.className('users')).count().then((size: number) => {
           expect(size).toBe(1);
         });
       });
@@ -80,7 +80,7 @@ describe('Admin User e2e Tests', function () {
 
     element(by.id('user-search-box')).sendKeys(userName);
 
-    element.all(by.css('.users')).count().then((size: number) => {
+    element.all(by.className('users')).count().then((size: number) => {
       expect(size).toBe(0);
     });
   });

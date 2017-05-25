@@ -18,7 +18,7 @@ describe('Admin Chat Room e2e Tests', function () {
   let expectedMsg = 'Admin Chat Room';
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.admin-chat-room')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('admin-chat-room')).getText()).toEqual(expectedMsg);
   });
 
   it('should display an add button', function () {
@@ -33,7 +33,7 @@ describe('Admin Chat Room e2e Tests', function () {
   });
 
   it('should navigate to edit a chat room', function () {
-    let userElement = element.all(by.css('.chat-rooms')).get(1);
+    let userElement = element.all(by.className('chat-rooms')).get(1);
     userElement.getAttribute('value')
       .then((title) => {
 
@@ -61,13 +61,13 @@ describe('Admin Chat Room e2e Tests', function () {
   });
 
   it('should shown an existing chat room', function () {
-    let chatRoomElement = element.all(by.css('.chat-rooms')).get(2);
+    let chatRoomElement = element.all(by.className('chat-rooms')).get(2);
     chatRoomElement.getAttribute('value')
       .then((title) => {
 
         element(by.id('chat-room-search-box')).sendKeys(title);
 
-        element.all(by.css('.chat-rooms')).count().then((size: number) => {
+        element.all(by.className('chat-rooms')).count().then((size: number) => {
           expect(size).toBe(1);
         });
       });
@@ -78,7 +78,7 @@ describe('Admin Chat Room e2e Tests', function () {
 
     element(by.id('chat-room-search-box')).sendKeys(title);
 
-    element.all(by.css('.chat-rooms')).count().then((size: number) => {
+    element.all(by.className('chat-rooms')).count().then((size: number) => {
       expect(size).toBe(0);
     });
   });

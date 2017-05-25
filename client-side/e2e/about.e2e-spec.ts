@@ -11,7 +11,7 @@ describe('About e2e Tests', function () {
   });
 
   it('should display: ' + expectedMsg, function () {
-    expect(element(by.css('.about')).getText()).toEqual(expectedMsg);
+    expect(element(by.className('about')).getText()).toEqual(expectedMsg);
   });
 
 });
