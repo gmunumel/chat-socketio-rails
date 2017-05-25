@@ -38,11 +38,11 @@ describe('Admin Message e2e Tests', function () {
   // });
 
   it('should navigate to edit a message', function () {
-    let messageElement = element.all(by.xpath("//ul[@class='chat']/li/div/p")).get(1);
+    let messageElement = element.all(by.xpath('//ul[@class="chat"]/li/div/input')).get(1);
     messageElement.getAttribute('value')
       .then((body) => {
 
-        // console.log(body);
+        console.log('======> messageElement: ' + messageElement);
         // browser.pause();
 
         // little hack to scroll down the whole page to move where the delete button is
@@ -51,9 +51,19 @@ describe('Admin Message e2e Tests', function () {
 
           //browser.pause();
 
-          let messageDetailBody = element.all(by.id('body')).map((elem: any) => elem.getText());
+          //let messageDetailBody = element.all(by.id('body')).map((elem: any) => elem.getText());
+          element(by.id('body')).getAttribute('value')
+              .then((messageDetailBody) => {
+
+                  console.log('=====> body: ' + body);
+                  console.log('=====> new body: ' + messageDetailBody);
+              });
+
           
-          expect(body).toEqual(messageDetailBody);
+
+          // browser.pause();
+
+          // expect(body).toEqual(messageDetailBody);
           //expect(element(by.id('body')).getAttribute('value')).toEqual(body);
         });
       });
