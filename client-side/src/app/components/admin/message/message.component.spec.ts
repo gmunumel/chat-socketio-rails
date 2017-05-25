@@ -8,6 +8,7 @@ import {
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By }                     from '@angular/platform-browser';
+import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule }             from '@angular/http';
 
 import { MessageComponent }   from './message.component';
@@ -17,8 +18,10 @@ import {
   MESSAGES, FakeMessageService
 }                             from '../../../../testing/services/fake-message.service';
 import { CHATROOMS }          from '../../../../testing/services/fake-chat-room.service';
+import { USERS }              from '../../../../testing/services/fake-user.service';
 
 const firstChatRoom = CHATROOMS[0];
+const firstUser     = USERS[0];
 
 describe('MessageComponent', function () {
   let activatedRoute: ActivatedRouteStub;
@@ -29,7 +32,7 @@ describe('MessageComponent', function () {
   beforeEach(async(() => {
     activatedRoute = new ActivatedRouteStub();
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [ ReactiveFormsModule, HttpModule ],
       declarations: [ MessageComponent ],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
@@ -95,9 +98,26 @@ describe('MessageComponent', function () {
       expect(navArgs[0]).toContain(expectedChatRoom.id, 'expected chatRoom.id');
     }));
 
-    it('should add new message', () => {
-      // TODO
-    });
+    it('should do nothing in save whithout message body', fakeAsync(() => {
+      comp.response = 0;
+      comp.messageForm.value.body = '';
+      comp.save();
+      tick();
+
+      expect(comp.response).toBe(0, 'comp.response is initial value 0');
+    }));
+
+    it('should save message', fakeAsync(() => {
+      const messages = MESSAGES;
+      comp.response = 0;
+      comp.messageForm.value.body = 'test message';
+      comp.user = firstUser;
+      comp.save();
+      tick();
+
+      expect(comp.response).toBe(1, 'comp.response is 1');
+      expect(comp.messages.length).toBe(messages.length + 1, 'messages should increase in 1');
+    }));
   });
 
   describe('when navigate to non-existant chat room id', () => {

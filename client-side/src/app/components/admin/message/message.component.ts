@@ -61,8 +61,9 @@ export class MessageComponent implements OnInit, OnDestroy {
     }
 
     let message = new Message();
-    Object.assign(message, this.messageForm.value);
+    message.body = this.messageForm.value.body;
     message.chat_room_id = this.chatRoomId;
+    message.user_id = this.user.id;
 
     this.messageService.setUrl(this.chatRoomId);
     this.messageService.create(message)
