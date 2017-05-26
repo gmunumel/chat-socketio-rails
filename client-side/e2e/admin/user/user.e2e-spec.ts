@@ -1,6 +1,8 @@
 import { element, by } from 'protractor';
 
-import { SignIn, LogOut, AddUser, RemoveUser } from '../helper.e2e-spec';
+import { 
+  SignIn, LogOut, AddUser, RemoveUser, GetRandomInt 
+} from '../helper.e2e-spec';
 
 describe('Admin User e2e Tests', function () {
 
@@ -45,8 +47,8 @@ describe('Admin User e2e Tests', function () {
   });
 
   it('should delete an user', function () {
-    let userName    = 'test1234';
-    let userEmail   = 'test1234@test.com';
+    let userName    = `test${GetRandomInt(1, 1000000)}`;
+    let userEmail   = `${userName}@test.com`;
     let userElement = element(by.id(`delete-${userName}`));
 
     AddUser(userName, userEmail);

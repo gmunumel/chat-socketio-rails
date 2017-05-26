@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-import { RemoveUser, LogOut } from './admin/helper.e2e-spec';
+import { RemoveUser, LogOut, GetRandomInt } from './admin/helper.e2e-spec';
 
 describe('Sign Up e2e Tests', function () {
 
@@ -17,8 +17,11 @@ describe('Sign Up e2e Tests', function () {
   });
 
   it('should not create an user', function() {
-    element(by.id('name')).sendKeys('test-name');
-    element(by.id('email')).sendKeys('test.email');
+    let userName  = `testName${GetRandomInt(1, 1000000)}`;
+    let userEmail = userName;
+
+    element(by.id('name')).sendKeys(userName);
+    element(by.id('email')).sendKeys(userEmail);
 
     element(by.id('sign-up-submit')).click();
 
@@ -28,8 +31,8 @@ describe('Sign Up e2e Tests', function () {
 
   // won't create user if rails server is not up
   it('should add one user', function() {
-    let userName  = 'test-name8989';
-    let userEmail = 'test.email@foo.com';
+    let userName  = `testName${GetRandomInt(1, 1000000)}`;
+    let userEmail = `${userName}@foo.com`;
 
     element(by.id('name')).sendKeys(userName);
     element(by.id('email')).sendKeys(userEmail);

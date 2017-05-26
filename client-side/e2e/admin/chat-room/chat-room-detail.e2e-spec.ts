@@ -40,7 +40,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
   it('should update a chat room', function () {
     element(by.id('title')).getAttribute('value')
       .then((oldTitle) => {
-        let newTitle = oldTitle + '-' + GetRandomInt(1, 1000000);
+        let newTitle = `oldTitle-${GetRandomInt(1, 1000000)}`;
 
         expect(oldTitle).not.toBe(newTitle);
 

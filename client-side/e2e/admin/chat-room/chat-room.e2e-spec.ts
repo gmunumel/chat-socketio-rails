@@ -1,6 +1,8 @@
 import { element, by } from 'protractor';
 
-import { SignIn, LogOut, AddChatRoom, RemoveChatRoom } from '../helper.e2e-spec';
+import { 
+  SignIn, LogOut, AddChatRoom, RemoveChatRoom, GetRandomInt
+} from '../helper.e2e-spec';
 
 describe('Admin Chat Room e2e Tests', function () {
 
@@ -44,7 +46,7 @@ describe('Admin Chat Room e2e Tests', function () {
   });
 
   it('should delete a chat room', function () {
-    let title    = 'test1234';
+    let title           = `test-${GetRandomInt(1, 1000000)}`;
     let chatRoomElement = element(by.id(`delete-${title}`));
 
     AddChatRoom(title);
