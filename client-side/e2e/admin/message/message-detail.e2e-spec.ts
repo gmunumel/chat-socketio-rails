@@ -1,13 +1,14 @@
 import { browser, element, by } from 'protractor';
 
-import { 
-  SignIn, LogOut, AddMessage, RemoveMessage, GetRandomInt 
+import {
+  SignIn, LogOut, AddMessage, RemoveMessage, GetRandomInt
 } from '../helper.e2e-spec';
 
 describe('Admin Message Detail e2e Tests', function () {
 
-  const chatRoomId = 1;
-  const url        = '/admin/chat-room/1/message/detail/1';
+  const chatRoomId  = 1;
+  const url         = '/admin/chat-room/1/message/detail/1';
+  const testMessage = `test-${GetRandomInt(1, 1000000)}`;
 
   beforeAll(function () {
     SignIn();
@@ -58,9 +59,6 @@ describe('Admin Message Detail e2e Tests', function () {
         element(by.id('body')).getAttribute('value')
           .then((newBody) => {
 
-            console.log('=====> testBody: ' + testBody);
-            console.log('=====> newBody: ' + newBody);
-
             expect(testBody).toEqual(newBody);
 
             // clean up the message body
@@ -69,27 +67,29 @@ describe('Admin Message Detail e2e Tests', function () {
       });
   });
 
-  it('should delete a message', function () {
-    let body           = `test-${GetRandomInt(1, 1000000)}`;
+  it('should add a message', function () {
     let messageElement = element.all(by.xpath('//ul[@class="chat"]/li/div/p')).last();
 
-    AddMessage(body, chatRoomId);
+    AddMessage(testMessage, chatRoomId);
 
     element(by.id('admin-message-link')).click();
 
     messageElement.getText()
       .then((newBody: string) => {
 
-        expect(body).toBe(newBody);
+        expect(testMessage).toBe(newBody);
+      });
+  });
 
-        RemoveMessage(newBody, chatRoomId);
+  it('should delete a message', function () {
+    let messageElement = element.all(by.xpath('//ul[@class="chat"]/li/div/p')).last();
 
-        messageElement.getText()
-          .then((newBody: string) => {
+    RemoveMessage(testMessage, chatRoomId);
 
-            expect(body).not.toBe(newBody);
+    messageElement.getText()
+      .then((newBody: string) => {
 
-          });
+        expect(testMessage).not.toBe(newBody);
       });
   });
 

@@ -132,9 +132,8 @@ export function RemoveMessage(body: string, chatRoomId: number): void {
 
   let elementToClick = element.all(by.className('messages')).last();
 
-  // wait for the element to be clickable 
-  browser.wait(protractor.ExpectedConditions.elementToBeClickable(elementToClick), 10000)
-    .then (() => {
+  // little hack to scroll down the whole page to move where the add message is
+  browser.executeScript('window.scrollTo(0,10000);').then(() => {
       elementToClick.click();
 
       element(by.id('message-detail-delete')).click();

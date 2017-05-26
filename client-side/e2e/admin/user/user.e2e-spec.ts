@@ -1,10 +1,13 @@
 import { element, by } from 'protractor';
 
-import { 
-  SignIn, LogOut, AddUser, RemoveUser, GetRandomInt 
+import {
+  SignIn, LogOut, AddUser, RemoveUser, GetRandomInt
 } from '../helper.e2e-spec';
 
 describe('Admin User e2e Tests', function () {
+
+  const testUserName  = `test${GetRandomInt(1, 1000000)}`;
+  const testUserEmail = `${testUserName}@test.com`;
 
   beforeAll(function () {
     SignIn();
@@ -47,17 +50,19 @@ describe('Admin User e2e Tests', function () {
   });
 
   it('should delete an user', function () {
-    let userName    = `test${GetRandomInt(1, 1000000)}`;
-    let userEmail   = `${userName}@test.com`;
-    let userElement = element(by.id(`delete-${userName}`));
+    let userElement = element(by.id(`delete-${testUserName}`));
 
-    AddUser(userName, userEmail);
+    AddUser(testUserName, testUserEmail);
 
     element(by.id('admin-user-link')).click();
 
     expect(userElement.isPresent()).toBeTruthy();
+  });
 
-    RemoveUser(userName);
+  it('should delete an user', function () {
+    let userElement = element(by.id(`delete-${testUserName}`));
+
+    RemoveUser(testUserName);
 
     element(by.id('admin-user-link')).click();
 

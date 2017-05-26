@@ -1,10 +1,12 @@
 import { element, by } from 'protractor';
 
-import { 
+import {
   SignIn, LogOut, AddChatRoom, RemoveChatRoom, GetRandomInt
 } from '../helper.e2e-spec';
 
 describe('Admin Chat Room e2e Tests', function () {
+
+  const testChatRoom = `test-${GetRandomInt(1, 1000000)}`;
 
   beforeAll(function () {
     SignIn();
@@ -45,17 +47,20 @@ describe('Admin Chat Room e2e Tests', function () {
       });
   });
 
-  it('should delete a chat room', function () {
-    let title           = `test-${GetRandomInt(1, 1000000)}`;
-    let chatRoomElement = element(by.id(`delete-${title}`));
+  it('should add a chat room', function () {
+    let chatRoomElement = element(by.id(`delete-${testChatRoom}`));
 
-    AddChatRoom(title);
+    AddChatRoom(testChatRoom);
 
     element(by.id('admin-chat-room-link')).click();
 
     expect(chatRoomElement.isPresent()).toBeTruthy();
+  });
 
-    RemoveChatRoom(title);
+  it('should delete a chat room', function () {
+    let chatRoomElement = element(by.id(`delete-${testChatRoom}`));
+
+    RemoveChatRoom(testChatRoom);
 
     element(by.id('admin-chat-room-link')).click();
 
