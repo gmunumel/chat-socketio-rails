@@ -39,19 +39,22 @@ describe('Admin Chat Room Detail e2e Tests', function () {
 
   it('should update a chat room', function () {
     element(by.id('title')).getAttribute('value')
-      .then((oldTitle) => {
-        let newTitle = `oldTitle-${GetRandomInt(1, 1000000)}`;
+      .then((originalTitle) => {
+        let testTitle = `testTitle-${GetRandomInt(1, 1000000)}`;
 
-        expect(oldTitle).not.toBe(newTitle);
+        expect(originalTitle).not.toBe(testTitle);
 
-        setChatRoomTitle(newTitle);
+        setChatRoomTitle(testTitle);
 
         browser.get(url);
 
-        expect(element(by.id('title')).getAttribute('value')).toBe(newTitle);
+        element(by.id('title')).getAttribute('value')
+          .then((newTitle) => {
+            expect(testTitle).toEqual(newTitle);
 
-        // clean up the chat room title
-        setChatRoomTitle(oldTitle);
+            // clean up the chat room title
+            setChatRoomTitle(originalTitle);
+          });
       });
   });
 

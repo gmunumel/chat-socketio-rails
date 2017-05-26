@@ -39,19 +39,22 @@ describe('Admin User Detail e2e Tests', function () {
 
   it('should update an user', function () {
     element(by.id('name')).getAttribute('value')
-      .then((oldName) => {
-        let newUserName = `oldName-${GetRandomInt(1, 1000000)}`;
+      .then((originalName) => {
+        let testUserName = `testName-${GetRandomInt(1, 1000000)}`;
 
-        expect(oldName).not.toBe(newUserName);
+        expect(originalName).not.toBe(testUserName);
 
-        setUserName(newUserName);
+        setUserName(testUserName);
 
         browser.get(url);
 
-        expect(element(by.id('name')).getAttribute('value')).toBe(newUserName);
+        element(by.id('name')).getAttribute('value')
+          .then((newUserName) => {
+            expect(testUserName).toEqual(newUserName);
 
-        // clean up the user name
-        setUserName(oldName);
+            // clean up the user name
+            setUserName(originalName);
+          });
       });
   });
 
