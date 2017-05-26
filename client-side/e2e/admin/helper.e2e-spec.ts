@@ -35,6 +35,8 @@ export function AddUser(userName: string, userEmail: string): void {
 
   browser.executeScript('window.scrollTo(0,0);').then(() => {
     element(by.id('user-detail-save')).click();
+
+    browser.waitForAngular();
   });
 }
 
@@ -54,7 +56,7 @@ export function RemoveUser(userName: string): void {
       browser.executeScript('window.scrollTo(10000,10000);').then(() => {
         elementToClick.click();
 
-        browser.get('');
+        browser.waitForAngular();
       });
     });
 }
@@ -72,6 +74,8 @@ export function AddChatRoom(title: string): void {
 
   browser.executeScript('window.scrollTo(0,0);').then(() => {
     element(by.id('chat-room-detail-save')).click();
+
+    browser.waitForAngular();
   });
 }
 
@@ -91,7 +95,7 @@ export function RemoveChatRoom(title: string): void {
       browser.executeScript('window.scrollTo(10000,10000);').then(() => {
         elementToClick.click();
 
-        browser.get('');
+        browser.waitForAngular();
       });
     });
 }
@@ -106,13 +110,14 @@ export function AddMessage(body: string, chatRoomId: number): void {
   // select chat-room
   element(by.id(`select-${chatRoomId}`)).click();
 
-  element(by.id('body')).sendKeys(body);
+  // little hack to scroll down the whole page to move where the add message is
+  browser.executeScript('window.scrollTo(0,10000);').then(() => {
+    element(by.id('body')).sendKeys(body);
 
-  element(by.id('add-message')).click();
+    element(by.id('add-message')).click();
 
-  // browser.executeScript('window.scrollTo(0,0);').then(() => {
-  //   element(by.id('chat-room-detail-save')).click();
-  // });
+    browser.waitForAngular();
+  });
 }
 
 // To remove a specific message. For clean up purposes
@@ -134,13 +139,7 @@ export function RemoveMessage(body: string, chatRoomId: number): void {
 
       element(by.id('message-detail-delete')).click();
 
-      browser.get('');
-      // little hack to scroll down the whole page to move where the delete button is
-      // browser.executeScript('window.scrollTo(10000,10000);').then(() => {
-      //   elementToClick.click();
-
-      //   browser.get('');
-      // });
+      browser.waitForAngular();
     });
 }
 

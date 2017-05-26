@@ -68,5 +68,7 @@ describe('Admin Chat Room Detail e2e Tests', function () {
     element(by.id('title')).sendKeys(title);
 
     element(by.id('chat-room-detail-save')).click();
+
+    browser.waitForAngular();
   };
 });

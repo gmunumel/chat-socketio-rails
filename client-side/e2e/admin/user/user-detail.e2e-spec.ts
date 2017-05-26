@@ -68,5 +68,7 @@ describe('Admin User Detail e2e Tests', function () {
     element(by.id('name')).sendKeys(name);
 
     element(by.id('user-detail-save')).click();
+
+    browser.waitForAngular();
   };
 });
