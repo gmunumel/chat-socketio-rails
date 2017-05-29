@@ -26,4 +26,4 @@ TODO - use heroku
 
 # License
 
-Licensed under [MIT](https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+Licensed under [MIT](LICENSE.md)
