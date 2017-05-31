@@ -9,6 +9,7 @@ import { Message }        from '../../../models/message';
 
 import { MessageService } from '../../../services/message.service';
 import { SessionService } from '../../../services/session.service';
+import { ChatService }    from '../../../services/chat.service';
 
 @Component({
   selector: 'message',
@@ -23,14 +24,16 @@ export class MessageComponent implements OnInit, OnDestroy {
   user: User;
   messages: Message[];
   messageForm: FormGroup;
-  private subscription: Subscription;
+  private subscriptionSession: Subscription;
   private subscriptionParams: Subscription;
+  private subscriptionChat: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private chatService: ChatService) {
 
     this.messageForm = this.fb.group({
       id: [-1],
@@ -38,13 +41,18 @@ export class MessageComponent implements OnInit, OnDestroy {
       user_id: [1],       // default user id
       chat_room_id: [1]   // default chat room id
     });
+
+    this.subscriptionChat = this.chatService.getMessages()
+      .subscribe((message: any) => {
+        console.log('got message: ' + message);
+      });
   }
 
   ngOnInit(): void {
     this.subscriptionParams = this.route.params
       .subscribe(p => this.getMessage(+p['chat_room_id']));
 
-    this.subscription = SessionService.getInstance().collection$
+    this.subscriptionSession = SessionService.getInstance().collection$
       .subscribe((latestCollection: any) => {
         this.user = new User;
         this.user.id = latestCollection[0];
@@ -88,8 +96,9 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    this.subscriptionSession.unsubscribe();
     this.subscriptionParams.unsubscribe();
+    this.subscriptionChat.unsubscribe();
   }
 
   private getMessage(chatRoomId: number) {

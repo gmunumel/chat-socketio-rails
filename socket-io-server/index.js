@@ -25,7 +25,7 @@ var options = {
     url: 'redis://localhost:6379/0'
 };
 var io = require('socket.io').listen(5001),
-    redis = require('redis').createClient();
+    redis = require('redis').createClient(options);
 // var redis = require('redis').createClient(options);
 
 redis.subscribe('users-list');

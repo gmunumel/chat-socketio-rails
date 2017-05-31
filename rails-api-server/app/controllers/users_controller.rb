@@ -16,7 +16,7 @@ class UsersController < ActionController::API
     name = user_params[:name] ? user_params[:name].downcase : ' '
     email = user_params[:email] ? user_params[:email].downcase : ' '
     @users = User.where("lower(name) LIKE ? OR lower(email) LIKE ?", "%#{name}%", "%#{email}%").map{|x| x.as_json}
-    $redis.publish 'users-list', users: @users.to_json
+    $redis.publish 'users-list', @users.to_json
     json_response(@users)
   end
 
