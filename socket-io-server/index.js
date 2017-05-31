@@ -1,7 +1,7 @@
 /**
  * Created by gabrielmunumel on 3/31/17.
  */
-console.log("Hello world!");
+console.log('Hello world!');
 // var http = require("http");
 // http.createServer(function(request, response) {
 //     response.writeHead(200, {"Content-Type": "text/html"});
@@ -24,28 +24,31 @@ var options = {
     port: 6379,
     url: 'redis://localhost:6379/0'
 };
-var redis = require('redis').createClient(options);
-redis.set("foo", "OK");
+var io = require('socket.io').listen(5001),
+    redis = require('redis').createClient();
+// var redis = require('redis').createClient(options);
+
 redis.subscribe('users-list');
 
-
-console.log("PORT: " + process.env.PORT);
 // port was 5001
 
-var io = require('socket.io').listen(process.env.PORT || 5001);
+
 io.on('connection', function(socket){
-    console.log('connected socket');
-    socket.on('disconnect', function(){
-        console.log('client disconnected');
-        socket.disconnect();
-    });
+  console.log('connected socket');
+  
+  socket.on('disconnect', function(){
+    console.log('client disconnected');
+    socket.disconnect();
+  });
+
+  redis.on('message', function(channel, message){
+    var info = JSON.parse(message);
+    socket.emit('users-list', info);
+    console.log('emit '+ channel);
+  });
 });
 
-redis.on('message', function(channel, message){
-    var info = JSON.parse(message);
-    io.sockets.emit(channel, info);
-    console.log('emit '+ channel);
-});
+
 
 // var app = require('http').createServer();
 // var io = require('socket.io');
