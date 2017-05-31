@@ -11,6 +11,12 @@ Chat Room and Message.
 ## Run App
 ``` rails s```
 
+## Run Migration
+```rake db:migration```
+
+## Load Initial Data
+```rake db:seed```
+
 ## Run Tests
 ```rspec spec```
 
