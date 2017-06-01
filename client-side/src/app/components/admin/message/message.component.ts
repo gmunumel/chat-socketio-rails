@@ -24,6 +24,7 @@ export class MessageComponent implements OnInit, OnDestroy {
   user: User;
   messages: Message[];
   messageForm: FormGroup;
+  private isMessageSentByMe = false;
   private sessionSubscription: Subscription;
   private paramsSubscription: Subscription;
   private chatSubscription: Subscription;
@@ -43,8 +44,11 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
 
     this.chatSubscription = this.chatService.getMessages()
-      .subscribe((message: any) => {
-        console.log('got message: ' + message);
+      .subscribe((message: Message) => {
+        if (message.chat_room_id === this.chatRoomId
+            && !this.isMessageSentByMe) {
+          this.messages.push(message);
+        }
       });
   }
 
@@ -77,8 +81,10 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.messageService.create(message)
       .then((msg: Message) => {
         this.response = 1;
+        this.isMessageSentByMe = true;
         this.messages.push(msg);
         this.messageForm.reset();
+        this.chatService.sendMessage(msg);  // emit message to node server
       })
       .catch((error: any) => {
         this.response = -1;
