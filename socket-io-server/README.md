@@ -1,8 +1,12 @@
 # Socket-io-server
 
-TODO - explanation
+Cointains node server functionality which subscribe to channels on redis and emit messages
 
 # Installation
+```bundle install```
+
+# Run APP
+```node server.js```
 
 # Run Tests
 
