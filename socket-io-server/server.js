@@ -11,7 +11,7 @@ var options = {
 var io = require('socket.io').listen(PORT),
     redis = require('redis').createClient(options);
 
-redis.subscribe('users-list');
+redis.subscribe('messages');
 
 io.on('connection', function(socket){
   console.log('connected socket');
@@ -23,8 +23,7 @@ io.on('connection', function(socket){
 
   redis.on('message', function(channel, message){
     var info = JSON.parse(message);
-    console.log(channel);
-    socket.emit('users-list', info);
-    console.log('emit on channel '+ channel + ' message: '+ info);
+    socket.emit(channel, info);
+    console.log('emit message');
   });
 });

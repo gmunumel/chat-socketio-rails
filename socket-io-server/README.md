@@ -1,6 +1,6 @@
 # Socket-io-server
 
-Cointains node server functionality which subscribe to channels on redis and emit messages
+Cointains node server functionality which subscribe to channels on redis and emit messages using socket.io library.
 
 # Installation
 ```bundle install```
