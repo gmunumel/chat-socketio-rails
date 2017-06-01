@@ -4,6 +4,7 @@ class MessagesController < ActionController::API
 
   before_action :set_chat_room
   before_action :set_chat_room_message, only: [:show, :update, :destroy]
+  after_action  :publish_message, only: [:create], if: -> { @message }
 
   # GET /chat_rooms/:chat_room_id/messages
   def index
@@ -51,5 +52,9 @@ class MessagesController < ActionController::API
 
   def set_chat_room_message
     @message = @chat_room.messages.find_by!(id: params[:id]) if @chat_room
+  end
+
+  def publish_message
+    $redis.publish 'messages', @message.to_json
   end
 end
