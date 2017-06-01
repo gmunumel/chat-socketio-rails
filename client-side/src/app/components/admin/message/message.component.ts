@@ -24,9 +24,9 @@ export class MessageComponent implements OnInit, OnDestroy {
   user: User;
   messages: Message[];
   messageForm: FormGroup;
-  private subscriptionSession: Subscription;
-  private subscriptionParams: Subscription;
-  private subscriptionChat: Subscription;
+  private sessionSubscription: Subscription;
+  private paramsSubscription: Subscription;
+  private chatSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -42,17 +42,17 @@ export class MessageComponent implements OnInit, OnDestroy {
       chat_room_id: [1]   // default chat room id
     });
 
-    this.subscriptionChat = this.chatService.getMessages()
+    this.chatSubscription = this.chatService.getMessages()
       .subscribe((message: any) => {
         console.log('got message: ' + message);
       });
   }
 
   ngOnInit(): void {
-    this.subscriptionParams = this.route.params
+    this.paramsSubscription = this.route.params
       .subscribe(p => this.getMessage(+p['chat_room_id']));
 
-    this.subscriptionSession = SessionService.getInstance().collection$
+    this.sessionSubscription = SessionService.getInstance().collection$
       .subscribe((latestCollection: any) => {
         this.user = new User;
         this.user.id = latestCollection[0];
@@ -96,9 +96,9 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscriptionSession.unsubscribe();
-    this.subscriptionParams.unsubscribe();
-    this.subscriptionChat.unsubscribe();
+    this.sessionSubscription.unsubscribe();
+    this.paramsSubscription.unsubscribe();
+    this.chatSubscription.unsubscribe();
   }
 
   private getMessage(chatRoomId: number) {

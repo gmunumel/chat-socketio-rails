@@ -19,7 +19,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   response: number = 0;
   chatRoomId: number = -1;
   messageDetailForm: FormGroup;
-  private subscriptionParams: Subscription;
+  private paramsSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptionParams = this.route.params
+    this.paramsSubscription = this.route.params
       .subscribe(p => this.getMessage(+p['id'], +p['chat_room_id']));
   }
 
@@ -76,7 +76,7 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscriptionParams.unsubscribe();
+    this.paramsSubscription.unsubscribe();
   }
 
   private getMessage(messageId: number, chatRoomId: number): void {

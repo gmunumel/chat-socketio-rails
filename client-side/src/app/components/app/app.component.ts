@@ -15,10 +15,10 @@ import { SessionService } from '../../services/session.service';
 export class AppComponent implements OnInit, OnDestroy {
   toggled: string = 'toggled';
   user: User;
-  private subscription: Subscription;
+  private sessionSubscription: Subscription;
 
   ngOnInit(): void {
-    this.subscription = SessionService.getInstance().collection$
+    this.sessionSubscription = SessionService.getInstance().collection$
       .subscribe((latestCollection: any) => {
         this.user = new User;
         this.user.id = latestCollection[0];
@@ -43,6 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+    this.sessionSubscription.unsubscribe();
   }
 }

@@ -17,7 +17,7 @@ export class ChatRoomDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin Chat Room Detail';
   response: number = 0;
   chatRoomDetailForm: FormGroup;
-  private subscriptionParams: Subscription;
+  private paramsSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +35,7 @@ export class ChatRoomDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptionParams = this.route.params
+    this.paramsSubscription = this.route.params
       .subscribe(p => this.getChatRoom(+p['id']));
   }
 
@@ -52,7 +52,7 @@ export class ChatRoomDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscriptionParams.unsubscribe();
+    this.paramsSubscription.unsubscribe();
   }
 
   private getChatRoom(id: number): void {

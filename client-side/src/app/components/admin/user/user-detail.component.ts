@@ -19,7 +19,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin User Detail';
   response: number = 0;
   userDetailForm: FormGroup;
-  private subscriptionParams: Subscription;
+  private paramsSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -35,7 +35,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptionParams = this.route.params
+    this.paramsSubscription = this.route.params
       .subscribe(p => this.getUser(+p['id']));
   }
 
@@ -52,7 +52,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // prevent memory leak when component destroyed
-    this.subscriptionParams.unsubscribe();
+    this.paramsSubscription.unsubscribe();
   }
 
   private getUser(id: number): void {
