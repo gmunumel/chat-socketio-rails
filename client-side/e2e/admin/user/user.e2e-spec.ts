@@ -49,7 +49,7 @@ describe('Admin User e2e Tests', function () {
       });
   });
 
-  it('should delete an user', function () {
+  it('should add an user', function () {
     let userElement = element(by.id(`delete-${testUserName}`));
 
     AddUser(testUserName, testUserEmail);

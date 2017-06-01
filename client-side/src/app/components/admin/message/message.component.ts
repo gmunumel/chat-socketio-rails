@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, NgZone 
+}                                       from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 import { FormGroup, FormBuilder }       from '@angular/forms';
 
@@ -34,7 +36,8 @@ export class MessageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private messageService: MessageService,
-    private chatService: ChatService) {
+    private chatService: ChatService,
+    private ngZone: NgZone) {
 
     this.messageForm = this.fb.group({
       id: [-1],
@@ -43,13 +46,15 @@ export class MessageComponent implements OnInit, OnDestroy {
       chat_room_id: [1]   // default chat room id
     });
 
-    this.chatSubscription = this.chatService.getMessages()
-      .subscribe((message: Message) => {
-        if (message.chat_room_id === this.chatRoomId
-            && !this.isMessageSentByMe) {
-          this.messages.push(message);
-        }
-      });
+    this.ngZone.runOutsideAngular(() => {
+      this.chatSubscription = this.chatService.getMessages()
+        .subscribe((message: Message) => {
+          if (message.chat_room_id === this.chatRoomId
+              && !this.isMessageSentByMe) {
+            this.messages.push(message);
+          }
+        });
+    });
   }
 
   ngOnInit(): void {

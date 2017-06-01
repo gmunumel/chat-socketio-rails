@@ -13,7 +13,10 @@ import { HttpModule }             from '@angular/http';
 
 import { MessageComponent }   from './message.component';
 
+import { ChatService }        from '../../../services/chat.service';
 import { MessageService }     from '../../../services/message.service';
+
+import { FakeChatService }    from '../../../../testing/services/fake-chat.service';
 import {
   MESSAGES, FakeMessageService
 }                             from '../../../../testing/services/fake-message.service';
@@ -43,6 +46,7 @@ describe('MessageComponent', function () {
     .overrideComponent(MessageComponent, {
       set: {
         providers: [
+          { provide: ChatService,    useClass: FakeChatService },
           { provide: MessageService, useClass: FakeMessageService },
         ]
       }
