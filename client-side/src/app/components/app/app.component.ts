@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { Router }         from '@angular/router';
+
 import { Subscription }   from 'rxjs/Subscription';
 
 import { User }           from '../../models/user';
@@ -16,6 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   toggled: string = 'toggled';
   user: User;
   private sessionSubscription: Subscription;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.sessionSubscription = SessionService.getInstance().collection$
@@ -39,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logOut(): void {
     SessionService.getInstance().clear();
+    this.router.navigate(['dashboard']);
   }
 
   ngOnDestroy(): void {

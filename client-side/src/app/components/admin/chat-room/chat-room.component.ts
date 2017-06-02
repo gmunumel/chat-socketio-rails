@@ -20,11 +20,13 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { ChatRoom }        from '../../../models/chat-room';
 import { ChatRoomService } from '../../../services/chat-room.service';
+import { SessionService }  from '../../../services/session.service';
 
 @Component({
   selector: 'chat-room',
   templateUrl: './chat-room.component.html',
-  styleUrls: [ './chat-room.component.css' ]
+  styleUrls: [ './chat-room.component.css' ],
+  providers: [ SessionService ]
 })
 export class ChatRoomComponent implements OnInit, AfterViewInit {
   page: string = 'Admin Chat Room';
@@ -44,6 +46,10 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
     private chatRoomService: ChatRoomService) { }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.setChatRooms();
   }
 

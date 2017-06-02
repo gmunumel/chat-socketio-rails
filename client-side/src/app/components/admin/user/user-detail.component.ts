@@ -6,14 +6,16 @@ import {
 
 import { Subscription }  from 'rxjs/Subscription';
 
-import { User }          from '../../../models/user';
-import { UserService }   from '../../../services/user.service';
+import { User }           from '../../../models/user';
+import { UserService }    from '../../../services/user.service';
+import { SessionService } from '../../../services/session.service';
 
 const emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
 
 @Component({
   selector: 'admin-user-detail',
-  templateUrl: './user-detail.component.html'
+  templateUrl: './user-detail.component.html',
+  providers: [ SessionService ]
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin User Detail';
@@ -35,6 +37,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.paramsSubscription = this.route.params
       .subscribe(p => this.getUser(+p['id']));
   }

@@ -8,11 +8,13 @@ import { Subscription }   from 'rxjs/Subscription';
 
 import { Message }        from '../../../models/message';
 import { MessageService } from '../../../services/message.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'message-detail',
   templateUrl: './message-detail.component.html',
-  styleUrls: [ './resources/css/message-detail.component.css' ]
+  styleUrls: [ './resources/css/message-detail.component.css' ],
+  providers: [ SessionService ]
 })
 export class MessageDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin Message Detail';
@@ -36,6 +38,10 @@ export class MessageDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.paramsSubscription = this.route.params
       .subscribe(p => this.getMessage(+p['id'], +p['chat_room_id']));
   }

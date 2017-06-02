@@ -8,10 +8,12 @@ import { Subscription }    from 'rxjs/Subscription';
 
 import { ChatRoom }        from '../../../models/chat-room';
 import { ChatRoomService } from '../../../services/chat-room.service';
+import { SessionService }  from '../../../services/session.service';
 
 @Component({
   selector: 'admin-chat-room-detail',
-  templateUrl: './chat-room-detail.component.html'
+  templateUrl: './chat-room-detail.component.html',
+  providers: [ SessionService ]
 })
 export class ChatRoomDetailComponent implements OnInit, OnDestroy {
   page: string = 'Admin Chat Room Detail';
@@ -35,6 +37,10 @@ export class ChatRoomDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.paramsSubscription = this.route.params
       .subscribe(p => this.getChatRoom(+p['id']));
   }

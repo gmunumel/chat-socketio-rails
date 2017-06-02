@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, OnDestroy, NgZone 
+  Component, OnInit, OnDestroy, NgZone
 }                                       from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 import { FormGroup, FormBuilder }       from '@angular/forms';
@@ -58,6 +58,10 @@ export class MessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.paramsSubscription = this.route.params
       .subscribe(p => this.getMessage(+p['chat_room_id']));
 

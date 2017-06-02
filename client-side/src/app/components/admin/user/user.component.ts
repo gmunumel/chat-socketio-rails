@@ -18,12 +18,14 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { User }        from '../../../models/user';
-import { UserService } from '../../../services/user.service';
+import { User }           from '../../../models/user';
+import { UserService }    from '../../../services/user.service';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'user',
-  templateUrl: './user.component.html'
+  templateUrl: './user.component.html',
+  providers: [ SessionService ]
 })
 export class UserComponent implements OnInit, AfterViewInit {
   page: string = 'Admin User';
@@ -37,6 +39,10 @@ export class UserComponent implements OnInit, AfterViewInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
+    if (!SessionService.getInstance().isLoggedIn()) {
+      this.router.navigate(['signin']);
+    }
+
     this.setUsers();
   }
 

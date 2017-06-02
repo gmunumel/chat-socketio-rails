@@ -1,5 +1,7 @@
 import { AppComponent } from './app.component';
-import { RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
+import {
+  RouterLinkStubDirective, RouterOutletStubComponent, Router, RouterStub
+} from '../../../testing';
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By }             from '@angular/platform-browser';
@@ -13,7 +15,10 @@ describe('AppComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppComponent, RouterLinkStubDirective, RouterOutletStubComponent ]
+      declarations: [ AppComponent, RouterLinkStubDirective, RouterOutletStubComponent ],
+      providers: [
+        { provide: Router, useClass: RouterStub },
+      ]
     })
     .compileComponents()
       .then(() => {
