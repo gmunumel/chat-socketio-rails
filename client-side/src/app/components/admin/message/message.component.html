@@ -12,7 +12,7 @@
       <strong>Error!</strong> Something went wrong. Please try again.
     </div>
     <h3>Messages</h3>
-    <div class="panel-body">
+    <div #scrollMe class="panel-body">
       <ul *ngFor="let message of messages" class="chat">
         <li *ngIf="message.user_id != user.id" (click)="gotoDetail(message)" 
             class="left clearfix messages">

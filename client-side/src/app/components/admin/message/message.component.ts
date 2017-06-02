@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, OnDestroy, NgZone
+  Component, OnInit, OnDestroy, NgZone, AfterViewChecked, ElementRef, ViewChild
 }                                       from '@angular/core';
 import { ActivatedRoute, Router }       from '@angular/router';
 import { FormGroup, FormBuilder }       from '@angular/forms';
@@ -19,7 +19,7 @@ import { ChatService }    from '../../../services/chat.service';
   styleUrls: [ './resources/css/message.component.css' ],
   providers: [ SessionService ]
 })
-export class MessageComponent implements OnInit, OnDestroy {
+export class MessageComponent implements OnInit, AfterViewChecked, OnDestroy {
   page: string = 'Admin Message';
   response: number = 0;
   chatRoomId: number = -1;
@@ -30,6 +30,8 @@ export class MessageComponent implements OnInit, OnDestroy {
   private sessionSubscription: Subscription;
   private paramsSubscription: Subscription;
   private chatSubscription: Subscription;
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +64,8 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.router.navigate(['signin']);
     }
 
+    this.scrollToBottom();
+
     this.paramsSubscription = this.route.params
       .subscribe(p => this.getMessage(+p['chat_room_id']));
 
@@ -74,6 +78,10 @@ export class MessageComponent implements OnInit, OnDestroy {
     });
 
     SessionService.getInstance().load();
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
   }
 
   save(): void {
@@ -132,5 +140,13 @@ export class MessageComponent implements OnInit, OnDestroy {
       .catch(() => {
         this.response = -1;
       });
+  }
+
+  private scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
