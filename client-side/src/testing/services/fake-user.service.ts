@@ -7,11 +7,13 @@ import { Observable }    from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 // re-export for tester convenience
-export { User }        from '../../app/models/user';
-export { UserService } from '../../app/services/user.service';
+export { User }               from '../../app/models/user';
+export { UserService }        from '../../app/services/user.service';
+export { EnvironmentService } from '../../app/services/environment.service';
 
-import { User }        from '../../app/models/user';
-import { UserService } from '../../app/services/user.service';
+import { User }               from '../../app/models/user';
+import { UserService }        from '../../app/services/user.service';
+import { EnvironmentService } from '../../app/services/environment.service';
 
 export var USERS: User[] = [
   new User(0, 'Bob', 'bob@example.com'),
@@ -25,7 +27,7 @@ export var USERS: User[] = [
 // Dummy UserService. Pretend it makes real http requests 
 @Injectable()
 export class FakeUserService implements UserService {
-  usersUrl = 'http://localhost:3000/users';  // URL to web api
+  usersUrl = `${EnvironmentService.getInstance().getApiUrl()}/users`;  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
   lastObservable: Observable<any>;

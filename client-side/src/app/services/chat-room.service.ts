@@ -8,9 +8,11 @@ import 'rxjs/add/operator/map';
 
 import { ChatRoom } from '../models/chat-room';
 
+import { EnvironmentService } from './environment.service';
+
 @Injectable()
 export class ChatRoomService {
-  chatRoomsUrl = 'http://localhost:3000/chat_rooms';  // URL to web api
+  chatRoomsUrl = `${EnvironmentService.getInstance().getApiUrl()}/chat_rooms`; // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(public http: Http) { }

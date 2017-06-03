@@ -6,11 +6,13 @@ import 'rxjs/add/operator/map';
 
 import { Message } from '../models/message';
 
+import { EnvironmentService } from './environment.service';
+
 @Injectable()
 export class MessageService {
-  messagesUrl = '';
-  chatRoomsUrl = 'http://localhost:3000/chat_rooms';  // URL to web api
+  chatRoomsUrl = `${EnvironmentService.getInstance().getApiUrl()}/chat_rooms`; // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
+  messagesUrl = '';
 
   constructor(public http: Http) { }
 

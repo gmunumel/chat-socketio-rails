@@ -7,11 +7,13 @@ import { Observable }    from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 // re-export for tester convenience
-export { ChatRoom }        from '../../app/models/chat-room';
-export { ChatRoomService } from '../../app/services/chat-room.service';
+export { ChatRoom }           from '../../app/models/chat-room';
+export { ChatRoomService }    from '../../app/services/chat-room.service';
+export { EnvironmentService } from '../../app/services/environment.service';
 
-import { ChatRoom }        from '../../app/models/chat-room';
-import { ChatRoomService } from '../../app/services/chat-room.service';
+import { ChatRoom }           from '../../app/models/chat-room';
+import { ChatRoomService }    from '../../app/services/chat-room.service';
+import { EnvironmentService } from '../../app/services/environment.service';
 
 export var CHATROOMS: ChatRoom[] = [
   new ChatRoom(0, 'Music', 1),
@@ -25,7 +27,7 @@ export var CHATROOMS: ChatRoom[] = [
 // Dummy ChatRoomService. Pretend it makes real http requests 
 @Injectable()
 export class FakeChatRoomService implements ChatRoomService {
-  chatRoomsUrl = 'http://localhost:3000/chat_rooms';  // URL to web api
+  chatRoomsUrl = `${EnvironmentService.getInstance().getApiUrl()}/chat_rooms`;  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
   lastObservable: Observable<any>;

@@ -5,9 +5,11 @@ import * as io        from 'socket.io-client';
 
 import { Message }    from '../models/message';
 
+import { EnvironmentService } from './environment.service';
+
 @Injectable()
 export class SocketService {
-  url = 'http://localhost:5001';
+  url = EnvironmentService.getInstance().getSocketUrl();
   channel = 'messages';
   socket: SocketIOClient.Socket;
 

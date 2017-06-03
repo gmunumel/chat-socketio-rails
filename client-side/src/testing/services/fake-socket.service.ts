@@ -6,15 +6,18 @@ import { Observable }  from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 // re-export for tester convenience
-export { SocketService } from '../../app/services/socket.service';
+export { SocketService }      from '../../app/services/socket.service';
+export { Message }            from '../../app/models/message';
+export { EnvironmentService } from '../../app/services/environment.service';
 
-import { SocketService } from '../../app/services/socket.service';
-import { Message }       from '../../app/models/message';
+import { SocketService }      from '../../app/services/socket.service';
+import { Message }            from '../../app/models/message';
+import { EnvironmentService } from '../../app/services/environment.service';
 
 // Dummy ChatService. Pretend it emit real data 
 @Injectable()
 export class FakeSocketService implements SocketService {
-  url = 'http://localhost:5001';
+  url = EnvironmentService.getInstance().getSocketUrl();
   channel = 'messages';
   socket: SocketIOClient.Socket;
 

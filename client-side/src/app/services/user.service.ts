@@ -8,9 +8,11 @@ import 'rxjs/add/operator/map';
 
 import { User } from '../models/user';
 
+import { EnvironmentService } from './environment.service';
+
 @Injectable()
 export class UserService {
-  usersUrl = 'http://localhost:3000/users';  // URL to web api
+  usersUrl = `${EnvironmentService.getInstance().getApiUrl()}/users`;  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(public http: Http) { }

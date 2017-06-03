@@ -2,14 +2,16 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 // re-export for tester convenience
-export { Message }        from '../../app/models/message';
-export { MessageService } from '../../app/services/message.service';
+export { Message }            from '../../app/models/message';
+export { MessageService }     from '../../app/services/message.service';
+export { EnvironmentService } from '../../app/services/environment.service';
 
-import { Message }        from '../../app/models/message';
-import { MessageService } from '../../app/services/message.service';
+import { Message }            from '../../app/models/message';
+import { MessageService }     from '../../app/services/message.service';
+import { EnvironmentService } from '../../app/services/environment.service';
 
-import { ChatRoom }       from '../../app/models/chat-room';
-import { CHATROOMS }      from '../../testing/services/fake-chat-room.service';
+import { ChatRoom }           from '../../app/models/chat-room';
+import { CHATROOMS }          from '../../testing/services/fake-chat-room.service';
 
 export var MESSAGES: Message[] = [
   new Message(0, 'First Message', 1, 0),
@@ -25,7 +27,7 @@ export var MESSAGES: Message[] = [
 export class FakeMessageService implements MessageService {
   chatRoomId = -1;
   messagesUrl = '';
-  chatRoomsUrl = 'http://localhost:3000/chat_rooms';  // URL to web api
+  chatRoomsUrl = `${EnvironmentService.getInstance().getApiUrl()}/chat_rooms`;  // URL to web api
   headers = new Headers({'Content-Type': 'application/json'});
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
