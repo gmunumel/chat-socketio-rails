@@ -6,24 +6,24 @@ import { Observable }  from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 // re-export for tester convenience
-export { ChatService } from '../../app/services/chat.service';
+export { SocketService } from '../../app/services/socket.service';
 
-import { ChatService } from '../../app/services/chat.service';
-import { Message }     from '../../app/models/message';
+import { SocketService } from '../../app/services/socket.service';
+import { Message }       from '../../app/models/message';
 
 // Dummy ChatService. Pretend it emit real data 
 @Injectable()
-export class FakeChatService implements ChatService {
+export class FakeSocketService implements SocketService {
   url = 'http://localhost:5001';
   channel = 'messages';
   socket: SocketIOClient.Socket;
 
   constructor() { }
 
-  sendMessage(message: Message): void {
+  emit(message: Message): void {
   }
 
-  getMessages(): Observable<Message> {
+  receive(): Observable<Message> {
     return Observable.of(new Message);
   }
 }

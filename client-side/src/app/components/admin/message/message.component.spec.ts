@@ -13,15 +13,18 @@ import { HttpModule }             from '@angular/http';
 
 import { MessageComponent }   from './message.component';
 
-import { ChatService }        from '../../../services/chat.service';
 import { MessageService }     from '../../../services/message.service';
+import { UserService }        from '../../../services/user.service';
+import { SocketService }      from '../../../services/socket.service';
 
-import { FakeChatService }    from '../../../../testing/services/fake-chat.service';
+import { FakeSocketService }  from '../../../../testing/services/fake-socket.service';
 import {
   MESSAGES, FakeMessageService
 }                             from '../../../../testing/services/fake-message.service';
 import { CHATROOMS }          from '../../../../testing/services/fake-chat-room.service';
-import { USERS }              from '../../../../testing/services/fake-user.service';
+import {
+  USERS, FakeUserService
+}                             from '../../../../testing/services/fake-user.service';
 
 const firstChatRoom = CHATROOMS[0];
 const firstUser     = USERS[0];
@@ -46,8 +49,9 @@ describe('MessageComponent', function () {
     .overrideComponent(MessageComponent, {
       set: {
         providers: [
-          { provide: ChatService,    useClass: FakeChatService },
           { provide: MessageService, useClass: FakeMessageService },
+          { provide: UserService,    useClass: FakeUserService },
+          { provide: SocketService,  useClass: FakeSocketService },
         ]
       }
     })
@@ -79,7 +83,8 @@ describe('MessageComponent', function () {
       const expectedMessage = MESSAGES[0];
       comp.showMessage(firstChatRoom.id);
       tick();
-      expect(comp.messages[0]).toEqual(expectedMessage, 'first message is the same');
+      expect(comp.messages[0].message).toEqual(expectedMessage, 'first message is the same');
+      expect(comp.messages[0].user).not.toBe(null, 'first user is not null');
     }));
 
     it('should navigate to selected message detail on click', fakeAsync(() => {

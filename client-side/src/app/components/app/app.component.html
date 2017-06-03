@@ -8,10 +8,10 @@
         <a [routerLink]="['/dashboard']" id="dashboard-link">My Simple Chat App</a>
       </li>
       <li class="sidebar-header">
-        <span *ngIf="userName != null">
-          Hello {{userName}}
+        <span *ngIf="user.id != null">
+          Hello {{user.name}}
         </span>
-        <span *ngIf="userName == null">
+        <span *ngIf="user.id == null">
           Hello Guest
         </span>
       </li>

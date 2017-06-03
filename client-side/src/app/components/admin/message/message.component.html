@@ -13,31 +13,31 @@
     </div>
     <h3>Messages</h3>
     <div #scrollMe class="panel-body">
-      <ul *ngFor="let message of messages" class="chat">
-        <li *ngIf="message.user_id != user.id" (click)="gotoDetail(message)" 
+      <ul *ngFor="let item of messages" class="chat">
+        <li *ngIf="item.user.id != user.id" (click)="gotoDetail(item.message)" 
             class="left clearfix messages">
           <span class="chat-img pull-left">
             <img src="app/components/admin/message/resources/img/you.png" alt="User Avatar" class="img-circle" />
           </span>
           <div class="chat-body clearfix">
             <div class="header">
-              <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                <span class="glyphicon glyphicon-time"></span>{{message.created_at | date:"medium"}}</small>
+              <strong class="primary-font">{{item.user.name}}</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>{{item.message.created_at | date:"medium"}}</small>
             </div>
-            <p>{{message.body}}</p>
+            <p>{{item.message.body}}</p>
           </div>
         </li>
-        <li *ngIf="message.user_id == user.id" (click)="gotoDetail(message)" 
+        <li *ngIf="item.user.id == user.id" (click)="gotoDetail(item.message)" 
             class="right clearfix messages">
           <span class="chat-img pull-right">
             <img src="app/components/admin/message/resources/img/me.png" alt="User Avatar" class="img-circle" />
           </span>
           <div class="chat-body clearfix">
             <div class="header">
-              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message.created_at | date:"medium"}}</small>
-              <strong class="pull-right primary-font">{{user.name}}</strong>
+              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{item.message.created_at | date:"medium"}}</small>
+              <strong class="pull-right primary-font">{{item.user.name}}</strong>
             </div>
-            <p>{{message.body}}</p>
+            <p>{{item.message.body}}</p>
           </div>
         </li>
       </ul>

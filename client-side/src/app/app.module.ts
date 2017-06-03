@@ -15,9 +15,9 @@ import { SignUpComponent }         from './components/sign-up/sign-up.component'
 import { UserComponent }           from './components/admin/user/user.component';
 import { UserDetailComponent }     from './components/admin/user/user-detail.component';
 import { UserService }             from './services/user.service';
-import { ChatService }             from './services/chat.service';
 import { ChatRoomService }         from './services/chat-room.service';
 import { MessageService }          from './services/message.service';
+import { SocketService }           from './services/socket.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -41,7 +41,7 @@ import { AppRoutingModule } from './app-routing.module';
     UserComponent,
     UserDetailComponent,
   ],
-  providers: [ UserService, ChatRoomService, MessageService, ChatService ],
+  providers: [ UserService, ChatRoomService, MessageService, SocketService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
