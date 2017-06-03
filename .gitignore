@@ -4,39 +4,49 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
+####################
+#rails-api-server
+####################
 rails-api-server/.bundle
 
-# Ignore the default SQLite database.
 rails-api-server/db/*.sqlite3
 rails-api-server/db/*.sqlite3-journal
 
-# Ignore all logfiles and tempfiles.
 rails-api-server/log/*
 rails-api-server/tmp/*
 !rails-api-server/log/.keep
 !rails-api-server/tmp/.keep
 
-# Ignore Byebug command history file.
 rails-api-server/.byebug_history
 
 rails-api-server/dump.rdb
 
-
+####################
+#client-side
+####################
 client-side/node_modules
 client-side/jspm_packages
+
 client-side/npm-debug.log
 client-side/debug.log
+
 client-side/src/**/*.js
 client-side/src/**/*.js.map
 client-side/spec/**/*.js
 client-side/spec/**/*.js.map
-!client-side/src/systemjs.config.extras.js
-!client-side/src/systemjs.config.js
-!client-side/src/systemjs-angular-loader.js
 client-side/*.js.map
 client-side/e2e/**/*.js
 client-side/e2e/**/*.js.map
+
+!client-side/src/systemjs.config.extras.js
+!client-side/src/systemjs.config.js
+!client-side/src/systemjs-angular-loader.js
+
 client-side/_test-output
 client-side/_temp
 client-side/_test-output
+
+####################
+#socket-io-server
+####################
+socket-io-server/node_modules
