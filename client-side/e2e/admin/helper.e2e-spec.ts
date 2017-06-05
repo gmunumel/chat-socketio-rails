@@ -13,12 +13,17 @@ export function SignIn(): void {
   element(by.id('email')).sendKeys('admin@admin.com');
 
   element(by.id('sign-in-submit')).click();
+
+  browser.waitForAngular();
 }
 
 export function LogOut(): void {
 
   browser.get('');
+  
   element(by.id('admin-log-out')).click();
+
+  browser.waitForAngular();
 }
 
 // Create a dummy user. Will be remove later
