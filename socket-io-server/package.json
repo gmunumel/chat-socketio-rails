@@ -2,6 +2,12 @@
   "name": "socket-io-server",
   "version": "0.0.1",
   "description": "My chat socket.io app",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cross-env NODE_ENV=test mocha -R spec"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:gmunumel/chat-socketio-rails.git"
@@ -10,5 +16,11 @@
   "dependencies": {
     "redis": "^2.7.1",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.0",
+    "mocha": "^3.4.2",
+    "redis-js": "^0.1.2",
+    "should": "^11.2.1"
   }
 }
