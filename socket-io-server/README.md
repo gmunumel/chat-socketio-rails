@@ -2,16 +2,16 @@
 
 Cointains node server functionality which subscribe to channels on redis and emit messages using socket.io library.
 
-# Installation
+## Installation
 ```bundle install```
 
-# Run APP
+## Run APP
 ```node chat-server.js```
 
-# Run Tests
+## Run Tests
 ```npm test```
 
-## LICENSE
+## License
 
 Licensed under [MIT](../LICENSE.md)
 

@@ -1,6 +1,6 @@
 # README
 
-# My Simple Chat App
+## My Simple Chat App
 
 This app is intended to show a simple chat functionality
 using [Socket.io](https://socket.io/) in addition with 
@@ -16,14 +16,14 @@ a Rails API.
 
 Because Rails is not an event-based server is not recommended to use it having real time applications. That's why Redis is so important, give you the communication between your data and the socket-io-server. [This article](https://medium.com/wolox-driving-innovation/adding-a-realtime-module-to-your-rails-api-18bb562e6441) explain with more details. 
 
-# How to run the app locally
+## How to run the app locally
 
 Make sure you have all the components up and running. Please go to the readme pages in every case.
 
-# Live example
+## Live example
 
 TODO - use heroku
 
-# License
+## License
 
 Licensed under [MIT](LICENSE.md)

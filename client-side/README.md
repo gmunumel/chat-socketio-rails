@@ -18,7 +18,7 @@ to rails API and will display data in a browser.
 
 _Notice before run e2e tests or the app you must have rails api server running first (`rails s`)._
 
-## LICENSE
+## License
 
 Licensed under [MIT](../LICENSE.md)
 

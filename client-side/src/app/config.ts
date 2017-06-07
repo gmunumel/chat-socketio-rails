@@ -8,7 +8,7 @@ export const CONFIG = {
     'SOCKET_URL': 'http://localhost:5001'
   },
   'production': {
-    'API_URL': '',
-    'SOCKET_URL': ''
+    'API_URL': 'https://gmunumel-chat-rails-api-server.herokuapp.com:3000',
+    'SOCKET_URL': 'https://gmunumel-chat-socketio-rails.herokuapp.com:5001'
   }
 };

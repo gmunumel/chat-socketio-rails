@@ -10,5 +10,5 @@ test:
 #  namespace: appname_test
 production:
   db: 2
-  host: 192.168.1.100
+  host: https://gmunumel-chat-socketio-rails.herokuapp.com
 #  namespace: appname_prod
