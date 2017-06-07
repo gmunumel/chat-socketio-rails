@@ -22,3 +22,4 @@ Based on the following tutorials:
 * http://liamkaufman.com/blog/2013/02/27/adding-real-time-to-a-restful-rails-app/
 * http://www.syntaxsuccess.com/viewarticle/socket.io-with-rxjs-in-angular-2.0
 * http://liamkaufman.com/blog/2012/01/28/testing-socketio-with-mocha-should-and-socketio-client/
+* https://github.com/wilkenstein/redis-mock-js
