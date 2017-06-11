@@ -21,7 +21,7 @@ Make sure you have all the components up and running. Please go to the readme pa
 
 ## Live example
 
-https://gmunumel-chat-socket-io-server.herokuapp.com/
+https://gmunumel-chat-client-side.herokuapp.com/
 
 ## License
 
