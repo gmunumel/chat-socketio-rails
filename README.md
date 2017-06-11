@@ -1,6 +1,5 @@
-# README
 
-## My Simple Chat App
+# My Simple Chat App
 
 This app is intended to show a simple chat functionality
 using [Socket.io](https://socket.io/) in addition with 
@@ -9,10 +8,10 @@ using [Socket.io](https://socket.io/) in addition with
 
 The structure of the project is very simple:
 
-* [client-side](https://github.com/gmunumel/chat-socketio-rails/blob/master/client-side/README.md): front-end side build in angular which allows users to interact with the application. Also communicate with socket-io-server to listen for incomming messages. All the information is send and request via
+* [client-side](https://github.com/gmunumel/chat-client-side): front-end side build in angular which allows users to interact with the application. Also communicate with socket-io-server to listen for incomming messages. All the information is send and request via
 a Rails API. 
-* [socket-io-server](https://github.com/gmunumel/chat-socketio-rails/blob/master/socket-io-server/README.md): listen and broadcast messages from [Redis](https://redis.io/), a in-memory database which storage keys with an optional durability.
-* [rails-api-server](https://github.com/gmunumel/chat-socketio-rails/blob/master/rails-api-server/README.md): back-end side build in rails which send and request data via an API. It communicates with Redis to storage new messages.
+* [socket-io-server](https://github.com/gmunumel/chat-socket-io-server): listen and broadcast messages from [Redis](https://redis.io/), a in-memory database which storage keys with an optional durability.
+* [rails-api-server](https://github.com/gmunumel/chat-rails-api-server): back-end side build in rails which send and request data via an API. It communicates with Redis to storage new messages.
 
 Because Rails is not an event-based server is not recommended to use it having real time applications. That's why Redis is so important, give you the communication between your data and the socket-io-server. [This article](https://medium.com/wolox-driving-innovation/adding-a-realtime-module-to-your-rails-api-18bb562e6441) explain with more details. 
 
@@ -22,7 +21,7 @@ Make sure you have all the components up and running. Please go to the readme pa
 
 ## Live example
 
-TODO - use heroku
+https://gmunumel-chat-socket-io-server.herokuapp.com/
 
 ## License
 

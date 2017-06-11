@@ -1,0 +1,9 @@
+[submodule "chat-client-side"]
+	path = chat-client-side
+	url = git@github.com:gmunumel/chat-client-side.git
+[submodule "chat-rails-api-server"]
+	path = chat-rails-api-server
+	url = git@github.com:gmunumel/chat-rails-api-server.git
+[submodule "chat-socket-io-server"]
+	path = chat-socket-io-server
+	url = git@github.com:gmunumel/chat-socket-io-server.git
